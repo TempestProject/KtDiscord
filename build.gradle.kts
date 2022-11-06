@@ -1,0 +1,50 @@
+plugins {
+    kotlin("multiplatform") version "1.7.20"
+}
+
+group = "cloud.drakon"
+version = "1.0.0"
+
+repositories {
+    mavenCentral()
+}
+
+val ktor_version: String by project
+
+kotlin {
+    jvm {
+        compilations.all {
+            kotlinOptions.jvmTarget = "11"
+        }
+        testRuns["test"].executionTask.configure {
+            useJUnitPlatform()
+        }
+    }
+    js(BOTH) {
+        nodejs()
+    }
+    sourceSets {
+        val commonMain by getting {
+            dependencies {
+                implementation("io.ktor:ktor-client-core:$ktor_version")
+            }
+        }
+        val commonTest by getting {
+            dependencies {
+                implementation(kotlin("test"))
+            }
+        }
+        val jvmMain by getting {
+            dependencies {
+                implementation("io.ktor:ktor-client-java:$ktor_version")
+            }
+        }
+        val jvmTest by getting
+        val jsMain by getting {
+            dependencies {
+                implementation("io.ktor:ktor-client-js:$ktor_version")
+            }
+        }
+        val jsTest by getting
+    }
+}
