@@ -11,9 +11,9 @@ class ExecuteWebhook(
     val embeds: Array<Embed>?,
     val allowed_mentions: AllowedMention,
     val components: Components?,
-    val files: String?,
-    val payload_json: String?,
-    val attachments: String?,
+    val files: String? = TODO(),
+    val payload_json: String? = TODO(),
+    val attachments: String? = TODO(),
     val flags: Short?,
     val thread_name: String?
 )

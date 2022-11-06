@@ -8,7 +8,7 @@ class EditWebhookMessage(
     val embeds: Array<Embed>?,
     val allowed_mentions: AllowedMention?,
     val components: Array<Components>?,
-    val files: String?,
-    val payload_json: String?,
-    val attachments: Array<String>?
+    val files: String? = TODO(),
+    val payload_json: String? = TODO(),
+    val attachments: Array<String>? = TODO()
 )

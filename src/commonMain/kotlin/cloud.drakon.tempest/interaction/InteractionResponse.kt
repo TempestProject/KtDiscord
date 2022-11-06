@@ -23,7 +23,7 @@ class InteractionCallbackDataMessage(
     val allowed_mentions: String?,
     val flags: Short?,
     val components: Array<String>?,
-    val attachments: Array<String>?
+    val attachments: Array<String>? = TODO()
 ) : InteractionCallbackData
 
 class InteractionCallbackDataAutocomplete(val choices: Array<String>) : InteractionCallbackData
