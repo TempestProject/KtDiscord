@@ -22,15 +22,17 @@ class SelectMenu(
     val placeholder: String?,
     val min_values: Byte?,
     val max_values: Byte?,
-    val disabled: Boolean?
+    val disabled: Boolean?,
 ): Component
 
 /** Type of select menu component. */
 enum class SelectMenuType(val SelectMenuType: Byte) {
     /** Select menu for users. */
     USER(5),
+
     /** Select menu for roles. */
     ROLE(6),
+
     /** Select menu for mentionables (users and roles). */
     MENTIONABLE(7)
 }

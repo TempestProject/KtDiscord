@@ -19,7 +19,7 @@ class ChannelSelectMenu(
     val placeholder: String?,
     val min_values: Byte?,
     val max_values: Byte?,
-    val disabled: Boolean?
+    val disabled: Boolean?,
 ): Component {
     val type: Byte = 8
 }

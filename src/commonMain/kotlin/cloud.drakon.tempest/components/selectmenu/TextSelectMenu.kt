@@ -19,7 +19,7 @@ class TextSelectMenu(
     val placeholder: String?,
     val min_values: Byte?,
     val max_values: Byte?,
-    val disabled: Boolean?
+    val disabled: Boolean?,
 ): Component {
     val type: Byte = 3
 }
@@ -36,5 +36,5 @@ class SelectOption(
     val value: String,
     val description: String?,
     val emoji: Emoji?,
-    val default: Boolean?
+    val default: Boolean?,
 )

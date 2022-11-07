@@ -15,7 +15,7 @@ class Button(
     val emoji: Emoji?,
     val custom_id: String?,
     val url: String?,
-    val disabled: Boolean?
+    val disabled: Boolean?,
 ): Component {
     val type: Byte = 2
 }
@@ -33,24 +33,28 @@ enum class ButtonStyle(val ButtonStyle: Byte) {
      * - Required field: custom_id
      */
     PRIMARY(1),
+
     /**
      * - Name: Secondary
      * - Color: Grey
      * - Required field: custom_id
      */
     SECONDARY(2),
+
     /**
      * - Name: Success
      * - Color: Green
      * - Required field: custom_id
      */
     SUCCESS(3),
+
     /**
      * - Name: Danger
      * - Color: Red
      * - Required field: custom_id
      */
     DANGER(4),
+
     /**
      * - Name: Link
      * - Color: Grey, navigates to a URL
