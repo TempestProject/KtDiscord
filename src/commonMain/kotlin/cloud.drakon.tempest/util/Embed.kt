@@ -15,7 +15,21 @@ package cloud.drakon.tempest.util
  * @property author Author information.
  * @property fields Fields information.
  */
-class Embed(val title: String?, val type: String?, val description: String?, val url: String?, val timestamp: String?, val color: Short?, val footer: EmbedFooter?, val image: EmbedImage?, val thumbnail: EmbedThumbnail?, val video: EmbedVideo?, val provider: EmbedProvider?, val author: EmbedAuthor?, val fields: Array<EmbedField>?)
+class Embed(
+    val title: String?,
+    val type: String?,
+    val description: String?,
+    val url: String?,
+    val timestamp: String?,
+    val color: Short?,
+    val footer: EmbedFooter?,
+    val image: EmbedImage?,
+    val thumbnail: EmbedThumbnail?,
+    val video: EmbedVideo?,
+    val provider: EmbedProvider?,
+    val author: EmbedAuthor?,
+    val fields: Array<EmbedField>?,
+)
 
 /**
  * @property text Footer text.
@@ -30,7 +44,12 @@ class EmbedFooter(val text: String, val icon_url: String?, val proxy_icon_url: S
  * @property height Height of image.
  * @property width Width of image.
  */
-class EmbedImage(val url: String, val proxy_url: String?, val height: Short?, val width: Short?)
+class EmbedImage(
+    val url: String,
+    val proxy_url: String?,
+    val height: Short?,
+    val width: Short?,
+)
 
 /**
  * @property url Source URL of thumbnail (only supports HTTP(S) and attachments).
@@ -38,7 +57,12 @@ class EmbedImage(val url: String, val proxy_url: String?, val height: Short?, va
  * @property height Height of thumbnail.
  * @property width Width of thumbnail.
  */
-class EmbedThumbnail(val url: String, val proxy_url: String?, val height: Short?, val width: Short?)
+class EmbedThumbnail(
+    val url: String,
+    val proxy_url: String?,
+    val height: Short?,
+    val width: Short?,
+)
 
 /**
  * @property url Source URL of video.
@@ -46,7 +70,12 @@ class EmbedThumbnail(val url: String, val proxy_url: String?, val height: Short?
  * @property height Height of video.
  * @property width Width of video.
  */
-class EmbedVideo(val url: String, val proxy_url: String?, val height: Short?, val width: Short?)
+class EmbedVideo(
+    val url: String,
+    val proxy_url: String?,
+    val height: Short?,
+    val width: Short?,
+)
 
 /**
  * @property name Name of provider.
@@ -60,7 +89,12 @@ class EmbedProvider(val name: String?, val url: String?)
  * @property icon_url URL of author icon (only supports HTTP(S) and attachments).
  * @property proxy_icon_url A proxied URL of author icon.
  */
-class EmbedAuthor(val name: String, val url: String?, val icon_url: String?, val proxy_icon_url: String?)
+class EmbedAuthor(
+    val name: String,
+    val url: String?,
+    val icon_url: String?,
+    val proxy_icon_url: String?,
+)
 
 /**
  * @property name Name of the field.
