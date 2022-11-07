@@ -3,13 +3,23 @@ package cloud.drakon.tempest.interaction
 import cloud.drakon.tempest.KtorClient
 import cloud.drakon.tempest.webhook.EditWebhookMessage
 import cloud.drakon.tempest.webhook.GetWebhookMessage
-import io.ktor.client.request.*
+import io.ktor.client.request.delete
+import io.ktor.client.request.get
+import io.ktor.client.request.headers
+import io.ktor.client.request.patch
+import io.ktor.client.request.post
+import io.ktor.client.request.setBody
 
 private fun getInteractionUrl(ApplicationId: Long, InteractionToken: Long): String {
     return "webhooks/$ApplicationId/$InteractionToken"
 }
 
+/**
+ * @property ApplicationId Discord Application ID
+ * @property BotToken Discord Bot Token
+ */
 class TempestInteractions(private val ApplicationId: Long, private val BotToken: String) {
+    /** Create a response to an Interaction from the gateway. Body is an interaction response. Returns 204 No Content. */
     suspend fun createInteractionResponse(
         InteractionResponse: InteractionResponse,
         InteractionId: Long,
@@ -23,6 +33,7 @@ class TempestInteractions(private val ApplicationId: Long, private val BotToken:
         }
     }
 
+    /** Returns the initial Interaction response. */
     suspend fun getOriginalInteractionResponse(GetWebhook: GetWebhookMessage, InteractionToken: Long) {
         KtorClient.get(
             urlString = getInteractionUrl(
@@ -37,6 +48,7 @@ class TempestInteractions(private val ApplicationId: Long, private val BotToken:
         }
     }
 
+    /** Edits the initial Interaction response. */
     suspend fun editOriginalInteractionResponse(EditWebhook: EditWebhookMessage, InteractionToken: Long) {
         KtorClient.patch(
             urlString = getInteractionUrl(
@@ -51,6 +63,7 @@ class TempestInteractions(private val ApplicationId: Long, private val BotToken:
         }
     }
 
+    /** Deletes the initial Interaction response. Returns 204 No Content on success. */
     suspend fun deleteOriginalInteractionResponse(InteractionToken: Long) {
         KtorClient.delete(
             urlString = getInteractionUrl(
@@ -64,6 +77,7 @@ class TempestInteractions(private val ApplicationId: Long, private val BotToken:
         }
     }
 
+    /** Create a followup message for an Interaction. */
     suspend fun createFollowupMessage(GetWebhook: GetWebhookMessage, InteractionToken: Long) {
         KtorClient.get(
             urlString = getInteractionUrl(
