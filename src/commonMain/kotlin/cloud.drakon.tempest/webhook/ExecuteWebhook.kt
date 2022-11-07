@@ -25,5 +25,5 @@ class ExecuteWebhook(
     val payload_json: String? = TODO(),
     val attachments: String? = TODO(),
     val flags: Short?,
-    val thread_name: String?
+    val thread_name: String?,
 )

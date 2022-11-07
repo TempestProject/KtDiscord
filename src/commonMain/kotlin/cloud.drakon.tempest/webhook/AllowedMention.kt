@@ -11,14 +11,16 @@ class AllowedMention(
     val parse: Array<AllowedMentionTypes>,
     val roles: Array<Long>,
     val users: Array<Long>,
-    val replied_user: Boolean
+    val replied_user: Boolean,
 )
 
 enum class AllowedMentionTypes(val AllowedMentionTypes: String) {
     /** Controls role mentions. */
     ROLE_MENTIONS("role"),
+
     /** Controls user mentions */
     USER_MENTIONS("users"),
+
     /** Controls @everyone and @here mentions */
     EVERYONE_MENTIONS("everyone")
 }

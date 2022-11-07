@@ -19,5 +19,5 @@ class EditWebhookMessage(
     val components: Array<Component>?,
     val files: String? = TODO(),
     val payload_json: String? = TODO(),
-    val attachments: Array<String>? = TODO()
+    val attachments: Array<String>? = TODO(),
 )
