@@ -1,10 +1,10 @@
 plugins {
     kotlin("multiplatform") version "1.7.20"
+    id("maven-publish")
     id("org.jetbrains.dokka") version "1.7.20"
 }
 
 group = "cloud.drakon"
-version = "1.0.0"
 
 repositories {
     mavenCentral()
@@ -47,6 +47,18 @@ kotlin {
             }
         }
         val jsTest by getting
+    }
+    publishing {
+        repositories {
+            maven {
+                name = "GitHubPackages"
+                url = uri("https://maven.pkg.github.com/drakon64/Tempest")
+                credentials {
+                    username = System.getenv("GITHUB_ACTOR")
+                    password = System.getenv("GITHUB_TOKEN")
+                }
+            }
+        }
     }
 }
 
