@@ -1,6 +1,6 @@
 package cloud.drakon.tempest.webhook
 
-import cloud.drakon.tempest.components.Components
+import cloud.drakon.tempest.components.Component
 import cloud.drakon.tempest.util.Embed
 
 class ExecuteWebhook(
@@ -10,7 +10,7 @@ class ExecuteWebhook(
     val tts: Boolean?,
     val embeds: Array<Embed>?,
     val allowed_mentions: AllowedMention,
-    val components: Components?,
+    val components: Array<Component>?,
     val files: String? = TODO(),
     val payload_json: String? = TODO(),
     val attachments: String? = TODO(),
