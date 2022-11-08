@@ -1,6 +1,6 @@
 package cloud.drakon.tempest.util
 
-enum class Flags(val Flags: Short) {
+enum class Flags(val VALUE: Short) {
     /** Do not include any embeds when serializing this message. */
     SUPPRESS_EMBEDS(1 shl 2),
 

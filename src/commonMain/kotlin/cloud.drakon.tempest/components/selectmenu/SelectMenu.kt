@@ -26,7 +26,7 @@ class SelectMenu(
 ): Component
 
 /** Type of select menu component. */
-enum class SelectMenuType(val SelectMenuType: Byte) {
+enum class SelectMenuType(val TYPE: Byte) {
     /** Select menu for users. */
     USER(5),
 

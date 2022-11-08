@@ -1,6 +1,6 @@
 package cloud.drakon.tempest.util
 
-enum class ChannelType(val ChannelType: Byte) {
+enum class ChannelType(val ID: Byte) {
     /** A text channel within a server. */
     GUILD_TEXT(0),
 

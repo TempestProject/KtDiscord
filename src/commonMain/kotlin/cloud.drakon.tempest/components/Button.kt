@@ -26,7 +26,7 @@ class Button(
  * - Link buttons must have a url, and cannot have a custom_id
  * - Link buttons do not send an interaction to your app when clicked
  */
-enum class ButtonStyle(val ButtonStyle: Byte) {
+enum class ButtonStyle(val VALUE: Byte) {
     /**
      * - Name: Primary
      * - Color: Blurple

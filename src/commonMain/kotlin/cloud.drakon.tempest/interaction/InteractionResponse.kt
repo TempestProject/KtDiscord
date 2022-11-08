@@ -8,7 +8,7 @@ import cloud.drakon.tempest.util.Embed
  */
 class InteractionResponse(type: InteractionCallbackType, data: InteractionCallbackData?)
 
-enum class InteractionCallbackType(val InteractionCallbackType: Byte) {
+enum class InteractionCallbackType(val VALUE: Byte) {
     /** ACK a Ping. */
     PONG(1),
 
