@@ -23,11 +23,11 @@ class Embed(
     val timestamp: String?,
     val color: Short?,
     val footer: EmbedFooter?,
-    val image: EmbedImage?,
-    val thumbnail: EmbedThumbnail?,
-    val video: EmbedVideo?,
+    val image: EmbedMedia?,
+    val thumbnail: EmbedMedia?,
+    val video: EmbedMedia?,
     val provider: EmbedProvider?,
-    val author: EmbedAuthor?,
+    val author: EmbedMedia?,
     val fields: Array<EmbedField>?,
 )
 
@@ -39,38 +39,12 @@ class Embed(
 class EmbedFooter(val text: String, val icon_url: String?, val proxy_icon_url: String?)
 
 /**
- * @property url Source URL of image (only supports HTTP(S) and attachments).
- * @property proxy_url A proxied URL of the image.
- * @property height Height of image.
- * @property width Width of image.
+ * @property url Source URL of media (only supports HTTP(S) and attachments).
+ * @property proxy_url A proxied URL of the media.
+ * @property height Height of media.
+ * @property width Width of media.
  */
-class EmbedImage(
-    val url: String,
-    val proxy_url: String?,
-    val height: Short?,
-    val width: Short?,
-)
-
-/**
- * @property url Source URL of thumbnail (only supports HTTP(S) and attachments).
- * @property proxy_url A proxied URL of the thumbnail.
- * @property height Height of thumbnail.
- * @property width Width of thumbnail.
- */
-class EmbedThumbnail(
-    val url: String,
-    val proxy_url: String?,
-    val height: Short?,
-    val width: Short?,
-)
-
-/**
- * @property url Source URL of video.
- * @property proxy_url A proxied URL of the video.
- * @property height Height of video.
- * @property width Width of video.
- */
-class EmbedVideo(
+class EmbedMedia(
     val url: String,
     val proxy_url: String?,
     val height: Short?,
@@ -82,19 +56,6 @@ class EmbedVideo(
  * @property name url URL of provider.
  */
 class EmbedProvider(val name: String?, val url: String?)
-
-/**
- * @property name Name of author.
- * @property url URL of author.
- * @property icon_url URL of author icon (only supports HTTP(S) and attachments).
- * @property proxy_icon_url A proxied URL of author icon.
- */
-class EmbedAuthor(
-    val name: String,
-    val url: String?,
-    val icon_url: String?,
-    val proxy_icon_url: String?,
-)
 
 /**
  * @property name Name of the field.
