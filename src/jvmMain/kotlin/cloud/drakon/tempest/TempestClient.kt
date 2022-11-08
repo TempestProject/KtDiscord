@@ -1,9 +1,9 @@
 package cloud.drakon.tempest
 
-import io.ktor.client.*
-import io.ktor.client.engine.java.*
-import io.ktor.client.plugins.*
-import io.ktor.client.request.*
+import io.ktor.client.HttpClient
+import io.ktor.client.engine.java.Java
+import io.ktor.client.plugins.defaultRequest
+import io.ktor.client.request.header
 
 actual val KtorClient: HttpClient = HttpClient(Java) {
     defaultRequest {
