@@ -2,6 +2,7 @@ package cloud.drakon.tempest.webhook
 
 import cloud.drakon.tempest.components.Component
 import cloud.drakon.tempest.util.Embed
+import cloud.drakon.tempest.util.Flags
 
 /**
  * @property content The message contents (up to 2000 characters).
@@ -24,6 +25,6 @@ class ExecuteWebhook(
     val files: String? = TODO(),
     val payload_json: String? = TODO(),
     val attachments: String? = TODO(),
-    val flags: Short?,
+    val flags: Enum<Flags>?,
     val thread_name: String?,
 )

@@ -17,7 +17,7 @@ import cloud.drakon.tempest.components.Component
  * @property disabled Whether select menu is disabled (defaults to false).
  */
 class SelectMenu(
-    val type: SelectMenuType,
+    val type: Enum<SelectMenuType>,
     val custom_id: String,
     val placeholder: String?,
     val min_values: Byte?,

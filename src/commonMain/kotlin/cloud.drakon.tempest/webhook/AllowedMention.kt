@@ -8,13 +8,13 @@ package cloud.drakon.tempest.webhook
  * @property replied_user For replies, whether to mention the author of the message being replied to (default false).
  */
 class AllowedMention(
-    val parse: Array<AllowedMentionTypes>,
+    val parse: Array<Enum<AllowedMentionTypes>>,
     val roles: Array<Long>,
     val users: Array<Long>,
     val replied_user: Boolean,
 )
 
-enum class AllowedMentionTypes(val AllowedMentionTypes: String) {
+enum class AllowedMentionTypes(val Type: String) {
     /** Controls role mentions. */
     ROLE_MENTIONS("role"),
 

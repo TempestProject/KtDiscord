@@ -10,7 +10,7 @@ package cloud.drakon.tempest.components
  * @property disabled Whether the button is disabled (defaults to false).
  */
 class Button(
-    val style: ButtonStyle,
+    val style: Enum<ButtonStyle>,
     val label: String?,
     val emoji: Emoji?,
     val custom_id: String?,

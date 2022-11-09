@@ -3,10 +3,13 @@ package cloud.drakon.tempest.interaction
 import cloud.drakon.tempest.util.Embed
 
 /**
- * @property InteractionCallbackType Type of response.
- * @property InteractionCallbackData An optional response message.
+ * @property type Type of response.
+ * @property data An optional response message.
  */
-class InteractionResponse(type: InteractionCallbackType, data: InteractionCallbackData?)
+class InteractionResponse(
+    val type: Enum<InteractionCallbackType>,
+    val data: InteractionCallbackData?,
+)
 
 enum class InteractionCallbackType(val VALUE: Byte) {
     /** ACK a Ping. */

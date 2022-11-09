@@ -15,7 +15,7 @@ import cloud.drakon.tempest.util.ChannelType
  */
 class ChannelSelectMenu(
     val custom_id: String,
-    val channel_types: Array<ChannelType>,
+    val channel_types: Array<Enum<ChannelType>>,
     val placeholder: String?,
     val min_values: Byte?,
     val max_values: Byte?,
