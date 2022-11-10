@@ -1,5 +1,6 @@
 package cloud.drakon.tempest.interaction
 
+import cloud.drakon.tempest.components.Component
 import cloud.drakon.tempest.util.Embed
 
 /**
@@ -51,7 +52,7 @@ class InteractionCallbackDataMessage(
     val embeds: Array<Embed>?,
     val allowed_mentions: String?,
     val flags: Short?,
-    val components: Array<String>?,
+    val components: Array<Component>?,
     val attachments: Array<String>? = TODO(),
 ): InteractionCallbackData
 
@@ -69,5 +70,5 @@ class InteractionCallbackDataAutocomplete(val choices: Array<String>):
 class InteractionCallbackDataModal(
     val custom_id: String,
     val title: String,
-    val components: Array<String>,
+    val components: Array<Component>,
 ): InteractionCallbackData
