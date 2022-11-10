@@ -100,4 +100,56 @@ class TempestInteractions(
             setBody(ExecuteWebhook)
         }
     }
+
+    /** Returns a followup message for an Interaction. */
+    suspend fun getFollowupMessage(
+        GetWebhook: GetWebhookMessage,
+        InteractionToken: Long,
+        MessageId: Long,
+    ) {
+        KtorClient.get(
+            urlString = getInteractionUrl(
+                ApplicationId = ApplicationId, InteractionToken = InteractionToken
+            ) + "/messages/$MessageId"
+        ) {
+            headers {
+                append("Authorization", BotToken)
+            }
+            setBody(GetWebhook)
+        }
+    }
+
+    /** Edits a followup message for an Interaction. */
+    suspend fun editFollowupMessage(
+        EditWebhook: EditWebhookMessage,
+        InteractionToken: Long,
+        MessageId: Long,
+    ) {
+        KtorClient.patch(
+            urlString = getInteractionUrl(
+                ApplicationId = ApplicationId, InteractionToken = InteractionToken
+            ) + "/messages/$MessageId"
+        ) {
+            headers {
+                append("Authorization", BotToken)
+            }
+            setBody(EditWebhook)
+        }
+    }
+
+    /** Deletes a followup message for an Interaction. */
+    suspend fun deleteFollowupMessage(
+        InteractionToken: Long,
+        MessageId: Long,
+    ) {
+        KtorClient.delete(
+            urlString = getInteractionUrl(
+                ApplicationId = ApplicationId, InteractionToken = InteractionToken
+            ) + "/messages/$MessageId"
+        ) {
+            headers {
+                append("Authorization", BotToken)
+            }
+        }
+    }
 }
