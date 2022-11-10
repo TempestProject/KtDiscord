@@ -44,7 +44,6 @@ interface InteractionCallbackData
  * @property allowed_mentions Allowed mentions object.
  * @property flags Message flags combined as a bitfield.
  * @property components Message components.
- * @property attachments Attachment objects with filename and description.
  */
 class InteractionCallbackDataMessage(
     val tts: Boolean?,
@@ -53,7 +52,6 @@ class InteractionCallbackDataMessage(
     val allowed_mentions: String?,
     val flags: Short?,
     val components: Array<Component>?,
-    val attachments: Array<String>? = TODO(),
 ): InteractionCallbackData
 
 /**
