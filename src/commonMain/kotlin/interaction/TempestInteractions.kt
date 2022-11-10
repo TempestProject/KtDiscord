@@ -2,6 +2,7 @@ package cloud.drakon.tempest.interaction
 
 import cloud.drakon.tempest.KtorClient
 import cloud.drakon.tempest.webhook.EditWebhookMessage
+import cloud.drakon.tempest.webhook.ExecuteWebhook
 import cloud.drakon.tempest.webhook.GetWebhookMessage
 import io.ktor.client.request.delete
 import io.ktor.client.request.get
@@ -85,7 +86,7 @@ class TempestInteractions(
 
     /** Create a followup message for an Interaction. */
     suspend fun createFollowupMessage(
-        GetWebhook: GetWebhookMessage,
+        ExecuteWebhook: ExecuteWebhook,
         InteractionToken: Long,
     ) {
         KtorClient.get(
@@ -96,7 +97,7 @@ class TempestInteractions(
             headers {
                 append("Authorization", BotToken)
             }
-            setBody(GetWebhook)
+            setBody(ExecuteWebhook)
         }
     }
 }
