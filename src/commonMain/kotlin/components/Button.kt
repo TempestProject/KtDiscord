@@ -1,5 +1,7 @@
 package cloud.drakon.tempest.components
 
+import cloud.drakon.tempest.emoji.Emoji
+
 /**
  * Buttons are interactive components that render in messages. They can be clicked by users, and send an interaction to your app when clicked.
  * @property type 2 for a button.

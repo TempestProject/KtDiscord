@@ -1,8 +1,8 @@
 package cloud.drakon.tempest.webhook
 
+import cloud.drakon.tempest.channel.Embed
+import cloud.drakon.tempest.channel.Flags
 import cloud.drakon.tempest.components.Component
-import cloud.drakon.tempest.util.Embed
-import cloud.drakon.tempest.util.Flags
 
 /**
  * @property content The message contents (up to 2000 characters).

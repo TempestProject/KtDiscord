@@ -1,4 +1,4 @@
-package cloud.drakon.tempest.util
+package cloud.drakon.tempest.channel
 
 /**
  * @property title Title of embed.

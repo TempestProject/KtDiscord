@@ -1,7 +1,7 @@
 package cloud.drakon.tempest.interaction
 
+import cloud.drakon.tempest.channel.Embed
 import cloud.drakon.tempest.components.Component
-import cloud.drakon.tempest.util.Embed
 
 /**
  * @property type Type of response.

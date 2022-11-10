@@ -1,4 +1,4 @@
-package cloud.drakon.tempest.components
+package cloud.drakon.tempest.emoji
 
 /**
  * @property id Emoji ID.

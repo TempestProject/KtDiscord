@@ -1,4 +1,4 @@
-package cloud.drakon.tempest.util
+package cloud.drakon.tempest.channel
 
 enum class Flags(val VALUE: Byte) {
     /** Do not include any embeds when serializing this message. */
