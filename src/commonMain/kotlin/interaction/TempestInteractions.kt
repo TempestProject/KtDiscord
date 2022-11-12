@@ -10,6 +10,7 @@ import io.ktor.client.request.headers
 import io.ktor.client.request.patch
 import io.ktor.client.request.post
 import io.ktor.client.request.setBody
+import io.ktor.client.statement.HttpResponse
 
 private fun getInteractionUrl(ApplicationId: Long, InteractionToken: Long): String {
     return "webhooks/$ApplicationId/$InteractionToken"
@@ -28,8 +29,8 @@ class TempestInteractions(
         InteractionResponse: InteractionResponse,
         InteractionId: Long,
         InteractionToken: Long,
-    ) {
-        KtorClient.post(urlString = "/interactions/$InteractionId/$InteractionToken}/callback") {
+    ): HttpResponse {
+        return KtorClient.post(urlString = "/interactions/$InteractionId/$InteractionToken}/callback") {
             headers {
                 append("Authorization", BotToken)
             }
@@ -41,8 +42,8 @@ class TempestInteractions(
     suspend fun getOriginalInteractionResponse(
         GetWebhook: GetWebhookMessage,
         InteractionToken: Long,
-    ) {
-        KtorClient.get(
+    ): HttpResponse {
+        return KtorClient.get(
             urlString = getInteractionUrl(
                 ApplicationId = ApplicationId, InteractionToken = InteractionToken
             ) + "/messages/@original"
@@ -58,8 +59,8 @@ class TempestInteractions(
     suspend fun editOriginalInteractionResponse(
         EditWebhook: EditWebhookMessage,
         InteractionToken: Long,
-    ) {
-        KtorClient.patch(
+    ): HttpResponse {
+        return KtorClient.patch(
             urlString = getInteractionUrl(
                 ApplicationId = ApplicationId, InteractionToken = InteractionToken
             ) + "/messages/@original"
@@ -72,8 +73,8 @@ class TempestInteractions(
     }
 
     /** Deletes the initial Interaction response. Returns 204 No Content on success. */
-    suspend fun deleteOriginalInteractionResponse(InteractionToken: Long) {
-        KtorClient.delete(
+    suspend fun deleteOriginalInteractionResponse(InteractionToken: Long): HttpResponse {
+        return KtorClient.delete(
             urlString = getInteractionUrl(
                 ApplicationId = ApplicationId, InteractionToken = InteractionToken
             ) + "/messages/@original"
@@ -88,8 +89,8 @@ class TempestInteractions(
     suspend fun createFollowupMessage(
         ExecuteWebhook: ExecuteWebhook,
         InteractionToken: Long,
-    ) {
-        KtorClient.get(
+    ): HttpResponse {
+        return KtorClient.get(
             urlString = getInteractionUrl(
                 ApplicationId = ApplicationId, InteractionToken = InteractionToken
             ) + "/messages/@original"
@@ -106,8 +107,8 @@ class TempestInteractions(
         GetWebhook: GetWebhookMessage,
         InteractionToken: Long,
         MessageId: Long,
-    ) {
-        KtorClient.get(
+    ): HttpResponse {
+        return KtorClient.get(
             urlString = getInteractionUrl(
                 ApplicationId = ApplicationId, InteractionToken = InteractionToken
             ) + "/messages/$MessageId"
@@ -124,8 +125,8 @@ class TempestInteractions(
         EditWebhook: EditWebhookMessage,
         InteractionToken: Long,
         MessageId: Long,
-    ) {
-        KtorClient.patch(
+    ): HttpResponse {
+        return KtorClient.patch(
             urlString = getInteractionUrl(
                 ApplicationId = ApplicationId, InteractionToken = InteractionToken
             ) + "/messages/$MessageId"
@@ -141,8 +142,8 @@ class TempestInteractions(
     suspend fun deleteFollowupMessage(
         InteractionToken: Long,
         MessageId: Long,
-    ) {
-        KtorClient.delete(
+    ): HttpResponse {
+        return KtorClient.delete(
             urlString = getInteractionUrl(
                 ApplicationId = ApplicationId, InteractionToken = InteractionToken
             ) + "/messages/$MessageId"
