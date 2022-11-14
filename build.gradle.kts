@@ -1,5 +1,6 @@
 plugins {
     kotlin("multiplatform") version "1.7.21"
+    kotlin("plugin.serialization") version "1.7.20"
     id("maven-publish")
     id("org.jetbrains.dokka") version "1.7.20"
 }
@@ -28,6 +29,7 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1")
                 implementation("io.ktor:ktor-client-core:$ktor_version")
             }
         }
