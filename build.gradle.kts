@@ -23,6 +23,7 @@ kotlin {
     }
     js(BOTH) {
         nodejs()
+        useCommonJs()
     }
     sourceSets {
         val commonMain by getting {
