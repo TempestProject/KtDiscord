@@ -55,7 +55,7 @@ kotlin {
         repositories {
             maven {
                 name = "GitHubPackages"
-                url = uri("https://maven.pkg.github.com/drakon64/Tempest")
+                url = uri("https://maven.pkg.github.com/TempestProject/Tempest")
                 credentials {
                     username = System.getenv("GITHUB_ACTOR")
                     password = System.getenv("GITHUB_TOKEN")
