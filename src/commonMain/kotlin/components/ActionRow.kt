@@ -1,4 +1,4 @@
-package components
+package cloud.drakon.tempest.components
 
 /**
  * An Action Row is a non-interactive container component for other types of components. It has a sub-array of `components` of other types.

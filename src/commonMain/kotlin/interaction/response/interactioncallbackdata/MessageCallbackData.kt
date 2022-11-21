@@ -1,9 +1,9 @@
-package interaction.response.interactioncallbackdata
+package cloud.drakon.tempest.interaction.response.interactioncallbackdata
 
-import channel.Attachment
-import channel.allowedmentions.AllowedMentions
-import channel.embed.Embed
-import components.Component
+import cloud.drakon.tempest.channel.Attachment
+import cloud.drakon.tempest.channel.allowedmentions.AllowedMentions
+import cloud.drakon.tempest.channel.embed.Embed
+import cloud.drakon.tempest.components.Component
 import kotlinx.serialization.Serializable
 
 /**

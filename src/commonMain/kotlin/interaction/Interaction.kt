@@ -1,9 +1,9 @@
-package interaction
+package cloud.drakon.tempest.interaction
 
-import channel.message.Message
-import guild.GuildMember
+import cloud.drakon.tempest.channel.message.Message
+import cloud.drakon.tempest.guild.GuildMember
+import cloud.drakon.tempest.user.User
 import kotlinx.serialization.Serializable
-import user.User
 
 /**
  * An Interaction is the message that your application receives when a user uses an application command or a message components.

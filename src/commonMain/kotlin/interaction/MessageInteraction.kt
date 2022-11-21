@@ -1,8 +1,8 @@
-package interaction
+package cloud.drakon.tempest.interaction
 
-import guild.GuildMember
+import cloud.drakon.tempest.guild.GuildMember
+import cloud.drakon.tempest.user.User
 import kotlinx.serialization.Serializable
-import user.User
 
 @Serializable class MessageInteraction(
     val id: String,

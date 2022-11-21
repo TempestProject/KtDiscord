@@ -1,7 +1,7 @@
-package guild
+package cloud.drakon.tempest.guild
 
+import cloud.drakon.tempest.user.User
 import kotlinx.serialization.Serializable
-import user.User
 
 @Serializable class GuildMember(
     val user: User? = null,

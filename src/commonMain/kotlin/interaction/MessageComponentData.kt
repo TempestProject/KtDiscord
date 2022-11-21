@@ -1,6 +1,6 @@
-package interaction
+package cloud.drakon.tempest.interaction
 
-import components.selectmenu.SelectOption
+import cloud.drakon.tempest.components.selectmenu.SelectOption
 import kotlinx.serialization.Serializable
 
 /**

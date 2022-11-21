@@ -1,6 +1,6 @@
-package channel
+package cloud.drakon.tempest.channel
 
-import emoji.Emoji
+import cloud.drakon.tempest.emoji.Emoji
 import kotlinx.serialization.Serializable
 
 /**

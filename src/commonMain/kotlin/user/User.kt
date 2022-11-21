@@ -1,4 +1,4 @@
-package user
+package cloud.drakon.tempest.user
 
 import kotlinx.serialization.Serializable
 

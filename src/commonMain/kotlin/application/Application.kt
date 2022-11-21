@@ -1,8 +1,8 @@
-package application
+package cloud.drakon.tempest.application
 
+import cloud.drakon.tempest.teams.Team
+import cloud.drakon.tempest.user.User
 import kotlinx.serialization.Serializable
-import teams.Team
-import user.User
 
 /**
  * @property id the id of the app

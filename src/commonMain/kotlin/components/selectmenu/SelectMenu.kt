@@ -1,6 +1,6 @@
-package components.selectmenu
+package cloud.drakon.tempest.components.selectmenu
 
-import components.Component
+import cloud.drakon.tempest.components.Component
 
 /**
  * Select menus are interactive components that allow users to select one or more options from a dropdown list in messages. On desktop, clicking on a select menu opens a dropdown-style UI; on mobile, tapping a select menu opens up a half-sheet with the options.

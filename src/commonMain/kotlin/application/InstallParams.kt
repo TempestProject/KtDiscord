@@ -1,4 +1,4 @@
-package application
+package cloud.drakon.tempest.application
 
 import kotlinx.serialization.Serializable
 

@@ -1,4 +1,4 @@
-package permissions
+package cloud.drakon.tempest.permissions
 
 import kotlinx.serialization.Serializable
 

@@ -1,4 +1,4 @@
-package interaction.response
+package cloud.drakon.tempest.interaction.response
 
 object InteractionCallbackType {
     /** ACK a `Ping` */

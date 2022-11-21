@@ -1,4 +1,4 @@
-package components
+package cloud.drakon.tempest.components
 
 /**
  * Components are a new field on the message object, so you can use them whether you're sending messages or responding to a slash command or other interaction.

@@ -1,4 +1,4 @@
-package channel.allowedmentions
+package cloud.drakon.tempest.channel.allowedmentions
 
 import kotlinx.serialization.Serializable
 

@@ -1,12 +1,12 @@
-package interaction
+package cloud.drakon.tempest.interaction
 
-import channel.Attachment
-import channel.Channel
-import channel.message.Message
-import guild.GuildMember
+import cloud.drakon.tempest.channel.Attachment
+import cloud.drakon.tempest.channel.Channel
+import cloud.drakon.tempest.channel.message.Message
+import cloud.drakon.tempest.guild.GuildMember
+import cloud.drakon.tempest.permissions.Role
+import cloud.drakon.tempest.user.User
 import kotlinx.serialization.Serializable
-import permissions.Role
-import user.User
 
 /**
  * If data for a Member is included, data for its corresponding User will also be included.

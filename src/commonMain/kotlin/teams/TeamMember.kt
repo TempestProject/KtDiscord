@@ -1,7 +1,7 @@
-package teams
+package cloud.drakon.tempest.teams
 
+import cloud.drakon.tempest.user.User
 import kotlinx.serialization.Serializable
-import user.User
 
 /**
  * @property membership_state the user's membership state on the team

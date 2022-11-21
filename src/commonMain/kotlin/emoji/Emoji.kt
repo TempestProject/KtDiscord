@@ -1,8 +1,8 @@
-package emoji
+package cloud.drakon.tempest.emoji
 
+import cloud.drakon.tempest.permissions.Role
+import cloud.drakon.tempest.user.User
 import kotlinx.serialization.Serializable
-import permissions.Role
-import user.User
 
 /**
  * @property id emoji id

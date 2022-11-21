@@ -1,4 +1,4 @@
-package channel.message
+package cloud.drakon.tempest.channel.message
 
 object MessageFlags {
     const val SUPPRESS_EMBEDS: Byte = 1 shl 2

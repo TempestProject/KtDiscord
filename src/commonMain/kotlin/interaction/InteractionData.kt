@@ -1,4 +1,4 @@
-package interaction
+package cloud.drakon.tempest.interaction
 
 /**
  * An Interaction is the message that your application receives when a user uses an application command or a message component.

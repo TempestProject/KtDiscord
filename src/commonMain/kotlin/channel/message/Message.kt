@@ -1,18 +1,18 @@
-package channel.message
+package cloud.drakon.tempest.channel.message
 
-import application.Application
-import channel.Attachment
-import channel.Channel
-import channel.ChannelMention
-import channel.Reaction
-import channel.embed.Embed
-import components.Component
-import interaction.MessageInteraction
+import cloud.drakon.tempest.application.Application
+import cloud.drakon.tempest.channel.Attachment
+import cloud.drakon.tempest.channel.Channel
+import cloud.drakon.tempest.channel.ChannelMention
+import cloud.drakon.tempest.channel.Reaction
+import cloud.drakon.tempest.channel.embed.Embed
+import cloud.drakon.tempest.components.Component
+import cloud.drakon.tempest.interaction.MessageInteraction
+import cloud.drakon.tempest.permissions.Role
+import cloud.drakon.tempest.sticker.Sticker
+import cloud.drakon.tempest.sticker.StickerItem
+import cloud.drakon.tempest.user.User
 import kotlinx.serialization.Serializable
-import permissions.Role
-import sticker.Sticker
-import sticker.StickerItem
-import user.User
 
 /**
  * Represents a message sent in a channel within Discord.
