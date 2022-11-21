@@ -1,5 +1,6 @@
 package interaction
 
+import interaction.applicationcommand.ApplicationCommandData
 import kotlinx.serialization.DeserializationStrategy
 import kotlinx.serialization.json.JsonContentPolymorphicSerializer
 import kotlinx.serialization.json.JsonElement

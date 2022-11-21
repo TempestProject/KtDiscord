@@ -1,0 +1,3 @@
+package interaction.response.interactioncallbackdata
+
+interface InteractionCallbackData

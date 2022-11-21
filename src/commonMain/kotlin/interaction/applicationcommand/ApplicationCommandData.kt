@@ -1,5 +1,7 @@
-package interaction
+package interaction.applicationcommand
 
+import interaction.InteractionData
+import interaction.ResolvedData
 import kotlinx.serialization.Serializable
 
 /**
