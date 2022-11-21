@@ -23,14 +23,17 @@ kotlin {
             useJUnitPlatform()
         }
     }
-    js(BOTH) {
-        nodejs()
-        useCommonJs()
-    }
+
+    //    js(BOTH) {
+    //        nodejs()
+    //        useCommonJs()
+    //    }
+    
     sourceSets {
         val commonMain by getting {
             dependencies {
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1")
+
                 implementation("io.ktor:ktor-client-core:$ktor_version")
             }
         }
@@ -45,12 +48,13 @@ kotlin {
             }
         }
         val jvmTest by getting
-        val jsMain by getting {
-            dependencies {
-                implementation("io.ktor:ktor-client-js:$ktor_version")
-            }
-        }
-        val jsTest by getting
+
+        //        val jsMain by getting {
+        //            dependencies {
+        //                implementation("io.ktor:ktor-client-js:$ktor_version")
+        //            }
+        //        }
+        //        val jsTest by getting
     }
     publishing {
         repositories {
