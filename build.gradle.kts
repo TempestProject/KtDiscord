@@ -28,13 +28,13 @@ kotlin {
     //        nodejs()
     //        useCommonJs()
     //    }
-    
+
     sourceSets {
         val commonMain by getting {
             dependencies {
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1")
 
-                implementation("io.ktor:ktor-client-core:$ktor_version")
+                implementation("io.ktor:ktor-client-core:2.1.3")
             }
         }
         val commonTest by getting {
@@ -44,14 +44,14 @@ kotlin {
         }
         val jvmMain by getting {
             dependencies {
-                implementation("io.ktor:ktor-client-java:$ktor_version")
+                implementation("io.ktor:ktor-client-java:2.1.3")
             }
         }
         val jvmTest by getting
 
         //        val jsMain by getting {
         //            dependencies {
-        //                implementation("io.ktor:ktor-client-js:$ktor_version")
+        //                implementation("io.ktor:ktor-client-js:2.1.3")
         //            }
         //        }
         //        val jsTest by getting
