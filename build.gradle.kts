@@ -51,11 +51,14 @@ kotlin {
 
         //        val jsMain by getting {
         //            dependencies {
+        //                implementation(npm("tweetnacl", "1.0.3", generateExternals = true))
+        //
         //                implementation("io.ktor:ktor-client-js:2.1.3")
         //            }
         //        }
         //        val jsTest by getting
     }
+
     publishing {
         repositories {
             maven {
