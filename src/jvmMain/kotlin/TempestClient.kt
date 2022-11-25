@@ -1,23 +1,22 @@
 package cloud.drakon.tempest
 
-import java.security.KeyFactory
-import java.security.Signature
-import java.security.spec.X509EncodedKeySpec
+import com.goterl.lazysodium.LazySodiumJava
+import com.goterl.lazysodium.SodiumJava
+import com.goterl.lazysodium.utils.Key
+import com.goterl.lazysodium.utils.LibraryLoader
 
 actual class TempestClient actual constructor(
     private val applicationId: String,
     private val botToken: String,
     private val publicKey: String,
 ) {
+    private val lazySodium = LazySodiumJava(SodiumJava(LibraryLoader.Mode.BUNDLED_ONLY))
+
     fun validateRequest(timestamp: String, body: String, signature: String): Boolean {
-        val validateSignature = Signature.getInstance("Ed25519")
-
-        validateSignature.initVerify(
-            KeyFactory.getInstance("Ed25519")
-                .generatePublic(X509EncodedKeySpec(publicKey.toByteArray()))
+        return lazySodium.cryptoSignVerifyDetached(
+            Key.fromHexString(signature).asHexString,
+            timestamp + body,
+            Key.fromHexString(publicKey)
         )
-
-        validateSignature.update((timestamp + body).toByteArray())
-        return validateSignature.verify(signature.toByteArray())
     }
 }

@@ -44,6 +44,9 @@ kotlin {
         }
         val jvmMain by getting {
             dependencies {
+                implementation("com.goterl:lazysodium-java:5.1.4")
+                implementation("net.java.dev.jna:jna:5.12.1")
+
                 implementation("io.ktor:ktor-client-java:2.1.3")
             }
         }
