@@ -17,7 +17,7 @@ val ktor_version: String by project
 kotlin {
     jvm {
         compilations.all {
-            kotlinOptions.jvmTarget = "17"
+            kotlinOptions.jvmTarget = "11"
         }
         testRuns["test"].executionTask.configure {
             useJUnitPlatform()
@@ -81,7 +81,7 @@ tasks.dokkaJekyll.configure {
 
     dokkaSourceSets {
         configureEach {
-            jdkVersion.set(17)
+            jdkVersion.set(11)
         }
     }
 }
