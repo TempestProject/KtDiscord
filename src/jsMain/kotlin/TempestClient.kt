@@ -6,6 +6,6 @@ actual class TempestClient actual constructor(
     private val publicKey: String,
 ) {
     fun validateRequest(timestamp: String, body: String, signature: String) {
-        
+
     }
 }
