@@ -10,4 +10,4 @@ import kotlinx.serialization.Serializable
 @Serializable class ModalSubmitData(
     val custom_id: String,
     val components: Array<Component>,
-)
+): InteractionData
