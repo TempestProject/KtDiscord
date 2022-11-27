@@ -1,3 +1,5 @@
 package cloud.drakon.tempest.interaction.response.interactioncallbackdata
 
-interface InteractionCallbackData
+import kotlinx.serialization.Serializable
+
+@Serializable sealed interface InteractionCallbackData
