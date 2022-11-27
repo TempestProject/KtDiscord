@@ -12,8 +12,6 @@ repositories {
     mavenCentral()
 }
 
-val ktor_version: String by project
-
 kotlin {
     jvm {
         compilations.all {
