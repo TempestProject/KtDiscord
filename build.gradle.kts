@@ -23,11 +23,10 @@ kotlin {
             useJUnitPlatform()
         }
     }
-
-    //    js(BOTH) {
-    //        nodejs()
-    //        useCommonJs()
-    //    }
+    js(BOTH) {
+        nodejs()
+        useCommonJs()
+    }
 
     sourceSets {
         val commonMain by getting {
@@ -53,15 +52,15 @@ kotlin {
             }
         }
         val jvmTest by getting
+        val jsMain by getting {
+            dependencies {
 
-        //        val jsMain by getting {
-        //            dependencies {
-        //                implementation(npm("tweetnacl", "1.0.3", generateExternals = true))
-        //
-        //                implementation("io.ktor:ktor-client-js:2.1.3")
-        //            }
-        //        }
-        //        val jsTest by getting
+                //                implementation(npm("tweetnacl", "1.0.3", generateExternals = true))
+
+                implementation("io.ktor:ktor-client-js:2.1.3")
+            }
+        }
+        val jsTest by getting
     }
 
     publishing {
