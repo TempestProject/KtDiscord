@@ -12,5 +12,5 @@ import kotlinx.serialization.Serializable
     val allowed_mentions: AllowedMentions? = null,
     val components: Array<Component>? = null,
     val payload_json: String? = null,
-    val attachments: Array<Attachment>? = null
+    val attachments: Array<Attachment>? = null,
 )
