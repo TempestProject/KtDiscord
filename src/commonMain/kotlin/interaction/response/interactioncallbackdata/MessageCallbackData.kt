@@ -19,7 +19,7 @@ import kotlinx.serialization.Serializable
     val tts: Boolean? = null,
     val content: String? = null,
     val embeds: Array<Embed>? = null,
-    val allowed_mentions: AllowedMentions,
+    val allowed_mentions: AllowedMentions? = null,
     val flags: Short? = null,
     val components: Array<Component>? = null,
     val attachments: Array<Attachment>? = null,
