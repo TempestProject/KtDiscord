@@ -36,6 +36,9 @@ actual class TempestClient actual constructor(
         expectSuccess = true
     }
 
+    /**
+     * Create a response to an Interaction from the gateway. Body is an interaction response. Returns `204 No Content`.
+     */
     suspend fun createInteractionResponse(
         interactionResponse: InteractionResponse,
         interactionId: String,
@@ -47,6 +50,9 @@ actual class TempestClient actual constructor(
         }
     }
 
+    /**
+     * Returns the initial Interaction response.
+     */
     suspend fun getOriginalInteractionResponse(
         interactionToken: String,
     ): Message {
@@ -54,6 +60,9 @@ actual class TempestClient actual constructor(
             .body()
     }
 
+    /**
+     * Edits the initial Interaction response.
+     */
     suspend fun editOriginalInteractionResponse(
         editWebhookMessage: EditWebhookMessage, interactionToken: String,
     ): Message {
@@ -63,10 +72,18 @@ actual class TempestClient actual constructor(
         }.body()
     }
 
+    /**
+     * Deletes the initial Interaction response. Returns `204 No Content` on success.
+     */
     suspend fun deleteOriginalInteractionResponse(interactionToken: String): HttpResponse {
         return ktorClient.delete("webhooks/$applicationId/$interactionToken/messages/@original")
     }
 
+    /**
+     * Create a followup message for an Interaction.
+     *
+     * `flags` can be set to `64` to mark the message as ephemeral, except when it is the first followup message to a deferred Interactions Response. In that case, the `flags` field will be ignored, and the ephemerality of the message will be determined by the `flags` value in your original ACK.
+     */
     suspend fun createFollowupMessage(
         executeWebhook: ExecuteWebhook,
         interactionToken: String,
@@ -77,6 +94,9 @@ actual class TempestClient actual constructor(
         }.body()
     }
 
+    /**
+     * Returns a followup message for an Interaction.
+     */
     suspend fun getFollowupMessage(
         messageId: String,
         interactionToken: String,
@@ -85,6 +105,9 @@ actual class TempestClient actual constructor(
             .body()
     }
 
+    /**
+     * Edits a followup message for an Interaction.
+     */
     suspend fun editFollowupMessage(
         editWebhookMessage: EditWebhookMessage,
         interactionToken: String,
@@ -96,6 +119,9 @@ actual class TempestClient actual constructor(
         }.body()
     }
 
+    /**
+     * Deletes a followup message for an Interaction. Returns `204 No Content` on success.
+     */
     suspend fun deleteFollowupMessage(
         interactionToken: String,
         messageId: String,
