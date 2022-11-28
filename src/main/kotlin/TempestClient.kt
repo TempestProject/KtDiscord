@@ -5,10 +5,6 @@ import cloud.drakon.discordkt.interaction.response.InteractionResponse
 import cloud.drakon.discordkt.webbook.EditWebhookMessage
 import cloud.drakon.discordkt.webbook.ExecuteWebhook
 import cloud.drakon.discordkt.webbook.Webhook
-import com.goterl.lazysodium.LazySodiumJava
-import com.goterl.lazysodium.SodiumJava
-import com.goterl.lazysodium.utils.Key
-import com.goterl.lazysodium.utils.LibraryLoader
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.engine.java.Java
@@ -28,6 +24,10 @@ import io.ktor.http.Headers
 import io.ktor.http.HttpHeaders
 import io.ktor.http.contentType
 import io.ktor.serialization.kotlinx.json.json
+import java.security.KeyFactory
+import java.security.Signature
+import java.security.spec.X509EncodedKeySpec
+import java.util.HexFormat
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
@@ -36,7 +36,6 @@ class TempestClient(
     private val botToken: String,
     private val publicKey: String,
 ) {
-    private val lazySodium = LazySodiumJava(SodiumJava(LibraryLoader.Mode.BUNDLED_ONLY))
     private val ktorClient = HttpClient(Java) {
         install(ContentNegotiation) {
             json(Json { ignoreUnknownKeys = true })
@@ -66,11 +65,14 @@ class TempestClient(
     }
 
     fun validateRequest(timestamp: String, body: String, signature: String): Boolean {
-        return lazySodium.cryptoSignVerifyDetached(
-            Key.fromHexString(signature).asHexString,
-            timestamp + body,
-            Key.fromHexString(publicKey)
+        val sig: Signature = Signature.getInstance("Ed25519")
+        sig.initVerify(
+            KeyFactory.getInstance("Ed25519")
+                .generatePublic(X509EncodedKeySpec(HexFormat.of().parseHex(publicKey)))
         )
+        sig.update((timestamp + body).toByteArray())
+
+        return sig.verify(signature.toByteArray())
     }
 
     /**

@@ -23,9 +23,6 @@ dependencies {
     implementation("io.ktor:ktor-client-java:$ktorVersion")
     implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
     implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
-
-    implementation("com.goterl:lazysodium-java:5.1.4")
-    implementation("net.java.dev.jna:jna:5.12.1")
 }
 
 publishing {
