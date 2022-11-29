@@ -38,6 +38,7 @@ import kotlinx.serialization.Serializable
     val username: String,
     val discriminator: String,
     val avatar: String?,
+    val avatar_decoration: String? = null, // TODO https://github.com/discord/discord-api-docs/issues/5690
     val bot: String? = null,
     val system: String? = null,
     val mfa_enabled: Boolean? = null,

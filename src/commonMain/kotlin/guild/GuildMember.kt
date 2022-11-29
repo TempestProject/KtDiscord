@@ -15,4 +15,6 @@ import kotlinx.serialization.Serializable
     val pending: Boolean? = null,
     val permissions: String? = null,
     val communication_disabled_until: String? = null,
+    val flags: Byte? = null, // TODO undocumented
+    val is_pending: Boolean? = null, // TODO undocumented
 )
