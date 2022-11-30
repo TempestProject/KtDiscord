@@ -11,6 +11,6 @@ import kotlinx.serialization.Serializable
 @Serializable class EmbedImage(
     val url: String,
     val proxy_url: String? = null,
-    val height: UInt? = null,
-    val width: UInt? = null,
+    val height: Short? = null,
+    val width: Short? = null,
 )

@@ -22,7 +22,7 @@ import kotlinx.serialization.Serializable
     val size: UInt,
     val url: String,
     val proxy_url: String,
-    val height: UInt? = null,
-    val width: UInt? = null,
+    val height: Short? = null,
+    val width: Short? = null,
     val ephemeral: Boolean? = null,
 )
