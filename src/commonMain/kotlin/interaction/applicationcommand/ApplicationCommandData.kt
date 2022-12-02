@@ -16,7 +16,7 @@ import kotlinx.serialization.Serializable
 @Serializable class ApplicationCommandData(
     val id: String,
     val name: String,
-    val type: Byte,
+    val type: Int,
     val resolved: ResolvedData? = null,
     val options: Array<ApplicationCommandInteractionDataOption>? = null,
     val guild_id: String? = null,
