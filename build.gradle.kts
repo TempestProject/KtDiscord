@@ -31,9 +31,9 @@ kotlin {
             dependencies {
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1")
 
-                implementation("io.ktor:ktor-client-core:2.1.3")
-                implementation("io.ktor:ktor-client-content-negotiation:2.1.3")
-                implementation("io.ktor:ktor-serialization-kotlinx-json:2.1.3")
+                implementation("io.ktor:ktor-client-core:2.2.0")
+                implementation("io.ktor:ktor-client-content-negotiation:2.2.0")
+                implementation("io.ktor:ktor-serialization-kotlinx-json:2.2.0")
             }
         }
         val commonTest by getting {
@@ -46,7 +46,7 @@ kotlin {
                 implementation("com.goterl:lazysodium-java:5.1.4")
                 implementation("net.java.dev.jna:jna:5.12.1")
 
-                implementation("io.ktor:ktor-client-java:2.1.3")
+                implementation("io.ktor:ktor-client-java:2.2.0")
             }
         }
         val jvmTest by getting
@@ -55,7 +55,7 @@ kotlin {
 
                 //                implementation(npm("tweetnacl", "1.0.3", generateExternals = true))
 
-                implementation("io.ktor:ktor-client-js:2.1.3")
+                implementation("io.ktor:ktor-client-js:2.2.0")
             }
         }
         val jsTest by getting
