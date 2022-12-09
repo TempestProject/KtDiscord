@@ -10,8 +10,8 @@ import kotlinx.serialization.Serializable
     val roles: Array<String>,
     val joined_at: String,
     val premium_since: String? = null,
-    val deaf: Boolean,
-    val mute: Boolean,
+    val deaf: Boolean? = null, // TODO https://github.com/discord/discord-api-docs/issues/5728
+    val mute: Boolean? = null, // TODO https://github.com/discord/discord-api-docs/issues/5728
     val pending: Boolean? = null,
     val permissions: String? = null,
     val communication_disabled_until: String? = null,
