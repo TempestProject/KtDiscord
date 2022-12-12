@@ -21,7 +21,7 @@ kotlin {
             useJUnitPlatform()
         }
     }
-    js(BOTH) {
+    js(LEGACY) {
         nodejs()
         useCommonJs()
     }
