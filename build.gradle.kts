@@ -55,7 +55,7 @@ kotlin {
 
                 //                implementation(npm("tweetnacl", "1.0.3", generateExternals = true))
 
-                implementation("io.ktor:ktor-client-js:2.2.0")
+                implementation("io.ktor:ktor-client-js:2.2.1")
             }
         }
         val jsTest by getting
