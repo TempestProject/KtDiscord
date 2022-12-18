@@ -31,7 +31,7 @@ import kotlinx.serialization.Serializable
 @Serializable class Interaction<T: InteractionData?>(
     val id: String,
     val application_id: String,
-    val type: Byte,
+    val type: Int,
     val data: T? = null,
     val guild_id: String? = null,
     val channel_id: String? = null,
