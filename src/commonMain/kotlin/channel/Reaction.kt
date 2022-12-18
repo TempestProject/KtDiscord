@@ -8,4 +8,12 @@ import kotlinx.serialization.Serializable
  * @property me whether the current user reacted using this emoji
  * @property emoji emoji information
  */
-@Serializable class Reaction(val count: UInt, val me: Boolean, val emoji: Emoji)
+@Serializable class Reaction(
+    val count: UInt,
+    val me: Boolean,
+    val emoji: Emoji,
+    val burst_colors: Array<String>?, //TODO undocumented,
+    val burst_count: Byte?, //TODO undocumented
+    val burst_me: Boolean?, //TODO undocumented
+    val burst_user_ids: Array<String>?, //TODO undocumented
+)
