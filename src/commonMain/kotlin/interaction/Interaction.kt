@@ -43,5 +43,4 @@ import kotlinx.serialization.Serializable
     val app_permissions: String? = null,
     val locale: String? = null,
     val guild_locale: String? = null,
-    val entitlement_sku_ids: Array<String>? = null, // TODO undocumented
 )

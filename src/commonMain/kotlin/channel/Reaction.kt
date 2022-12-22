@@ -12,8 +12,4 @@ import kotlinx.serialization.Serializable
     val count: UInt,
     val me: Boolean,
     val emoji: Emoji,
-    val burst_colors: Array<String>?, //TODO undocumented,
-    val burst_count: Byte?, //TODO undocumented
-    val burst_me: Boolean?, //TODO undocumented
-    val burst_user_ids: Array<String>?, //TODO undocumented
 )
