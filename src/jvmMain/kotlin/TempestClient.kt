@@ -23,6 +23,7 @@ import io.ktor.client.statement.HttpResponse
 import io.ktor.http.ContentType
 import io.ktor.http.contentType
 import io.ktor.serialization.kotlinx.json.json
+import kotlinx.serialization.json.Json
 
 actual class TempestClient actual constructor(
     private val applicationId: String,
@@ -32,12 +33,14 @@ actual class TempestClient actual constructor(
     private val lazySodium = LazySodiumJava(SodiumJava(LibraryLoader.Mode.BUNDLED_ONLY))
     private val ktorClient = HttpClient(Java) {
         install(ContentNegotiation) {
-            json()
+            json(Json { ignoreUnknownKeys = true })
         }
+
         install(DefaultRequest)
         defaultRequest {
             url("https://discord.com/api/v10/")
         }
+
         expectSuccess = true
     }
 
