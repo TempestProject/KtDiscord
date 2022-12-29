@@ -1,8 +1,6 @@
 package cloud.drakon.tempest
 
-import kotlinx.serialization.Serializable
-
-@Serializable class File(
+class File(
     val id: String,
     val filename: String,
     val contentType: String,
