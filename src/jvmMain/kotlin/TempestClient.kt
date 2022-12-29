@@ -136,10 +136,37 @@ actual class TempestClient actual constructor(
         executeWebhook: ExecuteWebhook,
         interactionToken: String,
     ): Message {
-        return ktorClient.post("webhooks/$applicationId/$interactionToken") {
-            contentType(ContentType.Application.Json)
-            setBody(executeWebhook)
-        }.body()
+        return if (executeWebhook.files == null) {
+            ktorClient.post("webhooks/$applicationId/$interactionToken") {
+                contentType(ContentType.Application.Json)
+                setBody(executeWebhook)
+            }.body()
+        } else {
+            ktorClient.post("webhooks/$applicationId/$interactionToken") {
+                setBody(MultiPartFormDataContent(formData {
+                    append(
+                        "payload_json",
+                        Json.encodeToString(executeWebhook),
+
+                        //                        Headers.build {
+                        //                            append(
+                        //                                HttpHeaders.ContentType, ContentType.Application.Json
+                        //                            )
+                        //                        }
+
+                    )
+                    for (i in executeWebhook.files) {
+                        append("files[" + i.id + "]", i.bytes, Headers.build {
+                            append(HttpHeaders.ContentType, i.contentType)
+                            append(
+                                HttpHeaders.ContentDisposition,
+                                "filename=\"" + i.filename + "\""
+                            )
+                        })
+                    }
+                }))
+            }.body()
+        }
     }
 
     /**
