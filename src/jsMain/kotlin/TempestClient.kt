@@ -11,14 +11,20 @@ import io.ktor.client.plugins.DefaultRequest
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.defaultRequest
 import io.ktor.client.request.delete
+import io.ktor.client.request.forms.MultiPartFormDataContent
+import io.ktor.client.request.forms.formData
 import io.ktor.client.request.get
 import io.ktor.client.request.patch
 import io.ktor.client.request.post
 import io.ktor.client.request.setBody
 import io.ktor.client.statement.HttpResponse
 import io.ktor.http.ContentType
+import io.ktor.http.Headers
+import io.ktor.http.HttpHeaders
 import io.ktor.http.contentType
 import io.ktor.serialization.kotlinx.json.json
+import io.ktor.util.InternalAPI
+import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
 actual class TempestClient actual constructor(
@@ -68,13 +74,41 @@ actual class TempestClient actual constructor(
      * Edits the initial Interaction response.
      */
     @JsName("editOriginalInteractionResponse")
+    @OptIn(InternalAPI::class)
     suspend fun editOriginalInteractionResponse(
         editWebhookMessage: EditWebhookMessage, interactionToken: String,
     ): Message {
-        return ktorClient.patch("webhooks/$applicationId/$interactionToken/messages/@original") {
-            contentType(ContentType.Application.Json)
-            setBody(editWebhookMessage)
-        }.body()
+        return if (editWebhookMessage.files == null) {
+            ktorClient.patch("webhooks/$applicationId/$interactionToken/messages/@original") {
+                contentType(ContentType.Application.Json)
+                setBody(editWebhookMessage)
+            }.body()
+        } else {
+            ktorClient.patch("webhooks/$applicationId/$interactionToken/messages/@original") {
+                setBody(MultiPartFormDataContent(formData {
+                    append(
+                        "payload_json",
+                        Json.encodeToString(editWebhookMessage),
+
+                        //                        Headers.build {
+                        //                            append(
+                        //                                HttpHeaders.ContentType, ContentType.Application.Json
+                        //                            )
+                        //                        }
+
+                    )
+                    for (i in editWebhookMessage.files) {
+                        append("files[" + i.id + "]", i.bytes, Headers.build {
+                            append(HttpHeaders.ContentType, i.contentType)
+                            append(
+                                HttpHeaders.ContentDisposition,
+                                "filename=\"" + i.filename + "\""
+                            )
+                        })
+                    }
+                }))
+            }.body()
+        }
     }
 
     /**

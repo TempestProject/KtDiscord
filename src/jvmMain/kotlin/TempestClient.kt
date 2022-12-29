@@ -27,6 +27,8 @@ import io.ktor.http.Headers
 import io.ktor.http.HttpHeaders
 import io.ktor.http.contentType
 import io.ktor.serialization.kotlinx.json.json
+import io.ktor.util.InternalAPI
+import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
 actual class TempestClient actual constructor(
@@ -83,7 +85,7 @@ actual class TempestClient actual constructor(
     /**
      * Edits the initial Interaction response.
      */
-    suspend fun editOriginalInteractionResponse(
+    @OptIn(InternalAPI::class) suspend fun editOriginalInteractionResponse(
         editWebhookMessage: EditWebhookMessage, interactionToken: String,
     ): Message {
         return if (editWebhookMessage.files == null) {
@@ -94,6 +96,17 @@ actual class TempestClient actual constructor(
         } else {
             ktorClient.patch("webhooks/$applicationId/$interactionToken/messages/@original") {
                 setBody(MultiPartFormDataContent(formData {
+                    append(
+                        "payload_json",
+                        Json.encodeToString(editWebhookMessage),
+                        
+                        //                        Headers.build {
+                        //                            append(
+                        //                                HttpHeaders.ContentType, ContentType.Application.Json
+                        //                            )
+                        //                        }
+
+                    )
                     for (i in editWebhookMessage.files) {
                         append("files[" + i.id + "]", i.bytes, Headers.build {
                             append(HttpHeaders.ContentType, i.contentType)
