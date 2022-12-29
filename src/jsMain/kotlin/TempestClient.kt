@@ -23,7 +23,6 @@ import io.ktor.http.Headers
 import io.ktor.http.HttpHeaders
 import io.ktor.http.contentType
 import io.ktor.serialization.kotlinx.json.json
-import io.ktor.util.InternalAPI
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
@@ -74,7 +73,6 @@ actual class TempestClient actual constructor(
      * Edits the initial Interaction response.
      */
     @JsName("editOriginalInteractionResponse")
-    @OptIn(InternalAPI::class)
     suspend fun editOriginalInteractionResponse(
         editWebhookMessage: EditWebhookMessage, interactionToken: String,
     ): Message {
