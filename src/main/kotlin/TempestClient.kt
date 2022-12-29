@@ -30,7 +30,7 @@ import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
-actual class TempestClient actual constructor(
+class TempestClient(
     private val applicationId: String,
     private val botToken: String,
     private val publicKey: String,
