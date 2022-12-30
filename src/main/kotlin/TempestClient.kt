@@ -52,9 +52,7 @@ class TempestClient(
 
     private fun createMultiPartFormDataContent(webhook: Webhook): MultiPartFormDataContent {
         return MultiPartFormDataContent(formData {
-            append(
-                "payload_json", Json.encodeToString(webhook)
-            )
+            append("payload_json", Json.encodeToString(webhook))
             for (i in webhook.files !!) {
                 append("files[" + i.id + "]", i.bytes, Headers.build {
                     append(HttpHeaders.ContentType, i.contentType)
