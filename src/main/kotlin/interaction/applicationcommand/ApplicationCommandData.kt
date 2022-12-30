@@ -2,6 +2,7 @@ package cloud.drakon.discordkt.interaction.applicationcommand
 
 import cloud.drakon.discordkt.interaction.InteractionData
 import cloud.drakon.discordkt.interaction.ResolvedData
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 /**
@@ -10,8 +11,8 @@ import kotlinx.serialization.Serializable
  * @property type the `type` of the invoked command
  * @property resolved converted users + roles + channels + attachments
  * @property options the params + values from the user
- * @property guild_id the id of the guild the command is registered to
- * @property target_id id of the user or message targeted by a user or message command
+ * @property guildId the id of the guild the command is registered to
+ * @property targetId id of the user or message targeted by a user or message command
  */
 @Serializable class ApplicationCommandData(
     val id: String,
@@ -19,6 +20,6 @@ import kotlinx.serialization.Serializable
     val type: Int,
     val resolved: ResolvedData? = null,
     val options: Array<ApplicationCommandInteractionDataOption>? = null,
-    val guild_id: String? = null,
-    val target_id: String? = null,
+    @SerialName("guild_id") val guildId: String? = null,
+    @SerialName("target_id") val targetId: String? = null,
 ): InteractionData
