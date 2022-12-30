@@ -1,17 +1,18 @@
 package cloud.drakon.discordkt.teams
 
 import cloud.drakon.discordkt.user.User
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 /**
- * @property membership_state the user's membership state on the team
+ * @property membershipState the user's membership state on the team
  * @property permissions will always be ["*"]
- * @property team_id the id of the parent team of which they are a member
+ * @property teamId the id of the parent team of which they are a member
  * @property user the avatar, discriminator, id, and username of the user
  */
 @Serializable class TeamMember(
-    val membership_state: Byte,
+    @SerialName("membership_state") val membershipState: Byte,
     val permissions: Array<String>,
-    val team_id: String,
+    @SerialName("team_id") val teamId: String,
     val user: User,
 )

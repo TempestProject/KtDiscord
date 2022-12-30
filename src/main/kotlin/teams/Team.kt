@@ -1,5 +1,6 @@
 package cloud.drakon.discordkt.teams
 
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 /**
@@ -7,12 +8,12 @@ import kotlinx.serialization.Serializable
  * @property id the unique id of the team
  * @property members the members of the team
  * @property name the name of the team
- * @property owner_user_id the user id of the current team owner
+ * @property ownerUserId the user id of the current team owner
  */
 @Serializable class Team(
     val icon: String?,
     val id: String,
     val members: Array<TeamMember>,
     val name: String,
-    val owner_user_id: String,
+    @SerialName("owner_user_id") val ownerUserId: String,
 )
