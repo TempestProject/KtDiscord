@@ -8,7 +8,7 @@ import cloud.drakon.tempest.components.Component
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Transient
 
-@Serializable sealed class ExecuteWebhook(
+@Serializable class ExecuteWebhook(
     val content: String? = null,
     val tts: Boolean? = null,
     val embeds: Array<Embed>? = null,
