@@ -1,4 +1,4 @@
-package cloud.drakon.tempest.permissions
+package cloud.drakon.discordkt.permissions
 
 import kotlinx.serialization.Serializable
 

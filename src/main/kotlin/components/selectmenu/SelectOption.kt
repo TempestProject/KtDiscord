@@ -1,6 +1,6 @@
-package cloud.drakon.tempest.components.selectmenu
+package cloud.drakon.discordkt.components.selectmenu
 
-import cloud.drakon.tempest.emoji.Emoji
+import cloud.drakon.discordkt.emoji.Emoji
 import kotlinx.serialization.Serializable
 
 /**

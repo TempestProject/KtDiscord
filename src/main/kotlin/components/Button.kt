@@ -1,6 +1,6 @@
-package cloud.drakon.tempest.components
+package cloud.drakon.discordkt.components
 
-import cloud.drakon.tempest.emoji.Emoji
+import cloud.drakon.discordkt.emoji.Emoji
 
 /**
  * Buttons are interactive components that render in messages. They can be clicked by users, and send an interaction to your app when clicked.

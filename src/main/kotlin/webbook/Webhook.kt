@@ -1,6 +1,6 @@
-package cloud.drakon.tempest.webbook
+package cloud.drakon.discordkt.webbook
 
-import cloud.drakon.tempest.file.File
+import cloud.drakon.discordkt.file.File
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Transient
 

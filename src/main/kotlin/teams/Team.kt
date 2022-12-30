@@ -1,4 +1,4 @@
-package cloud.drakon.tempest.teams
+package cloud.drakon.discordkt.teams
 
 import kotlinx.serialization.Serializable
 

@@ -1,1 +1,1 @@
-rootProject.name = "tempest"
+rootProject.name = "discordkt"

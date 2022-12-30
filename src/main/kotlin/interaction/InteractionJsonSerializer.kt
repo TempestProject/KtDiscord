@@ -1,6 +1,6 @@
-package cloud.drakon.tempest.interaction
+package cloud.drakon.discordkt.interaction
 
-import cloud.drakon.tempest.interaction.applicationcommand.ApplicationCommandData
+import cloud.drakon.discordkt.interaction.applicationcommand.ApplicationCommandData
 import kotlinx.serialization.DeserializationStrategy
 import kotlinx.serialization.json.JsonContentPolymorphicSerializer
 import kotlinx.serialization.json.JsonElement

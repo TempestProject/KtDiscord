@@ -1,4 +1,4 @@
-package cloud.drakon.tempest.components.selectmenu
+package cloud.drakon.discordkt.components.selectmenu
 
 /**
  * @property custom_id ID for the select menu; max 100 characters

@@ -1,4 +1,4 @@
-package cloud.drakon.tempest.interaction
+package cloud.drakon.discordkt.interaction
 
 object InteractionType {
     const val PING: Int = 1

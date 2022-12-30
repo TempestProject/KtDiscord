@@ -1,11 +1,11 @@
-package cloud.drakon.tempest.interaction
+package cloud.drakon.discordkt.interaction
 
-import cloud.drakon.tempest.channel.Attachment
-import cloud.drakon.tempest.channel.Channel
-import cloud.drakon.tempest.channel.message.Message
-import cloud.drakon.tempest.guild.GuildMember
-import cloud.drakon.tempest.permissions.Role
-import cloud.drakon.tempest.user.User
+import cloud.drakon.discordkt.channel.Attachment
+import cloud.drakon.discordkt.channel.Channel
+import cloud.drakon.discordkt.channel.message.Message
+import cloud.drakon.discordkt.guild.GuildMember
+import cloud.drakon.discordkt.permissions.Role
+import cloud.drakon.discordkt.user.User
 import kotlinx.serialization.Serializable
 
 /**

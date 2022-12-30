@@ -1,17 +1,17 @@
-package cloud.drakon.tempest.channel.message
+package cloud.drakon.discordkt.channel.message
 
-import cloud.drakon.tempest.application.Application
-import cloud.drakon.tempest.channel.Attachment
-import cloud.drakon.tempest.channel.Channel
-import cloud.drakon.tempest.channel.ChannelMention
-import cloud.drakon.tempest.channel.Reaction
-import cloud.drakon.tempest.channel.embed.Embed
-import cloud.drakon.tempest.components.Component
-import cloud.drakon.tempest.interaction.MessageInteraction
-import cloud.drakon.tempest.permissions.Role
-import cloud.drakon.tempest.sticker.Sticker
-import cloud.drakon.tempest.sticker.StickerItem
-import cloud.drakon.tempest.user.User
+import cloud.drakon.discordkt.application.Application
+import cloud.drakon.discordkt.channel.Attachment
+import cloud.drakon.discordkt.channel.Channel
+import cloud.drakon.discordkt.channel.ChannelMention
+import cloud.drakon.discordkt.channel.Reaction
+import cloud.drakon.discordkt.channel.embed.Embed
+import cloud.drakon.discordkt.components.Component
+import cloud.drakon.discordkt.interaction.MessageInteraction
+import cloud.drakon.discordkt.permissions.Role
+import cloud.drakon.discordkt.sticker.Sticker
+import cloud.drakon.discordkt.sticker.StickerItem
+import cloud.drakon.discordkt.user.User
 import kotlinx.serialization.Serializable
 
 /**

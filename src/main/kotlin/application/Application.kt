@@ -1,7 +1,7 @@
-package cloud.drakon.tempest.application
+package cloud.drakon.discordkt.application
 
-import cloud.drakon.tempest.teams.Team
-import cloud.drakon.tempest.user.User
+import cloud.drakon.discordkt.teams.Team
+import cloud.drakon.discordkt.user.User
 import kotlinx.serialization.Serializable
 
 /**

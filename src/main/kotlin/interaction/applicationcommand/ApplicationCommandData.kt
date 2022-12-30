@@ -1,7 +1,7 @@
-package cloud.drakon.tempest.interaction.applicationcommand
+package cloud.drakon.discordkt.interaction.applicationcommand
 
-import cloud.drakon.tempest.interaction.InteractionData
-import cloud.drakon.tempest.interaction.ResolvedData
+import cloud.drakon.discordkt.interaction.InteractionData
+import cloud.drakon.discordkt.interaction.ResolvedData
 import kotlinx.serialization.Serializable
 
 /**

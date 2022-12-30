@@ -1,4 +1,4 @@
-package cloud.drakon.tempest.channel.message
+package cloud.drakon.discordkt.channel.message
 
 import kotlinx.serialization.Serializable
 

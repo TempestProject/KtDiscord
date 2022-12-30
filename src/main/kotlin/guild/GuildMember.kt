@@ -1,6 +1,6 @@
-package cloud.drakon.tempest.guild
+package cloud.drakon.discordkt.guild
 
-import cloud.drakon.tempest.user.User
+import cloud.drakon.discordkt.user.User
 import kotlinx.serialization.Serializable
 
 @Serializable class GuildMember(

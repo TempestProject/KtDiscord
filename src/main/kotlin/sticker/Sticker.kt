@@ -1,4 +1,4 @@
-package cloud.drakon.tempest.sticker
+package cloud.drakon.discordkt.sticker
 
 import kotlinx.serialization.Serializable
 

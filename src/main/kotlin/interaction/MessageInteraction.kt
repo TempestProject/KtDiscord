@@ -1,7 +1,7 @@
-package cloud.drakon.tempest.interaction
+package cloud.drakon.discordkt.interaction
 
-import cloud.drakon.tempest.guild.GuildMember
-import cloud.drakon.tempest.user.User
+import cloud.drakon.discordkt.guild.GuildMember
+import cloud.drakon.discordkt.user.User
 import kotlinx.serialization.Serializable
 
 @Serializable class MessageInteraction(

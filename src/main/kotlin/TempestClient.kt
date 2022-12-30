@@ -1,10 +1,10 @@
-package cloud.drakon.tempest
+package cloud.drakon.discordkt
 
-import cloud.drakon.tempest.channel.message.Message
-import cloud.drakon.tempest.interaction.response.InteractionResponse
-import cloud.drakon.tempest.webbook.EditWebhookMessage
-import cloud.drakon.tempest.webbook.ExecuteWebhook
-import cloud.drakon.tempest.webbook.Webhook
+import cloud.drakon.discordkt.channel.message.Message
+import cloud.drakon.discordkt.interaction.response.InteractionResponse
+import cloud.drakon.discordkt.webbook.EditWebhookMessage
+import cloud.drakon.discordkt.webbook.ExecuteWebhook
+import cloud.drakon.discordkt.webbook.Webhook
 import com.goterl.lazysodium.LazySodiumJava
 import com.goterl.lazysodium.SodiumJava
 import com.goterl.lazysodium.utils.Key

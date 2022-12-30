@@ -1,6 +1,6 @@
-package cloud.drakon.tempest.components.textinput
+package cloud.drakon.discordkt.components.textinput
 
-import cloud.drakon.tempest.components.Component
+import cloud.drakon.discordkt.components.Component
 
 /**
  * @property custom_id Developer-defined identifier for the input; max 100 characters

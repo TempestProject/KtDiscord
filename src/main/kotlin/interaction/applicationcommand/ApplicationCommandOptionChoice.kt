@@ -1,4 +1,4 @@
-package cloud.drakon.tempest.interaction.applicationcommand
+package cloud.drakon.discordkt.interaction.applicationcommand
 
 import kotlinx.serialization.Serializable
 

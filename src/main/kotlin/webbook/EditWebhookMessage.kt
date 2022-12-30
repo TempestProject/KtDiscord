@@ -1,10 +1,10 @@
-package cloud.drakon.tempest.webbook
+package cloud.drakon.discordkt.webbook
 
-import cloud.drakon.tempest.channel.Attachment
-import cloud.drakon.tempest.channel.allowedmentions.AllowedMentions
-import cloud.drakon.tempest.channel.embed.Embed
-import cloud.drakon.tempest.components.Component
-import cloud.drakon.tempest.file.File
+import cloud.drakon.discordkt.channel.Attachment
+import cloud.drakon.discordkt.channel.allowedmentions.AllowedMentions
+import cloud.drakon.discordkt.channel.embed.Embed
+import cloud.drakon.discordkt.components.Component
+import cloud.drakon.discordkt.file.File
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Transient
 

@@ -1,6 +1,6 @@
-package cloud.drakon.tempest.interaction
+package cloud.drakon.discordkt.interaction
 
-import cloud.drakon.tempest.components.Component
+import cloud.drakon.discordkt.components.Component
 import kotlinx.serialization.Serializable
 
 /**

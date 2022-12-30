@@ -1,4 +1,4 @@
-package cloud.drakon.tempest.channel.allowedmentions
+package cloud.drakon.discordkt.channel.allowedmentions
 
 object AllowedMentionTypes {
     /** Controls role mentions */

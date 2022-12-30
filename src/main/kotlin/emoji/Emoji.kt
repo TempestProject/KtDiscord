@@ -1,7 +1,7 @@
-package cloud.drakon.tempest.emoji
+package cloud.drakon.discordkt.emoji
 
-import cloud.drakon.tempest.permissions.Role
-import cloud.drakon.tempest.user.User
+import cloud.drakon.discordkt.permissions.Role
+import cloud.drakon.discordkt.user.User
 import kotlinx.serialization.Serializable
 
 /**

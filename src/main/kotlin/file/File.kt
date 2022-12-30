@@ -1,4 +1,4 @@
-package cloud.drakon.tempest.file
+package cloud.drakon.discordkt.file
 
 class File(
     val id: String,
