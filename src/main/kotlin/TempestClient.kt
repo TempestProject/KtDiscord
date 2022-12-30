@@ -4,6 +4,7 @@ import cloud.drakon.tempest.channel.message.Message
 import cloud.drakon.tempest.interaction.response.InteractionResponse
 import cloud.drakon.tempest.webbook.EditWebhookMessage
 import cloud.drakon.tempest.webbook.ExecuteWebhook
+import cloud.drakon.tempest.webbook.Webhook
 import com.goterl.lazysodium.LazySodiumJava
 import com.goterl.lazysodium.SodiumJava
 import com.goterl.lazysodium.utils.Key
@@ -47,6 +48,23 @@ class TempestClient(
         }
 
         expectSuccess = true
+    }
+
+    private fun createMultiPartFormDataContent(webhook: Webhook): MultiPartFormDataContent {
+        return MultiPartFormDataContent(formData {
+            append(
+                "payload_json", Json.encodeToString(webhook)
+            )
+            for (i in webhook.files !!) {
+                append("files[" + i.id + "]", i.bytes, Headers.build {
+                    append(HttpHeaders.ContentType, i.contentType)
+                    append(
+                        HttpHeaders.ContentDisposition,
+                        "filename=\"" + i.filename + "\""
+                    )
+                })
+            }
+        })
     }
 
     fun validateRequest(timestamp: String, body: String, signature: String): Boolean {
@@ -94,28 +112,7 @@ class TempestClient(
             }.body()
         } else {
             ktorClient.patch("webhooks/$applicationId/$interactionToken/messages/@original") {
-                setBody(MultiPartFormDataContent(formData {
-                    append(
-                        "payload_json",
-                        Json.encodeToString(editWebhookMessage),
-
-                        //                        Headers.build {
-                        //                            append(
-                        //                                HttpHeaders.ContentType, ContentType.Application.Json
-                        //                            )
-                        //                        }
-
-                    )
-                    for (i in editWebhookMessage.files) {
-                        append("files[" + i.id + "]", i.bytes, Headers.build {
-                            append(HttpHeaders.ContentType, i.contentType)
-                            append(
-                                HttpHeaders.ContentDisposition,
-                                "filename=\"" + i.filename + "\""
-                            )
-                        })
-                    }
-                }))
+                setBody(createMultiPartFormDataContent(editWebhookMessage))
             }.body()
         }
     }
@@ -143,28 +140,7 @@ class TempestClient(
             }.body()
         } else {
             ktorClient.post("webhooks/$applicationId/$interactionToken") {
-                setBody(MultiPartFormDataContent(formData {
-                    append(
-                        "payload_json",
-                        Json.encodeToString(executeWebhook),
-
-                        //                        Headers.build {
-                        //                            append(
-                        //                                HttpHeaders.ContentType, ContentType.Application.Json
-                        //                            )
-                        //                        }
-
-                    )
-                    for (i in executeWebhook.files) {
-                        append("files[" + i.id + "]", i.bytes, Headers.build {
-                            append(HttpHeaders.ContentType, i.contentType)
-                            append(
-                                HttpHeaders.ContentDisposition,
-                                "filename=\"" + i.filename + "\""
-                            )
-                        })
-                    }
-                }))
+                setBody(createMultiPartFormDataContent(executeWebhook))
             }.body()
         }
     }

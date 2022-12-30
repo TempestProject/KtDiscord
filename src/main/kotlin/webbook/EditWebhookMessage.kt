@@ -13,7 +13,7 @@ import kotlinx.serialization.Transient
     val embeds: Array<Embed>? = null,
     val allowed_mentions: AllowedMentions? = null,
     val components: Array<Component>? = null,
-    @Transient val files: Array<File>? = null,
+    @Transient override val files: Array<File>? = null,
     val payload_json: String? = null,
     val attachments: Array<Attachment>? = null,
-)
+): Webhook
