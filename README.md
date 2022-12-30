@@ -31,7 +31,7 @@ repositories {
 }
     
 dependencies {
-    implementation("cloud.drakon:discordkt:0.0.1")
+    implementation("cloud.drakon:ktdiscord:0.0.1")
 }
 ```
 
@@ -43,5 +43,4 @@ KtDiscord will follow Semantic Versioning 2.0.0, meaning:
 * A MINOR version denotes adding functionality in a backwards compatible manner
 * A PATCH version denotes backwards compatible bug fixes
 
-It's also worth noting that rate limiting is currently unimplemented and must be handled by the application at this
-time.
+It's also worth noting that rate limiting is currently unimplemented and must be handled by the application at this time.
