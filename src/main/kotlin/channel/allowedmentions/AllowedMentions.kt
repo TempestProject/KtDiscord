@@ -1,5 +1,6 @@
 package cloud.drakon.discordkt.channel.allowedmentions
 
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 /**
@@ -9,5 +10,5 @@ import kotlinx.serialization.Serializable
     val parse: Array<String>,
     val roles: Array<String>,
     val users: Array<String>,
-    val replied_user: Boolean,
+    @SerialName("replied_user") val repliedUser: Boolean,
 )
