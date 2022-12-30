@@ -8,7 +8,7 @@ import cloud.drakon.tempest.components.Component
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Transient
 
-@Serializable class EditWebhookMessage(
+@Serializable sealed class EditWebhookMessage(
     val content: String? = null,
     val embeds: Array<Embed>? = null,
     val allowed_mentions: AllowedMentions? = null,
