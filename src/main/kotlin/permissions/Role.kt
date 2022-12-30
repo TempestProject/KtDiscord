@@ -1,5 +1,6 @@
 package cloud.drakon.discordkt.permissions
 
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 /**
@@ -9,7 +10,7 @@ import kotlinx.serialization.Serializable
  * @property color integer representation of hexadecimal color code
  * @property hoist if this role is pinned in the user listing
  * @property icon role icon hash
- * @property unicode_emoji role unicode emoji
+ * @property unicodeEmoji role unicode emoji
  * @property position position of this role
  * @property permissions permission bit set
  * @property managed whether this role is managed by an integration
@@ -22,7 +23,7 @@ import kotlinx.serialization.Serializable
     val color: UInt,
     val hoist: Boolean,
     val icon: String? = null,
-    val unicode_emoji: String? = null,
+    @SerialName("unicode_emoji") val unicodeEmoji: String? = null,
     val position: UInt,
     val permissions: String? = null,
     val managed: Boolean,
