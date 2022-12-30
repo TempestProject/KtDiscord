@@ -1,6 +1,5 @@
 package cloud.drakon.discordkt
 
-import cloud.drakon.discordkt.channel.message.Message
 import cloud.drakon.discordkt.interaction.response.InteractionResponse
 import cloud.drakon.discordkt.webbook.EditWebhookMessage
 import cloud.drakon.discordkt.webbook.ExecuteWebhook
@@ -10,7 +9,6 @@ import com.goterl.lazysodium.SodiumJava
 import com.goterl.lazysodium.utils.Key
 import com.goterl.lazysodium.utils.LibraryLoader
 import io.ktor.client.HttpClient
-import io.ktor.client.call.body
 import io.ktor.client.engine.java.Java
 import io.ktor.client.plugins.DefaultRequest
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
@@ -92,9 +90,8 @@ class TempestClient(
      */
     suspend fun getOriginalInteractionResponse(
         interactionToken: String,
-    ): Message {
+    ): HttpResponse {
         return ktorClient.get("webhooks/$applicationId/$interactionToken/messages/@original")
-            .body()
     }
 
     /**
@@ -102,16 +99,16 @@ class TempestClient(
      */
     suspend fun editOriginalInteractionResponse(
         editWebhookMessage: EditWebhookMessage, interactionToken: String,
-    ): Message {
+    ): HttpResponse {
         return if (editWebhookMessage.files == null) {
             ktorClient.patch("webhooks/$applicationId/$interactionToken/messages/@original") {
                 contentType(ContentType.Application.Json)
                 setBody(editWebhookMessage)
-            }.body()
+            }
         } else {
             ktorClient.patch("webhooks/$applicationId/$interactionToken/messages/@original") {
                 setBody(createMultiPartFormDataContent(editWebhookMessage))
-            }.body()
+            }
         }
     }
 
@@ -130,16 +127,20 @@ class TempestClient(
     suspend fun createFollowupMessage(
         executeWebhook: ExecuteWebhook,
         interactionToken: String,
-    ): Message {
+    ): HttpResponse {
         return if (executeWebhook.files == null) {
             ktorClient.post("webhooks/$applicationId/$interactionToken") {
-                contentType(ContentType.Application.Json)
+                contentType(
+                    ContentType.Application.Json
+                )
                 setBody(executeWebhook)
-            }.body()
+            }
         } else {
             ktorClient.post("webhooks/$applicationId/$interactionToken") {
-                setBody(createMultiPartFormDataContent(executeWebhook))
-            }.body()
+                setBody(
+                    createMultiPartFormDataContent(executeWebhook)
+                )
+            }
         }
     }
 
@@ -149,9 +150,8 @@ class TempestClient(
     suspend fun getFollowupMessage(
         messageId: String,
         interactionToken: String,
-    ): Message {
+    ): HttpResponse {
         return ktorClient.get("webhooks/$applicationId/$interactionToken/messages/$messageId")
-            .body()
     }
 
     /**
@@ -161,11 +161,11 @@ class TempestClient(
         editWebhookMessage: EditWebhookMessage,
         interactionToken: String,
         messageId: String,
-    ): Message {
+    ): HttpResponse {
         return ktorClient.patch("webhooks/$applicationId/$interactionToken/messages/$messageId") {
             contentType(ContentType.Application.Json)
             setBody(editWebhookMessage)
-        }.body()
+        }
     }
 
     /**
