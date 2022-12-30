@@ -14,8 +14,6 @@ DiscordKt is a Kotlin/JVM library for working with Discord Interactions.
 
 ## Stability
 
-DiscordKt is still under heavy development. As such there is currently no guarantee of API stability.
-
 DiscordKt will follow Semantic Versioning 2.0.0, meaning:
 
 * A MAJOR version denotes incompatible API changes
