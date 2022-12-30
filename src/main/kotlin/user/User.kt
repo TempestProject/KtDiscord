@@ -1,5 +1,6 @@
 package cloud.drakon.discordkt.user
 
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 /**
@@ -40,13 +41,13 @@ import kotlinx.serialization.Serializable
     val avatar: String?,
     val bot: Boolean? = null,
     val system: String? = null,
-    val mfa_enabled: Boolean? = null,
+    @SerialName("mfa_enabled") val mfaEnabled: Boolean? = null,
     val banner: String? = null,
-    val accent_color: UInt? = null,
+    @SerialName("accent_color") val accentColor: UInt? = null,
     val locale: String? = null,
     val verified: String? = null,
     val email: String? = null,
     val flags: Int? = null,
-    val premium_type: Byte? = null,
-    val public_flags: Int? = null,
+    @SerialName("premium_type") val premiumType: Byte? = null,
+    @SerialName("public_flags") val publicFlags: Int? = null,
 )
