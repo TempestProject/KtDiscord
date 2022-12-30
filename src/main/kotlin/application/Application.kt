@@ -1,7 +1,7 @@
-package cloud.drakon.discordkt.application
+package cloud.drakon.ktdiscord.application
 
-import cloud.drakon.discordkt.teams.Team
-import cloud.drakon.discordkt.user.User
+import cloud.drakon.ktdiscord.teams.Team
+import cloud.drakon.ktdiscord.user.User
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

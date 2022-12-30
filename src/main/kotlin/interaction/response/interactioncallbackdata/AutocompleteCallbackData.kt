@@ -1,6 +1,6 @@
-package cloud.drakon.discordkt.interaction.response.interactioncallbackdata
+package cloud.drakon.ktdiscord.interaction.response.interactioncallbackdata
 
-import cloud.drakon.discordkt.interaction.applicationcommand.ApplicationCommandOptionChoice
+import cloud.drakon.ktdiscord.interaction.applicationcommand.ApplicationCommandOptionChoice
 import kotlinx.serialization.Serializable
 
 /**

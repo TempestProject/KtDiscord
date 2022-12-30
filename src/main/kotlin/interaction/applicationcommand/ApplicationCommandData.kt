@@ -1,7 +1,7 @@
-package cloud.drakon.discordkt.interaction.applicationcommand
+package cloud.drakon.ktdiscord.interaction.applicationcommand
 
-import cloud.drakon.discordkt.interaction.InteractionData
-import cloud.drakon.discordkt.interaction.ResolvedData
+import cloud.drakon.ktdiscord.interaction.InteractionData
+import cloud.drakon.ktdiscord.interaction.ResolvedData
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

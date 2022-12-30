@@ -1,4 +1,4 @@
-package cloud.drakon.discordkt.application
+package cloud.drakon.ktdiscord.application
 
 import kotlinx.serialization.Serializable
 

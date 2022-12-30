@@ -1,4 +1,4 @@
-package cloud.drakon.discordkt.teams
+package cloud.drakon.ktdiscord.teams
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

@@ -1,4 +1,4 @@
-package cloud.drakon.discordkt.permissions
+package cloud.drakon.ktdiscord.permissions
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

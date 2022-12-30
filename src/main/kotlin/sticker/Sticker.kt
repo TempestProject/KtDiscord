@@ -1,4 +1,4 @@
-package cloud.drakon.discordkt.sticker
+package cloud.drakon.ktdiscord.sticker
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

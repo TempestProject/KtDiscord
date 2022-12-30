@@ -1,6 +1,6 @@
-package cloud.drakon.discordkt.components.textinput
+package cloud.drakon.ktdiscord.components.textinput
 
-import cloud.drakon.discordkt.components.Component
+import cloud.drakon.ktdiscord.components.Component
 import kotlinx.serialization.SerialName
 
 /**

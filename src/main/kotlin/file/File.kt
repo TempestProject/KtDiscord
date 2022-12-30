@@ -1,4 +1,4 @@
-package cloud.drakon.discordkt.file
+package cloud.drakon.ktdiscord.file
 
 class File(
     val id: String,

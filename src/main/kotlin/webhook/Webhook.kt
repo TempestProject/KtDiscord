@@ -1,6 +1,6 @@
-package cloud.drakon.discordkt.webbook
+package cloud.drakon.ktdiscord.webhook
 
-import cloud.drakon.discordkt.file.File
+import cloud.drakon.ktdiscord.file.File
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Transient
 

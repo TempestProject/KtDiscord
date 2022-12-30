@@ -1,9 +1,9 @@
-package cloud.drakon.discordkt
+package cloud.drakon.ktdiscord
 
-import cloud.drakon.discordkt.interaction.response.InteractionResponse
-import cloud.drakon.discordkt.webbook.EditWebhookMessage
-import cloud.drakon.discordkt.webbook.ExecuteWebhook
-import cloud.drakon.discordkt.webbook.Webhook
+import cloud.drakon.ktdiscord.interaction.response.InteractionResponse
+import cloud.drakon.ktdiscord.webhook.EditWebhookMessage
+import cloud.drakon.ktdiscord.webhook.ExecuteWebhook
+import cloud.drakon.ktdiscord.webhook.Webhook
 import com.goterl.lazysodium.LazySodiumJava
 import com.goterl.lazysodium.SodiumJava
 import com.goterl.lazysodium.utils.Key
@@ -29,7 +29,7 @@ import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
-class DiscordKtClient(
+class KtDiscordClient(
     private val applicationId: String,
     private val botToken: String,
     private val publicKey: String,

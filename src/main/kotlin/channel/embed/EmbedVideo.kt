@@ -1,4 +1,4 @@
-package cloud.drakon.discordkt.channel.embed
+package cloud.drakon.ktdiscord.channel.embed
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

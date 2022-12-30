@@ -1,4 +1,4 @@
-package cloud.drakon.discordkt.channel.message
+package cloud.drakon.ktdiscord.channel.message
 
 object MessageFlags {
     const val SUPPRESS_EMBEDS: Short = 1 shl 2

@@ -1,4 +1,4 @@
-package cloud.drakon.discordkt.interaction
+package cloud.drakon.ktdiscord.interaction
 
 object InteractionType {
     const val PING: Int = 1

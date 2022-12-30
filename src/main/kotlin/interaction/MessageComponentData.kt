@@ -1,6 +1,6 @@
-package cloud.drakon.discordkt.interaction
+package cloud.drakon.ktdiscord.interaction
 
-import cloud.drakon.discordkt.components.selectmenu.SelectOption
+import cloud.drakon.ktdiscord.components.selectmenu.SelectOption
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

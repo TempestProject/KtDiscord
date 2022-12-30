@@ -1,7 +1,7 @@
-package cloud.drakon.discordkt.emoji
+package cloud.drakon.ktdiscord.emoji
 
-import cloud.drakon.discordkt.permissions.Role
-import cloud.drakon.discordkt.user.User
+import cloud.drakon.ktdiscord.permissions.Role
+import cloud.drakon.ktdiscord.user.User
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

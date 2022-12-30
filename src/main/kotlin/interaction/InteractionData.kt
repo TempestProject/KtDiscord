@@ -1,4 +1,4 @@
-package cloud.drakon.discordkt.interaction
+package cloud.drakon.ktdiscord.interaction
 
 /**
  * An Interaction is the message that your application receives when a user uses an application command or a message component.

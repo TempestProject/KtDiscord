@@ -1,4 +1,4 @@
-package cloud.drakon.discordkt.components.selectmenu
+package cloud.drakon.ktdiscord.components.selectmenu
 
 import kotlinx.serialization.SerialName
 

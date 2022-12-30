@@ -1,4 +1,4 @@
-package cloud.drakon.discordkt.user
+package cloud.drakon.ktdiscord.user
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

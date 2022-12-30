@@ -1,6 +1,6 @@
-package cloud.drakon.discordkt.interaction
+package cloud.drakon.ktdiscord.interaction
 
-import cloud.drakon.discordkt.components.Component
+import cloud.drakon.ktdiscord.components.Component
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

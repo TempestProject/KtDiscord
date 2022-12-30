@@ -1,6 +1,6 @@
-package cloud.drakon.discordkt.components.selectmenu
+package cloud.drakon.ktdiscord.components.selectmenu
 
-import cloud.drakon.discordkt.components.Component
+import cloud.drakon.ktdiscord.components.Component
 
 /**
  * Select menus are interactive components that allow users to select one or more options from a dropdown list in messages. On desktop, clicking on a select menu opens a dropdown-style UI; on mobile, tapping a select menu opens up a half-sheet with the options.

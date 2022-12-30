@@ -1,9 +1,9 @@
-package cloud.drakon.discordkt.interaction.response.interactioncallbackdata
+package cloud.drakon.ktdiscord.interaction.response.interactioncallbackdata
 
-import cloud.drakon.discordkt.channel.Attachment
-import cloud.drakon.discordkt.channel.allowedmentions.AllowedMentions
-import cloud.drakon.discordkt.channel.embed.Embed
-import cloud.drakon.discordkt.components.Component
+import cloud.drakon.ktdiscord.channel.Attachment
+import cloud.drakon.ktdiscord.channel.allowedmentions.AllowedMentions
+import cloud.drakon.ktdiscord.channel.embed.Embed
+import cloud.drakon.ktdiscord.components.Component
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

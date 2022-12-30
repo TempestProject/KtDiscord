@@ -1,4 +1,4 @@
-package cloud.drakon.discordkt.channel.message
+package cloud.drakon.ktdiscord.channel.message
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

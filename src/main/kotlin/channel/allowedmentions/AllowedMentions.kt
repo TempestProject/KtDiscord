@@ -1,4 +1,4 @@
-package cloud.drakon.discordkt.channel.allowedmentions
+package cloud.drakon.ktdiscord.channel.allowedmentions
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

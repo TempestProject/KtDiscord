@@ -1,8 +1,8 @@
-package cloud.drakon.discordkt.interaction
+package cloud.drakon.ktdiscord.interaction
 
-import cloud.drakon.discordkt.channel.message.Message
-import cloud.drakon.discordkt.guild.GuildMember
-import cloud.drakon.discordkt.user.User
+import cloud.drakon.ktdiscord.channel.message.Message
+import cloud.drakon.ktdiscord.guild.GuildMember
+import cloud.drakon.ktdiscord.user.User
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
