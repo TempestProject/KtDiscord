@@ -29,7 +29,7 @@ import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
-class TempestClient(
+class DiscordKtClient(
     private val applicationId: String,
     private val botToken: String,
     private val publicKey: String,
