@@ -12,6 +12,29 @@ KtDiscord is a Kotlin/JVM library for working with Discord Interactions.
 * All Interactions endpoints are supported by KtDiscord and their usage is exposed as suspendable functions
 * All Discord Interactions objects are exposed as classes
 
+## Installation
+
+KtDiscord is (currently) only available from GitHub Packages.
+
+Add the following to your `build.gradle.kts` file to install KtDiscord:
+
+```kotlin
+repositories {
+    maven {
+        name = "GitHubPackages"
+        url = uri("https://maven.pkg.github.com/TempestProject/KtDiscord")
+        credentials {
+            username = System.getenv("GITHUB_ACTOR")
+            password = System.getenv("GITHUB_TOKEN")
+        }
+    }
+}
+    
+dependencies {
+    implementation("cloud.drakon:discordkt:0.0.1")
+}
+```
+
 ## Stability
 
 KtDiscord will follow Semantic Versioning 2.0.0, meaning:
