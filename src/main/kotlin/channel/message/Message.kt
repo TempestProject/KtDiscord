@@ -78,5 +78,5 @@ import kotlinx.serialization.Serializable
     val components: Array<Component>? = null,
     @SerialName("sticker_items") val stickerItems: Array<StickerItem>? = null,
     @Deprecated(message = "Deprecated") val stickers: Array<Sticker>? = null,
-    val position: UInt? = null,
+    val position: Int? = null,
 )

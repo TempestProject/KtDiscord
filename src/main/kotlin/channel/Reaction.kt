@@ -9,7 +9,7 @@ import kotlinx.serialization.Serializable
  * @property emoji emoji information
  */
 @Serializable class Reaction(
-    val count: UInt,
+    val count: Int,
     val me: Boolean,
     val emoji: Emoji,
 )

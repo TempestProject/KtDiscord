@@ -13,7 +13,7 @@ import kotlinx.serialization.Serializable
     val id: String,
     val type: Byte,
     @SerialName("guild_id") val guildId: String? = null,
-    val position: UInt? = null,
+    val position: Int? = null,
     @SerialName("permission_overwrites")
     val permissionOverwrites: Array<Overwrite>? = null,
     val name: String? = null,

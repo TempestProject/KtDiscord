@@ -23,7 +23,7 @@ import kotlinx.serialization.Serializable
     val description: String? = null,
     val url: String? = null,
     val timestamp: String? = null,
-    val color: UInt? = null,
+    val color: Int? = null,
     val footer: EmbedFooter? = null,
     val image: EmbedImage? = null,
     val thumbnail: EmbedThumbnail? = null,

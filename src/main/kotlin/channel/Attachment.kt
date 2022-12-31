@@ -20,7 +20,7 @@ import kotlinx.serialization.Serializable
     val filename: String,
     val description: String? = null,
     @SerialName("content_type") val contentType: String? = null,
-    val size: UInt? = null,
+    val size: Int? = null,
     val url: String? = null,
     @SerialName("proxy_url") val proxyUrl: String? = null,
     val height: Short? = null,

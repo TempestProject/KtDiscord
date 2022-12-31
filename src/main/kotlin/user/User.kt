@@ -43,7 +43,7 @@ import kotlinx.serialization.Serializable
     val system: String? = null,
     @SerialName("mfa_enabled") val mfaEnabled: Boolean? = null,
     val banner: String? = null,
-    @SerialName("accent_color") val accentColor: UInt? = null,
+    @SerialName("accent_color") val accentColor: Int? = null,
     val locale: String? = null,
     val verified: String? = null,
     val email: String? = null,

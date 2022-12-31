@@ -20,11 +20,11 @@ import kotlinx.serialization.Serializable
 @Serializable class Role(
     val id: String,
     val name: String,
-    val color: UInt,
+    val color: Int,
     val hoist: Boolean,
     val icon: String? = null,
     @SerialName("unicode_emoji") val unicodeEmoji: String? = null,
-    val position: UInt,
+    val position: Int,
     val permissions: String? = null,
     val managed: Boolean,
     val mentionable: Boolean,

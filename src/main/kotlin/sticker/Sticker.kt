@@ -30,5 +30,5 @@ import kotlinx.serialization.Serializable
     val available: Boolean? = null,
     @SerialName("guild_id") val guildId: String? = null,
     val user: String? = null,
-    @SerialName("sort_value") val sortValue: UInt? = null,
+    @SerialName("sort_value") val sortValue: Int? = null,
 )
