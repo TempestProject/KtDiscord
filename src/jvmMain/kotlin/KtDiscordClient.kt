@@ -46,11 +46,25 @@ actual class KtDiscordClient actual constructor(
             url("https://discord.com/api/v10/")
             header(
                 "User-Agent",
-                "DiscordBot (https://github.com/TempestProject/KtDiscord, 1.0.1)"
+                "DiscordBot (https://github.com/TempestProject/KtDiscord, 1.0.2)"
             )
         }
 
         expectSuccess = true
+    }
+
+    /**
+     * Validate a received interaction. If the signature passes validation this will return `true`, otherwise it will return `false`.
+     * @param timestamp The value of the `X-Signature-Timestamp` header from the interaction request
+     * @param body The raw body of the request
+     * @param signature The value of the `X-Signature-Ed25519` header from the interaction request
+     */
+    fun validateRequest(timestamp: String, body: String, signature: String): Boolean {
+        return lazySodium.cryptoSignVerifyDetached(
+            Key.fromHexString(signature).asHexString,
+            timestamp + body,
+            Key.fromHexString(publicKey)
+        )
     }
 
     private fun createMultiPartFormDataContent(webhook: Webhook): MultiPartFormDataContent {
@@ -66,14 +80,6 @@ actual class KtDiscordClient actual constructor(
                 })
             }
         })
-    }
-
-    fun validateRequest(timestamp: String, body: String, signature: String): Boolean {
-        return lazySodium.cryptoSignVerifyDetached(
-            Key.fromHexString(signature).asHexString,
-            timestamp + body,
-            Key.fromHexString(publicKey)
-        )
     }
 
     /**
