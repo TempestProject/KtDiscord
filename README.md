@@ -9,8 +9,7 @@ KtDiscord is a Kotlin Multiplatform library for working with Discord Interaction
 ## Features
 
 * All Discord Interactions objects are exposed as classes
-* All Interactions endpoints are supported by KtDiscord and their usage is exposed as suspendable functions (currently
-  Kotlin/JVM only)
+* All Interactions endpoints are supported by KtDiscord and their usage is exposed as functions
 
 ## Installation
 
@@ -31,7 +30,7 @@ repositories {
 }
     
 dependencies {
-    implementation("cloud.drakon:ktdiscord:1.0.1")
+    implementation("cloud.drakon:ktdiscord:1.0.2")
 }
 ```
 
