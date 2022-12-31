@@ -1,6 +1,7 @@
 package cloud.drakon.ktdiscord.components.selectmenu
 
 import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
 /**
  * @property customId ID for the select menu; max 100 characters
@@ -10,7 +11,7 @@ import kotlinx.serialization.SerialName
  * @property maxValues Maximum number of items that can be chosen (defaults to 1); max 25
  * @property disabled Whether select menu is disabled (defaults to `false`)
  */
-class TextSelectMenu(
+@Serializable class TextSelectMenu(
     @SerialName("custom_id") val customId: String,
     val options: Array<SelectOption>? = null,
     val placeholder: String? = null,
