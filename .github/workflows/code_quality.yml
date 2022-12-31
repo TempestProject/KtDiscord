@@ -3,9 +3,11 @@ on:
   pull_request:
     branches:
       - main
+      - canary
   push:
     branches:
       - main
+      - canary
     paths:
       - "**.kt"
       - "**.kts"
