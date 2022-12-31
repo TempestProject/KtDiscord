@@ -1,6 +1,6 @@
 package cloud.drakon.ktdiscord.channel.message
 
 object MessageFlags {
-    const val SUPPRESS_EMBEDS: Short = 1 shl 2
-    const val EPHEMERAL: Short = 1 shl 6
+    const val SUPPRESS_EMBEDS: Byte = 1 shl 2
+    const val EPHEMERAL: Byte = 1 shl 6
 }
