@@ -1,7 +1,5 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-
 plugins {
-    kotlin("jvm") version "1.8.0"
+    kotlin("multiplatform") version "1.8.0"
     kotlin("plugin.serialization") version "1.8.0"
     id("maven-publish")
     id("org.jetbrains.dokka") version "1.7.20"
@@ -14,45 +12,61 @@ repositories {
     mavenCentral()
 }
 
-dependencies {
-    val ktorVersion = "2.2.1"
+kotlin {
+    jvm {
+        compilations.all {
+            kotlinOptions.jvmTarget = "11"
+        }
+        testRuns["test"].executionTask.configure {
+            useJUnitPlatform()
+        }
+    }
+    js(IR) {
+        nodejs()
+        useCommonJs()
+        binaries.executable()
+    }
 
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1")
+    sourceSets {
+        val ktorVersion = "2.2.1"
 
-    implementation("io.ktor:ktor-client-core:$ktorVersion")
-    implementation("io.ktor:ktor-client-java:$ktorVersion")
-    implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
-    implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
-
-    implementation("com.goterl:lazysodium-java:5.1.4")
-    implementation("net.java.dev.jna:jna:5.12.1")
-}
-
-publishing {
-    repositories {
-        maven {
-            name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/TempestProject/KtDiscord")
-            credentials {
-                username = System.getenv("GITHUB_ACTOR")
-                password = System.getenv("GITHUB_TOKEN")
+        val commonMain by getting {
+            dependencies {
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1")
             }
         }
-    }
-
-    publications {
-        register<MavenPublication>("gpr") {
-            from(components["kotlin"])
+        val commonTest by getting {
+            dependencies {
+                implementation(kotlin("test"))
+            }
         }
-    }
-}
+        val jvmMain by getting {
+            dependencies {
+                implementation("com.goterl:lazysodium-java:5.1.4")
+                implementation("net.java.dev.jna:jna:5.12.1")
 
-tasks {
-    withType<KotlinCompile> {
-        kotlinOptions.jvmTarget = "11"
+                implementation("io.ktor:ktor-client-core:$ktorVersion")
+                implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
+                implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
+                implementation("io.ktor:ktor-client-java:$ktorVersion")
+            }
+        }
+        val jvmTest by getting
+        val jsMain by getting
+        val jsTest by getting
     }
-    test {
-        useJUnitPlatform()
+
+    publishing {
+        repositories {
+            maven {
+                name = "GitHubPackages"
+                url = uri("https://maven.pkg.github.com/TempestProject/KtDiscord")
+                credentials {
+                    username = System.getenv("GITHUB_ACTOR")
+                    password = System.getenv("GITHUB_TOKEN")
+                }
+            }
+        }
     }
 }
 
