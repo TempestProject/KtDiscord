@@ -1,6 +1,7 @@
 package cloud.drakon.ktdiscord
 
 import cloud.drakon.ktdiscord.interaction.response.InteractionResponse
+import cloud.drakon.ktdiscord.ratelimit.RateLimit
 import cloud.drakon.ktdiscord.webhook.EditWebhookMessage
 import cloud.drakon.ktdiscord.webhook.ExecuteWebhook
 import cloud.drakon.ktdiscord.webhook.Webhook
@@ -52,6 +53,17 @@ actual class KtDiscordClient actual constructor(
 
         expectSuccess = true
     }
+    private val rateLimit = HashMap<String, RateLimit>()
+
+    private fun updateRateLimits(response: HttpResponse) {
+        rateLimit[response.headers["X-RateLimit-Bucket"] !!] = RateLimit(
+            response.headers["X-RateLimit-Limit"] !!.toByte(),
+            response.headers["X-RateLimit-Remaining"] !!.toByte(),
+            response.headers["X-RateLimit-Reset"] !!.toDouble(),
+            response.headers["X-RateLimit-Reset-After"] !!.toDouble()
+        )
+        println("Bucket: " + rateLimit[response.headers["X-RateLimit-Bucket"] !!])
+    }
 
     /**
      * Validate a received interaction. If the signature passes validation this will return `true`, otherwise it will return `false`.
@@ -89,10 +101,13 @@ actual class KtDiscordClient actual constructor(
         interactionId: String,
         interactionToken: String,
     ): HttpResponse {
-        return ktorClient.post("interactions/$interactionId/$interactionToken/callback") {
-            contentType(ContentType.Application.Json)
-            setBody(interactionResponse)
-        }
+        val response =
+            ktorClient.post("interactions/$interactionId/$interactionToken/callback") {
+                contentType(ContentType.Application.Json)
+                setBody(interactionResponse)
+            }
+        updateRateLimits(response)
+        return response
     }
 
     /**
@@ -101,7 +116,10 @@ actual class KtDiscordClient actual constructor(
     suspend fun getOriginalInteractionResponse(
         interactionToken: String,
     ): HttpResponse {
-        return ktorClient.get("webhooks/$applicationId/$interactionToken/messages/@original")
+        val response =
+            ktorClient.get("webhooks/$applicationId/$interactionToken/messages/@original")
+        updateRateLimits(response)
+        return response
     }
 
     /**
@@ -110,7 +128,7 @@ actual class KtDiscordClient actual constructor(
     suspend fun editOriginalInteractionResponse(
         editWebhookMessage: EditWebhookMessage, interactionToken: String,
     ): HttpResponse {
-        return if (editWebhookMessage.files == null) {
+        val response = if (editWebhookMessage.files == null) {
             ktorClient.patch("webhooks/$applicationId/$interactionToken/messages/@original") {
                 contentType(ContentType.Application.Json)
                 setBody(editWebhookMessage)
@@ -120,13 +138,18 @@ actual class KtDiscordClient actual constructor(
                 setBody(createMultiPartFormDataContent(editWebhookMessage))
             }
         }
+        updateRateLimits(response)
+        return response
     }
 
     /**
      * Deletes the initial Interaction response. Returns `204 No Content` on success.
      */
     suspend fun deleteOriginalInteractionResponse(interactionToken: String): HttpResponse {
-        return ktorClient.delete("webhooks/$applicationId/$interactionToken/messages/@original")
+        val response =
+            ktorClient.delete("webhooks/$applicationId/$interactionToken/messages/@original")
+        updateRateLimits(response)
+        return response
     }
 
     /**
@@ -138,7 +161,7 @@ actual class KtDiscordClient actual constructor(
         executeWebhook: ExecuteWebhook,
         interactionToken: String,
     ): HttpResponse {
-        return if (executeWebhook.files == null) {
+        val response = if (executeWebhook.files == null) {
             ktorClient.post("webhooks/$applicationId/$interactionToken") {
                 contentType(
                     ContentType.Application.Json
@@ -152,6 +175,8 @@ actual class KtDiscordClient actual constructor(
                 )
             }
         }
+        updateRateLimits(response)
+        return response
     }
 
     /**
@@ -161,7 +186,10 @@ actual class KtDiscordClient actual constructor(
         messageId: String,
         interactionToken: String,
     ): HttpResponse {
-        return ktorClient.get("webhooks/$applicationId/$interactionToken/messages/$messageId")
+        val response =
+            ktorClient.get("webhooks/$applicationId/$interactionToken/messages/$messageId")
+        updateRateLimits(response)
+        return response
     }
 
     /**
@@ -172,10 +200,13 @@ actual class KtDiscordClient actual constructor(
         interactionToken: String,
         messageId: String,
     ): HttpResponse {
-        return ktorClient.patch("webhooks/$applicationId/$interactionToken/messages/$messageId") {
-            contentType(ContentType.Application.Json)
-            setBody(editWebhookMessage)
-        }
+        val response =
+            ktorClient.patch("webhooks/$applicationId/$interactionToken/messages/$messageId") {
+                contentType(ContentType.Application.Json)
+                setBody(editWebhookMessage)
+            }
+        updateRateLimits(response)
+        return response
     }
 
     /**
@@ -185,6 +216,9 @@ actual class KtDiscordClient actual constructor(
         interactionToken: String,
         messageId: String,
     ): HttpResponse {
-        return ktorClient.delete("webhooks/$applicationId/$interactionToken/messages/$messageId")
+        val response =
+            ktorClient.delete("webhooks/$applicationId/$interactionToken/messages/$messageId")
+        updateRateLimits(response)
+        return response
     }
 }
