@@ -1,9 +1,14 @@
 package cloud.drakon.ktdiscord
 
 import cloud.drakon.ktdiscord.channel.message.Message
+import cloud.drakon.ktdiscord.exception.CreateFollowupMessageException
 import cloud.drakon.ktdiscord.exception.CreateInteractionResponseException
 import cloud.drakon.ktdiscord.exception.DeleteFollowupMessageException
 import cloud.drakon.ktdiscord.exception.DeleteOriginalInteractionResponseException
+import cloud.drakon.ktdiscord.exception.EditFollowupMessageException
+import cloud.drakon.ktdiscord.exception.EditOriginalInteractionResponseException
+import cloud.drakon.ktdiscord.exception.GetFollowupMessageException
+import cloud.drakon.ktdiscord.exception.GetOriginalInteractionResponseException
 import cloud.drakon.ktdiscord.interaction.response.InteractionResponse
 import cloud.drakon.ktdiscord.webhook.EditWebhookMessage
 import cloud.drakon.ktdiscord.webhook.ExecuteWebhook
@@ -30,6 +35,7 @@ import io.ktor.http.contentType
 import io.ktor.serialization.kotlinx.json.json
 import kotlin.js.Promise
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.await
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.promise
 import kotlinx.serialization.encodeToString
@@ -54,8 +60,6 @@ import kotlinx.serialization.json.Json
             url("https://discord.com/api/v10/")
             header("Authorization", "Bot $botToken")
         }
-
-        expectSuccess = true
     }
 
     //    private val rateLimit = HashMap<String, RateLimit>()
@@ -126,7 +130,14 @@ import kotlinx.serialization.json.Json
 
         //        updateRateLimits(response)
 
-        return@promise response.body()
+        if (response.status.value != 200 && response.status.value != 429) {
+            throw GetOriginalInteractionResponseException("Code: ${response.status.value}, message: ${response.body() as String}")
+        } else if (response.status.value == 429) {
+            delay(rateLimitToMilliseconds(response))
+            return@promise getOriginalInteractionResponse(interactionToken).await()
+        } else {
+            return@promise response.body()
+        }
     }
 
     /**
@@ -148,7 +159,16 @@ import kotlinx.serialization.json.Json
 
         //        updateRateLimits(response)
 
-        return@promise response.body()
+        if (response.status.value != 200 && response.status.value != 429) {
+            throw EditOriginalInteractionResponseException("Code: ${response.status.value}, message: ${response.body() as String}")
+        } else if (response.status.value == 429) {
+            delay(rateLimitToMilliseconds(response))
+            return@promise editOriginalInteractionResponse(
+                editWebhookMessage, interactionToken
+            ).await()
+        } else {
+            return@promise response.body()
+        }
     }
 
     /**
@@ -195,7 +215,17 @@ import kotlinx.serialization.json.Json
 
         //        updateRateLimits(response)
 
-        return@promise response.body()
+        if (response.status.value != 200 && response.status.value != 429) {
+            throw CreateFollowupMessageException("Code: ${response.status.value}, message: ${response.body() as String}")
+        } else if (response.status.value == 429) {
+            delay(rateLimitToMilliseconds(response))
+            return@promise createFollowupMessage(
+                executeWebhook,
+                interactionToken,
+            ).await()
+        } else {
+            return@promise response.body()
+        }
     }
 
     /**
@@ -210,7 +240,14 @@ import kotlinx.serialization.json.Json
 
         //        updateRateLimits(response)
 
-        return@promise response.body()
+        if (response.status.value != 200 && response.status.value != 429) {
+            throw GetFollowupMessageException("Code: ${response.status.value}, message: ${response.body() as String}")
+        } else if (response.status.value == 429) {
+            delay(rateLimitToMilliseconds(response))
+            return@promise getFollowupMessage(messageId, interactionToken).await()
+        } else {
+            return@promise response.body()
+        }
     }
 
     /**
@@ -229,7 +266,18 @@ import kotlinx.serialization.json.Json
 
         //        updateRateLimits(response)
 
-        return@promise response.body()
+        if (response.status.value != 200 && response.status.value != 429) {
+            throw EditFollowupMessageException("Code: ${response.status.value}, message: ${response.body() as String}")
+        } else if (response.status.value == 429) {
+            delay(rateLimitToMilliseconds(response))
+            return@promise editFollowupMessage(
+                editWebhookMessage,
+                interactionToken,
+                messageId,
+            ).await()
+        } else {
+            return@promise response.body()
+        }
     }
 
     /**
