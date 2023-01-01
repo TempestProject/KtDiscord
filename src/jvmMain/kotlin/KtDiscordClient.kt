@@ -11,13 +11,12 @@ import com.goterl.lazysodium.utils.LibraryLoader
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.java.Java
 import io.ktor.client.plugins.DefaultRequest
+import io.ktor.client.plugins.UserAgent
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
-import io.ktor.client.plugins.defaultRequest
 import io.ktor.client.request.delete
 import io.ktor.client.request.forms.MultiPartFormDataContent
 import io.ktor.client.request.forms.formData
 import io.ktor.client.request.get
-import io.ktor.client.request.header
 import io.ktor.client.request.patch
 import io.ktor.client.request.post
 import io.ktor.client.request.setBody
@@ -37,17 +36,16 @@ actual class KtDiscordClient actual constructor(
 ) {
     private val lazySodium = LazySodiumJava(SodiumJava(LibraryLoader.Mode.BUNDLED_ONLY))
     private val ktorClient = HttpClient(Java) {
+        install(UserAgent) {
+            agent = "DiscordBot (https://github.com/TempestProject/KtDiscord, 1.0.3)"
+        }
+
         install(ContentNegotiation) {
             json(Json { ignoreUnknownKeys = true })
         }
 
-        install(DefaultRequest)
-        defaultRequest {
+        install(DefaultRequest) {
             url("https://discord.com/api/v10/")
-            header(
-                "User-Agent",
-                "DiscordBot (https://github.com/TempestProject/KtDiscord, 1.0.2)"
-            )
         }
 
         expectSuccess = true
