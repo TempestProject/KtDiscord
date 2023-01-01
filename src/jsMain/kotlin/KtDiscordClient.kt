@@ -48,8 +48,7 @@ import kotlinx.serialization.json.Json
 ) {
     private val ktorClient = HttpClient(Js) {
         install(UserAgent) {
-            agent =
-                "DiscordBot (https://github.com/TempestProject/KtDiscord, 2.0.0-SNAPSHOT)"
+            agent = "DiscordBot (https://github.com/TempestProject/KtDiscord, 2.0.0)"
         }
 
         install(ContentNegotiation) {

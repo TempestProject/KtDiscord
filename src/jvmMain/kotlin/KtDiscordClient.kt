@@ -49,8 +49,7 @@ actual class KtDiscordClient actual constructor(
     private val lazySodium = LazySodiumJava(SodiumJava(LibraryLoader.Mode.BUNDLED_ONLY))
     private val ktorClient = HttpClient(Java) {
         install(UserAgent) {
-            agent =
-                "DiscordBot (https://github.com/TempestProject/KtDiscord, 2.0.0-SNAPSHOT)"
+            agent = "DiscordBot (https://github.com/TempestProject/KtDiscord, 2.0.0)"
         }
 
         install(ContentNegotiation) {
