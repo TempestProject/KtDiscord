@@ -74,6 +74,9 @@ actual class KtDiscordClient actual constructor(
         println("Bucket: " + rateLimit[response.headers["X-RateLimit-Bucket"] !!])
     }
 
+    private fun rateLimitToMilliseconds(response: HttpResponse): Long =
+        (response.headers["X-RateLimit-Reset-After"] !!.toDouble() * 1000).toLong()
+
     /**
      * Validate a received interaction. If the signature passes validation this will return `true`, otherwise it will return `false`.
      * @param timestamp The value of the `X-Signature-Timestamp` header from the interaction request
@@ -119,7 +122,7 @@ actual class KtDiscordClient actual constructor(
         if (response.status.value != 204 && response.status.value != 429) {
             throw CreateInteractionResponseException("Code: ${response.status.value}, message: ${response.body() as String}")
         } else if (response.status.value == 429) {
-            delay((response.headers["X-RateLimit-Reset-After"] !!.toDouble() * 1000).toLong())
+            delay(rateLimitToMilliseconds(response))
             createInteractionResponse(
                 interactionResponse, interactionId, interactionToken
             )
@@ -168,7 +171,7 @@ actual class KtDiscordClient actual constructor(
         if (response.status.value != 204 && response.status.value != 429) {
             throw DeleteOriginalInteractionResponseException("Code: ${response.status.value}, message: ${response.body() as String}")
         } else if (response.status.value == 429) {
-            delay((response.headers["X-RateLimit-Reset-After"] !!.toDouble() * 1000).toLong())
+            delay(rateLimitToMilliseconds(response))
             deleteOriginalInteractionResponse(interactionToken)
         }
     }
@@ -243,7 +246,7 @@ actual class KtDiscordClient actual constructor(
         if (response.status.value != 204 && response.status.value != 429) {
             throw DeleteFollowupMessageException("Code: ${response.status.value}, message: ${response.body() as String}")
         } else if (response.status.value == 429) {
-            delay((response.headers["X-RateLimit-Reset-After"] !!.toDouble() * 1000).toLong())
+            delay(rateLimitToMilliseconds(response))
             deleteFollowupMessage(interactionToken, messageId)
         }
     }

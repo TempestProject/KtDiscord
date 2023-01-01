@@ -71,6 +71,9 @@ import kotlinx.serialization.json.Json
         println("Bucket: " + rateLimit[response.headers["X-RateLimit-Bucket"] !!])
     }
 
+    private fun rateLimitToMilliseconds(response: HttpResponse): Long =
+        (response.headers["X-RateLimit-Reset-After"] !!.toDouble() * 1000).toLong()
+
     private fun createMultiPartFormDataContent(webhook: Webhook): MultiPartFormDataContent {
         return MultiPartFormDataContent(formData {
             append("payload_json", Json.encodeToString(webhook))
@@ -103,7 +106,7 @@ import kotlinx.serialization.json.Json
         if (response.status.value != 204 && response.status.value != 429) {
             throw CreateInteractionResponseException("Code: ${response.status.value}, message: ${response.body() as String}")
         } else if (response.status.value == 429) {
-            delay((response.headers["X-RateLimit-Reset-After"] !!.toDouble() * 1000).toLong())
+            delay(rateLimitToMilliseconds(response))
             createInteractionResponse(
                 interactionResponse, interactionId, interactionToken
             )
@@ -153,7 +156,7 @@ import kotlinx.serialization.json.Json
             if (response.status.value != 204 && response.status.value != 429) {
                 throw DeleteOriginalInteractionResponseException("Code: ${response.status.value}, message: ${response.body() as String}")
             } else if (response.status.value == 429) {
-                delay((response.headers["X-RateLimit-Reset-After"] !!.toDouble() * 1000).toLong())
+                delay(rateLimitToMilliseconds(response))
                 deleteOriginalInteractionResponse(interactionToken)
             }
         }
@@ -228,7 +231,7 @@ import kotlinx.serialization.json.Json
         if (response.status.value != 204 && response.status.value != 429) {
             throw DeleteFollowupMessageException("Code: ${response.status.value}, message: ${response.body() as String}")
         } else if (response.status.value == 429) {
-            delay((response.headers["X-RateLimit-Reset-After"] !!.toDouble() * 1000).toLong())
+            delay(rateLimitToMilliseconds(response))
             deleteFollowupMessage(interactionToken, messageId)
         }
     }
