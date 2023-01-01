@@ -59,13 +59,12 @@ actual class KtDiscordClient actual constructor(
      * @param body The raw body of the request
      * @param signature The value of the `X-Signature-Ed25519` header from the interaction request
      */
-    fun validateRequest(timestamp: String, body: String, signature: String): Boolean {
-        return lazySodium.cryptoSignVerifyDetached(
+    fun validateRequest(timestamp: String, body: String, signature: String): Boolean =
+        lazySodium.cryptoSignVerifyDetached(
             Key.fromHexString(signature).asHexString,
             timestamp + body,
             Key.fromHexString(publicKey)
         )
-    }
 
     private fun createMultiPartFormDataContent(webhook: Webhook): MultiPartFormDataContent {
         return MultiPartFormDataContent(formData {
