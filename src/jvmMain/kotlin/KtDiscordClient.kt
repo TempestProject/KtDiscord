@@ -31,7 +31,6 @@ import io.ktor.client.request.header
 import io.ktor.client.request.patch
 import io.ktor.client.request.post
 import io.ktor.client.request.setBody
-import io.ktor.client.statement.HttpResponse
 import io.ktor.http.ContentType
 import io.ktor.http.Headers
 import io.ktor.http.HttpHeaders
@@ -74,9 +73,6 @@ actual class KtDiscordClient actual constructor(
     //        )
     //        println("Bucket: " + rateLimit[response.headers["X-RateLimit-Bucket"] !!])
     //    }
-
-    private fun rateLimitToMilliseconds(response: HttpResponse): Long =
-        (response.headers["X-RateLimit-Reset-After"] !!.toDouble() * 1000).toLong()
 
     /**
      * Validate a received interaction. If the signature passes validation this will return `true`, otherwise it will return `false`.

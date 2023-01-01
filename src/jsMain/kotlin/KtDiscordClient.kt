@@ -27,7 +27,6 @@ import io.ktor.client.request.header
 import io.ktor.client.request.patch
 import io.ktor.client.request.post
 import io.ktor.client.request.setBody
-import io.ktor.client.statement.HttpResponse
 import io.ktor.http.ContentType
 import io.ktor.http.Headers
 import io.ktor.http.HttpHeaders
@@ -73,9 +72,6 @@ import kotlinx.serialization.json.Json
     //        )
     //        println("Bucket: " + rateLimit[response.headers["X-RateLimit-Bucket"] !!])
     //    }
-
-    private fun rateLimitToMilliseconds(response: HttpResponse): Long =
-        (response.headers["X-RateLimit-Reset-After"] !!.toDouble() * 1000).toLong()
 
     private fun createMultiPartFormDataContent(webhook: Webhook): MultiPartFormDataContent {
         return MultiPartFormDataContent(formData {
