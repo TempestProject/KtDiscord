@@ -4,7 +4,7 @@
 [![License](https://img.shields.io/github/license/TempestProject/KtDiscord)](https://www.gnu.org/licenses/agpl-3.0.en.html)
 [![Qodana](https://github.com/TempestProject/KtDiscord/actions/workflows/code_quality.yml/badge.svg)](https://github.com/TempestProject/KtDiscord/actions/workflows/code_quality.yml)
 
-KtDiscord is a Kotlin Multiplatform library for working with Discord Interactions.
+KtDiscord is a Kotlin Multiplatform and JavaScript/TypeScript library for working with Discord Interactions.
 
 ## Features
 
@@ -13,7 +13,9 @@ KtDiscord is a Kotlin Multiplatform library for working with Discord Interaction
 
 ## Installation
 
-KtDiscord is (currently) only available from GitHub Packages.
+KtDiscord is (currently) only available from GitHub Packages (for Kotlin) and npm (for JavaScript/TypeScript).
+
+### Kotlin
 
 Add the following to your `build.gradle.kts` file to install KtDiscord:
 
@@ -32,6 +34,20 @@ repositories {
 dependencies {
     implementation("cloud.drakon:ktdiscord:2.0.0")
 }
+```
+
+### JavaScript/TypeScript
+
+### `package.json`
+
+```json
+"@tempestproject/ktdiscord": "2.0.0"
+```
+
+#### Command line
+
+```commandline
+npm install @tempestproject/ktdiscord
 ```
 
 ## Stability
