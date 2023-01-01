@@ -109,6 +109,7 @@ actual class KtDiscordClient actual constructor(
 
     /**
      * Create a response to an Interaction from the gateway. Body is an interaction response.
+     * @exception CreateInteractionResponseException if the Discord API didn't return `204 No Content`.
      */
     suspend fun createInteractionResponse(
         interactionResponse: InteractionResponse,
@@ -135,6 +136,7 @@ actual class KtDiscordClient actual constructor(
 
     /**
      * Returns the initial Interaction response.
+     * @exception GetOriginalInteractionResponseException if the Discord API didn't return `200 OK`.
      */
     suspend fun getOriginalInteractionResponse(
         interactionToken: String,
@@ -156,6 +158,7 @@ actual class KtDiscordClient actual constructor(
 
     /**
      * Edits the initial Interaction response.
+     * @exception EditOriginalInteractionResponseException if the Discord API didn't return `200 OK`.
      */
     suspend fun editOriginalInteractionResponse(
         editWebhookMessage: EditWebhookMessage, interactionToken: String,
@@ -185,6 +188,7 @@ actual class KtDiscordClient actual constructor(
 
     /**
      * Deletes the initial Interaction response.
+     * @exception DeleteOriginalInteractionResponseException if the Discord API didn't return `204 No Content`.
      */
     suspend fun deleteOriginalInteractionResponse(interactionToken: String) {
         val response =
@@ -204,6 +208,7 @@ actual class KtDiscordClient actual constructor(
      * Create a followup message for an Interaction.
      *
      * `flags` can be set to `64` to mark the message as ephemeral, except when it is the first followup message to a deferred Interactions Response. In that case, the `flags` field will be ignored, and the ephemerality of the message will be determined by the `flags` value in your original ACK.
+     * @exception CreateFollowupMessageException if the Discord API didn't return `200 OK`.
      */
     suspend fun createFollowupMessage(
         executeWebhook: ExecuteWebhook,
@@ -238,6 +243,7 @@ actual class KtDiscordClient actual constructor(
 
     /**
      * Returns a followup message for an Interaction.
+     * @exception GetFollowupMessageException if the Discord API didn't return `200 OK`.
      */
     suspend fun getFollowupMessage(
         messageId: String,
@@ -260,6 +266,7 @@ actual class KtDiscordClient actual constructor(
 
     /**
      * Edits a followup message for an Interaction.
+     * @exception EditFollowupMessageException if the Discord API didn't return `200 OK`.
      */
     suspend fun editFollowupMessage(
         editWebhookMessage: EditWebhookMessage,
@@ -286,6 +293,7 @@ actual class KtDiscordClient actual constructor(
 
     /**
      * Deletes a followup message for an Interaction.
+     * @exception DeleteFollowupMessageException if the Discord API didn't return `204 No Content`.
      */
     suspend fun deleteFollowupMessage(
         interactionToken: String,

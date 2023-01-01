@@ -95,6 +95,7 @@ import kotlinx.serialization.json.Json
 
     /**
      * Create a response to an Interaction from the gateway. Body is an interaction response.
+     * @exception CreateInteractionResponseException if the Discord API didn't return `204 No Content`.
      */
     fun createInteractionResponse(
         interactionResponse: InteractionResponse,
@@ -121,6 +122,7 @@ import kotlinx.serialization.json.Json
 
     /**
      * Returns the initial Interaction response.
+     * @exception GetOriginalInteractionResponseException if the Discord API didn't return `200 OK`.
      */
     fun getOriginalInteractionResponse(
         interactionToken: String,
@@ -142,6 +144,7 @@ import kotlinx.serialization.json.Json
 
     /**
      * Edits the initial Interaction response.
+     * @exception EditOriginalInteractionResponseException if the Discord API didn't return `200 OK`.
      */
     fun editOriginalInteractionResponse(
         editWebhookMessage: EditWebhookMessage, interactionToken: String,
@@ -173,6 +176,7 @@ import kotlinx.serialization.json.Json
 
     /**
      * Deletes the initial Interaction response.
+     * @exception DeleteOriginalInteractionResponseException if the Discord API didn't return `204 No Content`.
      */
     fun deleteOriginalInteractionResponse(interactionToken: String): Promise<Unit> =
         GlobalScope.promise {
@@ -193,6 +197,7 @@ import kotlinx.serialization.json.Json
      * Create a followup message for an Interaction.
      *
      * `flags` can be set to `64` to mark the message as ephemeral, except when it is the first followup message to a deferred Interactions Response. In that case, the `flags` field will be ignored, and the ephemerality of the message will be determined by the `flags` value in your original ACK.
+     * @exception CreateFollowupMessageException if the Discord API didn't return `200 OK`.
      */
     fun createFollowupMessage(
         executeWebhook: ExecuteWebhook,
@@ -230,6 +235,7 @@ import kotlinx.serialization.json.Json
 
     /**
      * Returns a followup message for an Interaction.
+     * @exception GetFollowupMessageException if the Discord API didn't return `200 OK`.
      */
     fun getFollowupMessage(
         messageId: String,
@@ -252,6 +258,7 @@ import kotlinx.serialization.json.Json
 
     /**
      * Edits a followup message for an Interaction.
+     * @exception EditFollowupMessageException if the Discord API didn't return `200 OK`.
      */
     fun editFollowupMessage(
         editWebhookMessage: EditWebhookMessage,
@@ -282,6 +289,7 @@ import kotlinx.serialization.json.Json
 
     /**
      * Deletes a followup message for an Interaction.
+     * @exception DeleteFollowupMessageException if the Discord API didn't return `204 No Content`.
      */
     fun deleteFollowupMessage(
         interactionToken: String,
