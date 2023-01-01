@@ -5,7 +5,6 @@ import cloud.drakon.ktdiscord.exception.CreateInteractionResponseException
 import cloud.drakon.ktdiscord.exception.DeleteFollowupMessageException
 import cloud.drakon.ktdiscord.exception.DeleteOriginalInteractionResponseException
 import cloud.drakon.ktdiscord.interaction.response.InteractionResponse
-import cloud.drakon.ktdiscord.ratelimit.RateLimit
 import cloud.drakon.ktdiscord.webhook.EditWebhookMessage
 import cloud.drakon.ktdiscord.webhook.ExecuteWebhook
 import cloud.drakon.ktdiscord.webhook.Webhook
@@ -58,18 +57,19 @@ import kotlinx.serialization.json.Json
 
         expectSuccess = true
     }
-    private val rateLimit = HashMap<String, RateLimit>()
 
-    private fun updateRateLimits(response: HttpResponse) {
-        rateLimit[response.headers["X-RateLimit-Bucket"] !!] = RateLimit(
-            response.headers["X-RateLimit-Limit"] !!.toByte(),
-            response.headers["X-RateLimit-Remaining"] !!.toByte(),
-            response.headers["X-RateLimit-Reset"] !!.toDouble(),
-            response.headers["X-RateLimit-Reset-After"] !!.toDouble(),
-            response.headers["X-RateLimit-Scope"]
-        )
-        println("Bucket: " + rateLimit[response.headers["X-RateLimit-Bucket"] !!])
-    }
+    //    private val rateLimit = HashMap<String, RateLimit>()
+    //
+    //    private fun updateRateLimits(response: HttpResponse) {
+    //        rateLimit[response.headers["X-RateLimit-Bucket"] !!] = RateLimit(
+    //            response.headers["X-RateLimit-Limit"] !!.toByte(),
+    //            response.headers["X-RateLimit-Remaining"] !!.toByte(),
+    //            response.headers["X-RateLimit-Reset"] !!.toDouble(),
+    //            response.headers["X-RateLimit-Reset-After"] !!.toDouble(),
+    //            response.headers["X-RateLimit-Scope"]
+    //        )
+    //        println("Bucket: " + rateLimit[response.headers["X-RateLimit-Bucket"] !!])
+    //    }
 
     private fun rateLimitToMilliseconds(response: HttpResponse): Long =
         (response.headers["X-RateLimit-Reset-After"] !!.toDouble() * 1000).toLong()
@@ -102,7 +102,9 @@ import kotlinx.serialization.json.Json
                 contentType(ContentType.Application.Json)
                 setBody(interactionResponse)
             }
-        updateRateLimits(response)
+
+        //        updateRateLimits(response)
+
         if (response.status.value != 204 && response.status.value != 429) {
             throw CreateInteractionResponseException("Code: ${response.status.value}, message: ${response.body() as String}")
         } else if (response.status.value == 429) {
@@ -121,7 +123,9 @@ import kotlinx.serialization.json.Json
     ): Promise<Message> = GlobalScope.promise {
         val response =
             ktorClient.get("webhooks/$applicationId/$interactionToken/messages/@original")
-        updateRateLimits(response)
+
+        //        updateRateLimits(response)
+
         return@promise response.body()
     }
 
@@ -141,7 +145,9 @@ import kotlinx.serialization.json.Json
                 setBody(createMultiPartFormDataContent(editWebhookMessage))
             }
         }
-        updateRateLimits(response)
+
+        //        updateRateLimits(response)
+
         return@promise response.body()
     }
 
@@ -152,7 +158,9 @@ import kotlinx.serialization.json.Json
         GlobalScope.promise {
             val response =
                 ktorClient.delete("webhooks/$applicationId/$interactionToken/messages/@original")
-            updateRateLimits(response)
+
+            //            updateRateLimits(response)
+
             if (response.status.value != 204 && response.status.value != 429) {
                 throw DeleteOriginalInteractionResponseException("Code: ${response.status.value}, message: ${response.body() as String}")
             } else if (response.status.value == 429) {
@@ -184,7 +192,9 @@ import kotlinx.serialization.json.Json
                 )
             }
         }
-        updateRateLimits(response)
+
+        //        updateRateLimits(response)
+
         return@promise response.body()
     }
 
@@ -197,7 +207,9 @@ import kotlinx.serialization.json.Json
     ): Promise<Message> = GlobalScope.promise {
         val response =
             ktorClient.get("webhooks/$applicationId/$interactionToken/messages/$messageId")
-        updateRateLimits(response)
+
+        //        updateRateLimits(response)
+
         return@promise response.body()
     }
 
@@ -214,7 +226,9 @@ import kotlinx.serialization.json.Json
                 contentType(ContentType.Application.Json)
                 setBody(editWebhookMessage)
             }
-        updateRateLimits(response)
+
+        //        updateRateLimits(response)
+
         return@promise response.body()
     }
 
@@ -227,7 +241,9 @@ import kotlinx.serialization.json.Json
     ): Promise<Unit> = GlobalScope.promise {
         val response =
             ktorClient.delete("webhooks/$applicationId/$interactionToken/messages/$messageId")
-        updateRateLimits(response)
+
+        //        updateRateLimits(response)
+
         if (response.status.value != 204 && response.status.value != 429) {
             throw DeleteFollowupMessageException("Code: ${response.status.value}, message: ${response.body() as String}")
         } else if (response.status.value == 429) {

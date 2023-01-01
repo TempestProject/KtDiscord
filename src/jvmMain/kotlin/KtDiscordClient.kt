@@ -5,7 +5,6 @@ import cloud.drakon.ktdiscord.exception.CreateInteractionResponseException
 import cloud.drakon.ktdiscord.exception.DeleteFollowupMessageException
 import cloud.drakon.ktdiscord.exception.DeleteOriginalInteractionResponseException
 import cloud.drakon.ktdiscord.interaction.response.InteractionResponse
-import cloud.drakon.ktdiscord.ratelimit.RateLimit
 import cloud.drakon.ktdiscord.webhook.EditWebhookMessage
 import cloud.drakon.ktdiscord.webhook.ExecuteWebhook
 import cloud.drakon.ktdiscord.webhook.Webhook
@@ -33,7 +32,6 @@ import io.ktor.http.Headers
 import io.ktor.http.HttpHeaders
 import io.ktor.http.contentType
 import io.ktor.serialization.kotlinx.json.json
-import java.util.Hashtable
 import kotlinx.coroutines.delay
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
@@ -61,18 +59,19 @@ actual class KtDiscordClient actual constructor(
 
         expectSuccess = true
     }
-    private val rateLimit = Hashtable<String, RateLimit>()
 
-    private fun updateRateLimits(response: HttpResponse) {
-        rateLimit[response.headers["X-RateLimit-Bucket"] !!] = RateLimit(
-            response.headers["X-RateLimit-Limit"] !!.toByte(),
-            response.headers["X-RateLimit-Remaining"] !!.toByte(),
-            response.headers["X-RateLimit-Reset"] !!.toDouble(),
-            response.headers["X-RateLimit-Reset-After"] !!.toDouble(),
-            response.headers["X-RateLimit-Scope"]
-        )
-        println("Bucket: " + rateLimit[response.headers["X-RateLimit-Bucket"] !!])
-    }
+    //    private val rateLimit = Hashtable<String, RateLimit>()
+    //
+    //    private fun updateRateLimits(response: HttpResponse) {
+    //        rateLimit[response.headers["X-RateLimit-Bucket"] !!] = RateLimit(
+    //            response.headers["X-RateLimit-Limit"] !!.toByte(),
+    //            response.headers["X-RateLimit-Remaining"] !!.toByte(),
+    //            response.headers["X-RateLimit-Reset"] !!.toDouble(),
+    //            response.headers["X-RateLimit-Reset-After"] !!.toDouble(),
+    //            response.headers["X-RateLimit-Scope"]
+    //        )
+    //        println("Bucket: " + rateLimit[response.headers["X-RateLimit-Bucket"] !!])
+    //    }
 
     private fun rateLimitToMilliseconds(response: HttpResponse): Long =
         (response.headers["X-RateLimit-Reset-After"] !!.toDouble() * 1000).toLong()
@@ -118,7 +117,9 @@ actual class KtDiscordClient actual constructor(
                 contentType(ContentType.Application.Json)
                 setBody(interactionResponse)
             }
-        updateRateLimits(response)
+
+        //        updateRateLimits(response)
+
         if (response.status.value != 204 && response.status.value != 429) {
             throw CreateInteractionResponseException("Code: ${response.status.value}, message: ${response.body() as String}")
         } else if (response.status.value == 429) {
@@ -137,7 +138,9 @@ actual class KtDiscordClient actual constructor(
     ): Message {
         val response =
             ktorClient.get("webhooks/$applicationId/$interactionToken/messages/@original")
-        updateRateLimits(response)
+
+        //        updateRateLimits(response)
+
         return response.body()
     }
 
@@ -157,7 +160,9 @@ actual class KtDiscordClient actual constructor(
                 setBody(createMultiPartFormDataContent(editWebhookMessage))
             }
         }
-        updateRateLimits(response)
+
+        //        updateRateLimits(response)
+
         return response.body()
     }
 
@@ -167,7 +172,9 @@ actual class KtDiscordClient actual constructor(
     suspend fun deleteOriginalInteractionResponse(interactionToken: String) {
         val response =
             ktorClient.delete("webhooks/$applicationId/$interactionToken/messages/@original")
-        updateRateLimits(response)
+
+        //        updateRateLimits(response)
+
         if (response.status.value != 204 && response.status.value != 429) {
             throw DeleteOriginalInteractionResponseException("Code: ${response.status.value}, message: ${response.body() as String}")
         } else if (response.status.value == 429) {
@@ -199,7 +206,9 @@ actual class KtDiscordClient actual constructor(
                 )
             }
         }
-        updateRateLimits(response)
+
+        //        updateRateLimits(response)
+
         return response.body()
     }
 
@@ -212,7 +221,9 @@ actual class KtDiscordClient actual constructor(
     ): Message {
         val response =
             ktorClient.get("webhooks/$applicationId/$interactionToken/messages/$messageId")
-        updateRateLimits(response)
+
+        //        updateRateLimits(response)
+
         return response.body()
     }
 
@@ -229,7 +240,9 @@ actual class KtDiscordClient actual constructor(
                 contentType(ContentType.Application.Json)
                 setBody(editWebhookMessage)
             }
-        updateRateLimits(response)
+
+        //        updateRateLimits(response)
+
         return response.body()
     }
 
@@ -242,7 +255,9 @@ actual class KtDiscordClient actual constructor(
     ) {
         val response =
             ktorClient.delete("webhooks/$applicationId/$interactionToken/messages/$messageId")
-        updateRateLimits(response)
+
+        //        updateRateLimits(response)
+
         if (response.status.value != 204 && response.status.value != 429) {
             throw DeleteFollowupMessageException("Code: ${response.status.value}, message: ${response.body() as String}")
         } else if (response.status.value == 429) {
