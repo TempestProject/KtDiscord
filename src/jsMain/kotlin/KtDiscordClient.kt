@@ -31,6 +31,7 @@ import io.ktor.http.contentType
 import io.ktor.serialization.kotlinx.json.json
 import kotlin.js.Promise
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.promise
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
@@ -92,15 +93,20 @@ import kotlinx.serialization.json.Json
         interactionResponse: InteractionResponse,
         interactionId: String,
         interactionToken: String,
-    ) = GlobalScope.promise {
+    ): Promise<Unit> = GlobalScope.promise {
         val response =
             ktorClient.post("interactions/$interactionId/$interactionToken/callback") {
                 contentType(ContentType.Application.Json)
                 setBody(interactionResponse)
             }
         updateRateLimits(response)
-        if (response.status.value != 204) {
+        if (response.status.value != 204 && response.status.value != 429) {
             throw CreateInteractionResponseException("Code: ${response.status.value}, message: ${response.body() as String}")
+        } else if (response.status.value == 429) {
+            delay((response.headers["X-RateLimit-Reset-After"] !!.toDouble() * 1000).toLong())
+            createInteractionResponse(
+                interactionResponse, interactionId, interactionToken
+            )
         }
     }
 
@@ -144,8 +150,11 @@ import kotlinx.serialization.json.Json
             val response =
                 ktorClient.delete("webhooks/$applicationId/$interactionToken/messages/@original")
             updateRateLimits(response)
-            if (response.status.value != 204) {
+            if (response.status.value != 204 && response.status.value != 429) {
                 throw DeleteOriginalInteractionResponseException("Code: ${response.status.value}, message: ${response.body() as String}")
+            } else if (response.status.value == 429) {
+                delay((response.headers["X-RateLimit-Reset-After"] !!.toDouble() * 1000).toLong())
+                deleteOriginalInteractionResponse(interactionToken)
             }
         }
 
@@ -216,8 +225,11 @@ import kotlinx.serialization.json.Json
         val response =
             ktorClient.delete("webhooks/$applicationId/$interactionToken/messages/$messageId")
         updateRateLimits(response)
-        if (response.status.value != 204) {
+        if (response.status.value != 204 && response.status.value != 429) {
             throw DeleteFollowupMessageException("Code: ${response.status.value}, message: ${response.body() as String}")
+        } else if (response.status.value == 429) {
+            delay((response.headers["X-RateLimit-Reset-After"] !!.toDouble() * 1000).toLong())
+            deleteFollowupMessage(interactionToken, messageId)
         }
     }
 }

@@ -34,6 +34,7 @@ import io.ktor.http.HttpHeaders
 import io.ktor.http.contentType
 import io.ktor.serialization.kotlinx.json.json
 import java.util.Hashtable
+import kotlinx.coroutines.delay
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
@@ -115,8 +116,13 @@ actual class KtDiscordClient actual constructor(
                 setBody(interactionResponse)
             }
         updateRateLimits(response)
-        if (response.status.value != 204) {
+        if (response.status.value != 204 && response.status.value != 429) {
             throw CreateInteractionResponseException("Code: ${response.status.value}, message: ${response.body() as String}")
+        } else if (response.status.value == 429) {
+            delay((response.headers["X-RateLimit-Reset-After"] !!.toDouble() * 1000).toLong())
+            createInteractionResponse(
+                interactionResponse, interactionId, interactionToken
+            )
         }
     }
 
@@ -159,8 +165,11 @@ actual class KtDiscordClient actual constructor(
         val response =
             ktorClient.delete("webhooks/$applicationId/$interactionToken/messages/@original")
         updateRateLimits(response)
-        if (response.status.value != 204) {
+        if (response.status.value != 204 && response.status.value != 429) {
             throw DeleteOriginalInteractionResponseException("Code: ${response.status.value}, message: ${response.body() as String}")
+        } else if (response.status.value == 429) {
+            delay((response.headers["X-RateLimit-Reset-After"] !!.toDouble() * 1000).toLong())
+            deleteOriginalInteractionResponse(interactionToken)
         }
     }
 
@@ -231,8 +240,11 @@ actual class KtDiscordClient actual constructor(
         val response =
             ktorClient.delete("webhooks/$applicationId/$interactionToken/messages/$messageId")
         updateRateLimits(response)
-        if (response.status.value != 204) {
+        if (response.status.value != 204 && response.status.value != 429) {
             throw DeleteFollowupMessageException("Code: ${response.status.value}, message: ${response.body() as String}")
+        } else if (response.status.value == 429) {
+            delay((response.headers["X-RateLimit-Reset-After"] !!.toDouble() * 1000).toLong())
+            deleteFollowupMessage(interactionToken, messageId)
         }
     }
 }
