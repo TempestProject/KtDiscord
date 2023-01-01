@@ -28,6 +28,7 @@ import io.ktor.http.Headers
 import io.ktor.http.HttpHeaders
 import io.ktor.http.contentType
 import io.ktor.serialization.kotlinx.json.json
+import java.util.Hashtable
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
@@ -53,7 +54,7 @@ actual class KtDiscordClient actual constructor(
 
         expectSuccess = true
     }
-    private val rateLimit = HashMap<String, RateLimit>()
+    private val rateLimit = Hashtable<String, RateLimit>()
 
     private fun updateRateLimits(response: HttpResponse) {
         rateLimit[response.headers["X-RateLimit-Bucket"] !!] = RateLimit(
