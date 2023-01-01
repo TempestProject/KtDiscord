@@ -1,5 +1,6 @@
 package cloud.drakon.ktdiscord
 
+import cloud.drakon.ktdiscord.channel.message.Message
 import cloud.drakon.ktdiscord.interaction.response.InteractionResponse
 import cloud.drakon.ktdiscord.ratelimit.RateLimit
 import cloud.drakon.ktdiscord.webhook.EditWebhookMessage
@@ -10,6 +11,7 @@ import com.goterl.lazysodium.SodiumJava
 import com.goterl.lazysodium.utils.Key
 import com.goterl.lazysodium.utils.LibraryLoader
 import io.ktor.client.HttpClient
+import io.ktor.client.call.body
 import io.ktor.client.engine.java.Java
 import io.ktor.client.plugins.DefaultRequest
 import io.ktor.client.plugins.UserAgent
@@ -40,7 +42,8 @@ actual class KtDiscordClient actual constructor(
     private val lazySodium = LazySodiumJava(SodiumJava(LibraryLoader.Mode.BUNDLED_ONLY))
     private val ktorClient = HttpClient(Java) {
         install(UserAgent) {
-            agent = "DiscordBot (https://github.com/TempestProject/KtDiscord, 1.0.3)"
+            agent =
+                "DiscordBot (https://github.com/TempestProject/KtDiscord, 2.0.0-SNAPSHOT)"
         }
 
         install(ContentNegotiation) {
@@ -117,11 +120,11 @@ actual class KtDiscordClient actual constructor(
      */
     suspend fun getOriginalInteractionResponse(
         interactionToken: String,
-    ): HttpResponse {
+    ): Message {
         val response =
             ktorClient.get("webhooks/$applicationId/$interactionToken/messages/@original")
         updateRateLimits(response)
-        return response
+        return response.body()
     }
 
     /**
@@ -129,7 +132,7 @@ actual class KtDiscordClient actual constructor(
      */
     suspend fun editOriginalInteractionResponse(
         editWebhookMessage: EditWebhookMessage, interactionToken: String,
-    ): HttpResponse {
+    ): Message {
         val response = if (editWebhookMessage.files == null) {
             ktorClient.patch("webhooks/$applicationId/$interactionToken/messages/@original") {
                 contentType(ContentType.Application.Json)
@@ -141,7 +144,7 @@ actual class KtDiscordClient actual constructor(
             }
         }
         updateRateLimits(response)
-        return response
+        return response.body()
     }
 
     /**
@@ -162,7 +165,7 @@ actual class KtDiscordClient actual constructor(
     suspend fun createFollowupMessage(
         executeWebhook: ExecuteWebhook,
         interactionToken: String,
-    ): HttpResponse {
+    ): Message {
         val response = if (executeWebhook.files == null) {
             ktorClient.post("webhooks/$applicationId/$interactionToken") {
                 contentType(
@@ -178,7 +181,7 @@ actual class KtDiscordClient actual constructor(
             }
         }
         updateRateLimits(response)
-        return response
+        return response.body()
     }
 
     /**
@@ -187,11 +190,11 @@ actual class KtDiscordClient actual constructor(
     suspend fun getFollowupMessage(
         messageId: String,
         interactionToken: String,
-    ): HttpResponse {
+    ): Message {
         val response =
             ktorClient.get("webhooks/$applicationId/$interactionToken/messages/$messageId")
         updateRateLimits(response)
-        return response
+        return response.body()
     }
 
     /**
@@ -201,14 +204,14 @@ actual class KtDiscordClient actual constructor(
         editWebhookMessage: EditWebhookMessage,
         interactionToken: String,
         messageId: String,
-    ): HttpResponse {
+    ): Message {
         val response =
             ktorClient.patch("webhooks/$applicationId/$interactionToken/messages/$messageId") {
                 contentType(ContentType.Application.Json)
                 setBody(editWebhookMessage)
             }
         updateRateLimits(response)
-        return response
+        return response.body()
     }
 
     /**

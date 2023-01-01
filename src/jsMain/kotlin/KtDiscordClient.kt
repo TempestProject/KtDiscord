@@ -1,11 +1,13 @@
 package cloud.drakon.ktdiscord
 
+import cloud.drakon.ktdiscord.channel.message.Message
 import cloud.drakon.ktdiscord.interaction.response.InteractionResponse
 import cloud.drakon.ktdiscord.ratelimit.RateLimit
 import cloud.drakon.ktdiscord.webhook.EditWebhookMessage
 import cloud.drakon.ktdiscord.webhook.ExecuteWebhook
 import cloud.drakon.ktdiscord.webhook.Webhook
 import io.ktor.client.HttpClient
+import io.ktor.client.call.body
 import io.ktor.client.engine.js.Js
 import io.ktor.client.plugins.DefaultRequest
 import io.ktor.client.plugins.UserAgent
@@ -37,7 +39,8 @@ import kotlinx.serialization.json.Json
 ) {
     private val ktorClient = HttpClient(Js) {
         install(UserAgent) {
-            agent = "DiscordBot (https://github.com/TempestProject/KtDiscord, 1.0.3)"
+            agent =
+                "DiscordBot (https://github.com/TempestProject/KtDiscord, 2.0.0-SNAPSHOT)"
         }
 
         install(ContentNegotiation) {
@@ -101,11 +104,11 @@ import kotlinx.serialization.json.Json
      */
     fun getOriginalInteractionResponse(
         interactionToken: String,
-    ): Promise<HttpResponse> = GlobalScope.promise {
+    ): Promise<Message> = GlobalScope.promise {
         val response =
             ktorClient.get("webhooks/$applicationId/$interactionToken/messages/@original")
         updateRateLimits(response)
-        return@promise response
+        return@promise response.body()
     }
 
     /**
@@ -113,7 +116,7 @@ import kotlinx.serialization.json.Json
      */
     fun editOriginalInteractionResponse(
         editWebhookMessage: EditWebhookMessage, interactionToken: String,
-    ): Promise<HttpResponse> = GlobalScope.promise {
+    ): Promise<Message> = GlobalScope.promise {
         val response = if (editWebhookMessage.files == null) {
             ktorClient.patch("webhooks/$applicationId/$interactionToken/messages/@original") {
                 contentType(ContentType.Application.Json)
@@ -125,7 +128,7 @@ import kotlinx.serialization.json.Json
             }
         }
         updateRateLimits(response)
-        return@promise response
+        return@promise response.body()
     }
 
     /**
@@ -147,7 +150,7 @@ import kotlinx.serialization.json.Json
     fun createFollowupMessage(
         executeWebhook: ExecuteWebhook,
         interactionToken: String,
-    ): Promise<HttpResponse> = GlobalScope.promise {
+    ): Promise<Message> = GlobalScope.promise {
         val response = if (executeWebhook.files == null) {
             ktorClient.post("webhooks/$applicationId/$interactionToken") {
                 contentType(
@@ -163,7 +166,7 @@ import kotlinx.serialization.json.Json
             }
         }
         updateRateLimits(response)
-        return@promise response
+        return@promise response.body()
     }
 
     /**
@@ -172,11 +175,11 @@ import kotlinx.serialization.json.Json
     fun getFollowupMessage(
         messageId: String,
         interactionToken: String,
-    ): Promise<HttpResponse> = GlobalScope.promise {
+    ): Promise<Message> = GlobalScope.promise {
         val response =
             ktorClient.get("webhooks/$applicationId/$interactionToken/messages/$messageId")
         updateRateLimits(response)
-        return@promise response
+        return@promise response.body()
     }
 
     /**
@@ -186,14 +189,14 @@ import kotlinx.serialization.json.Json
         editWebhookMessage: EditWebhookMessage,
         interactionToken: String,
         messageId: String,
-    ): Promise<HttpResponse> = GlobalScope.promise {
+    ): Promise<Message> = GlobalScope.promise {
         val response =
             ktorClient.patch("webhooks/$applicationId/$interactionToken/messages/$messageId") {
                 contentType(ContentType.Application.Json)
                 setBody(editWebhookMessage)
             }
         updateRateLimits(response)
-        return@promise response
+        return@promise response.body()
     }
 
     /**
