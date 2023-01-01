@@ -5,4 +5,5 @@ internal data class RateLimit(
     val remaining: Byte,
     val reset: Double,
     val resetAfter: Double,
+    val scope: String?,
 )

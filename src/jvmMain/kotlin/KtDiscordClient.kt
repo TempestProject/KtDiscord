@@ -61,7 +61,8 @@ actual class KtDiscordClient actual constructor(
             response.headers["X-RateLimit-Limit"] !!.toByte(),
             response.headers["X-RateLimit-Remaining"] !!.toByte(),
             response.headers["X-RateLimit-Reset"] !!.toDouble(),
-            response.headers["X-RateLimit-Reset-After"] !!.toDouble()
+            response.headers["X-RateLimit-Reset-After"] !!.toDouble(),
+            response.headers["X-RateLimit-Scope"]
         )
         println("Bucket: " + rateLimit[response.headers["X-RateLimit-Bucket"] !!])
     }
