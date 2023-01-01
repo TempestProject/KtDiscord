@@ -2,6 +2,7 @@ plugins {
     kotlin("multiplatform") version "1.8.0"
     kotlin("plugin.serialization") version "1.8.0"
     id("maven-publish")
+    id("dev.petuska.npm.publish") version "3.2.0"
     id("org.jetbrains.dokka") version "1.7.20"
 }
 
@@ -24,7 +25,7 @@ kotlin {
     js(IR) {
         nodejs()
         useCommonJs()
-        binaries.executable()
+        binaries.library()
     }
 
     sourceSets {
@@ -71,6 +72,19 @@ kotlin {
                     password = System.getenv("GITHUB_TOKEN")
                 }
             }
+        }
+    }
+}
+
+npmPublish {
+    organization.set("tempestproject")
+    readme.set(rootDir.resolve("README.md"))
+    registries {
+        github {
+            authToken.set(System.getenv("GITHUB_TOKEN"))
+        }
+        npmjs {
+            authToken.set(System.getenv("NPM_ACCESS_TOKEN"))
         }
     }
 }
