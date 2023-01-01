@@ -1,6 +1,9 @@
 package cloud.drakon.ktdiscord
 
 import cloud.drakon.ktdiscord.channel.message.Message
+import cloud.drakon.ktdiscord.exception.CreateInteractionResponseException
+import cloud.drakon.ktdiscord.exception.DeleteFollowupMessageException
+import cloud.drakon.ktdiscord.exception.DeleteOriginalInteractionResponseException
 import cloud.drakon.ktdiscord.interaction.response.InteractionResponse
 import cloud.drakon.ktdiscord.ratelimit.RateLimit
 import cloud.drakon.ktdiscord.webhook.EditWebhookMessage
@@ -99,20 +102,22 @@ actual class KtDiscordClient actual constructor(
     }
 
     /**
-     * Create a response to an Interaction from the gateway. Body is an interaction response. Returns `204 No Content`.
+     * Create a response to an Interaction from the gateway. Body is an interaction response.
      */
     suspend fun createInteractionResponse(
         interactionResponse: InteractionResponse,
         interactionId: String,
         interactionToken: String,
-    ): HttpResponse {
+    ) {
         val response =
             ktorClient.post("interactions/$interactionId/$interactionToken/callback") {
                 contentType(ContentType.Application.Json)
                 setBody(interactionResponse)
             }
         updateRateLimits(response)
-        return response
+        if (response.status.value != 204) {
+            throw CreateInteractionResponseException("Code: ${response.status.value}, message: ${response.body() as String}")
+        }
     }
 
     /**
@@ -148,13 +153,15 @@ actual class KtDiscordClient actual constructor(
     }
 
     /**
-     * Deletes the initial Interaction response. Returns `204 No Content` on success.
+     * Deletes the initial Interaction response.
      */
-    suspend fun deleteOriginalInteractionResponse(interactionToken: String): HttpResponse {
+    suspend fun deleteOriginalInteractionResponse(interactionToken: String) {
         val response =
             ktorClient.delete("webhooks/$applicationId/$interactionToken/messages/@original")
         updateRateLimits(response)
-        return response
+        if (response.status.value != 204) {
+            throw DeleteOriginalInteractionResponseException("Code: ${response.status.value}, message: ${response.body() as String}")
+        }
     }
 
     /**
@@ -215,15 +222,17 @@ actual class KtDiscordClient actual constructor(
     }
 
     /**
-     * Deletes a followup message for an Interaction. Returns `204 No Content` on success.
+     * Deletes a followup message for an Interaction.
      */
     suspend fun deleteFollowupMessage(
         interactionToken: String,
         messageId: String,
-    ): HttpResponse {
+    ) {
         val response =
             ktorClient.delete("webhooks/$applicationId/$interactionToken/messages/$messageId")
         updateRateLimits(response)
-        return response
+        if (response.status.value != 204) {
+            throw DeleteFollowupMessageException("Code: ${response.status.value}, message: ${response.body() as String}")
+        }
     }
 }

@@ -1,6 +1,9 @@
 package cloud.drakon.ktdiscord
 
 import cloud.drakon.ktdiscord.channel.message.Message
+import cloud.drakon.ktdiscord.exception.CreateInteractionResponseException
+import cloud.drakon.ktdiscord.exception.DeleteFollowupMessageException
+import cloud.drakon.ktdiscord.exception.DeleteOriginalInteractionResponseException
 import cloud.drakon.ktdiscord.interaction.response.InteractionResponse
 import cloud.drakon.ktdiscord.ratelimit.RateLimit
 import cloud.drakon.ktdiscord.webhook.EditWebhookMessage
@@ -83,20 +86,22 @@ import kotlinx.serialization.json.Json
     }
 
     /**
-     * Create a response to an Interaction from the gateway. Body is an interaction response. Returns `204 No Content`.
+     * Create a response to an Interaction from the gateway. Body is an interaction response.
      */
     fun createInteractionResponse(
         interactionResponse: InteractionResponse,
         interactionId: String,
         interactionToken: String,
-    ): Promise<HttpResponse> = GlobalScope.promise {
+    ) = GlobalScope.promise {
         val response =
             ktorClient.post("interactions/$interactionId/$interactionToken/callback") {
                 contentType(ContentType.Application.Json)
                 setBody(interactionResponse)
             }
         updateRateLimits(response)
-        return@promise response
+        if (response.status.value != 204) {
+            throw CreateInteractionResponseException("Code: ${response.status.value}, message: ${response.body() as String}")
+        }
     }
 
     /**
@@ -132,14 +137,16 @@ import kotlinx.serialization.json.Json
     }
 
     /**
-     * Deletes the initial Interaction response. Returns `204 No Content` on success.
+     * Deletes the initial Interaction response.
      */
-    fun deleteOriginalInteractionResponse(interactionToken: String): Promise<HttpResponse> =
+    fun deleteOriginalInteractionResponse(interactionToken: String): Promise<Unit> =
         GlobalScope.promise {
             val response =
                 ktorClient.delete("webhooks/$applicationId/$interactionToken/messages/@original")
             updateRateLimits(response)
-            return@promise response
+            if (response.status.value != 204) {
+                throw DeleteOriginalInteractionResponseException("Code: ${response.status.value}, message: ${response.body() as String}")
+            }
         }
 
     /**
@@ -200,15 +207,17 @@ import kotlinx.serialization.json.Json
     }
 
     /**
-     * Deletes a followup message for an Interaction. Returns `204 No Content` on success.
+     * Deletes a followup message for an Interaction.
      */
     fun deleteFollowupMessage(
         interactionToken: String,
         messageId: String,
-    ): Promise<HttpResponse> = GlobalScope.promise {
+    ): Promise<Unit> = GlobalScope.promise {
         val response =
             ktorClient.delete("webhooks/$applicationId/$interactionToken/messages/$messageId")
         updateRateLimits(response)
-        return@promise response
+        if (response.status.value != 204) {
+            throw DeleteFollowupMessageException("Code: ${response.status.value}, message: ${response.body() as String}")
+        }
     }
 }
