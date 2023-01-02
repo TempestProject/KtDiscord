@@ -85,6 +85,10 @@ import kotlinx.serialization.json.Json
             }
         }
 
+    /**
+     * Create a new global command. s command will be overwritten). Returns an application command object.
+     * @exception CreateGlobalApplicationCommandException if the Discord API didn't return `200 OK` or `201 Created`.
+     */
     fun createGlobalApplicationCommand(applicationCommand: ApplicationCommandCreate): Promise<ApplicationCommand> =
         GlobalScope.promise {
             val response = ktorClient.post("/applications/$applicationId/commands") {
@@ -104,6 +108,10 @@ import kotlinx.serialization.json.Json
             }
         }
 
+    /**
+     * Fetch a global command for your application. Returns an application command object.
+     * @exception GetGlobalApplicationCommandException if the Discord API didn't return `200 OK`.
+     */
     fun getGlobalApplicationCommand(commandId: String): Promise<ApplicationCommand> =
         GlobalScope.promise {
             val response =
@@ -121,6 +129,10 @@ import kotlinx.serialization.json.Json
             }
         }
 
+    /**
+     * Edit a global command. Returns an application command object. All fields are optional, but any fields provided will entirely overwrite the existing values of those fields.
+     * @exception EditGlobalApplicationCommandException if the Discord API didn't return `200 OK`.
+     */
     fun editGlobalApplicationCommand(
         commandId: String,
         applicationCommand: ApplicationCommandEdit,
@@ -145,6 +157,10 @@ import kotlinx.serialization.json.Json
         }
     }
 
+    /**
+     * Deletes a global command.
+     * @exception DeleteGlobalApplicationCommandException if the Discord API didn't return `204 No Content`.
+     */
     fun deleteGlobalApplicationCommand(commandId: String): Promise<Unit> =
         GlobalScope.promise {
             val response =
@@ -160,6 +176,10 @@ import kotlinx.serialization.json.Json
             }
         }
 
+    /**
+     * Takes a list of application commands, overwriting the existing global command list for this application. Returns an array of application command objects. Commands that do not already exist will count toward daily application command create limits.
+     * @exception BulkOverwriteGlobalApplicationCommandsException if the Discord API didn't return `200 OK`.
+     */
     fun bulkOverwriteGlobalApplicationCommands(applicationCommands: Array<ApplicationCommandCreate>): Promise<Array<ApplicationCommand>> =
         GlobalScope.promise {
             val response = ktorClient.put("/applications/$applicationId/commands") {
@@ -182,6 +202,10 @@ import kotlinx.serialization.json.Json
         }
 
     inner class Guild(private val guildId: String) {
+        /**
+         * Fetch all of the guild commands for your application for a specific guild. Returns an array of application command objects.
+         * @exception GetGuildApplicationCommandsException if the Discord API didn't return `200 OK`.
+         */
         fun getGuildApplicationCommands(withLocalizations: Boolean? = null): Promise<Array<ApplicationCommand>> =
             GlobalScope.promise {
                 val response =
@@ -207,6 +231,10 @@ import kotlinx.serialization.json.Json
                 }
             }
 
+        /**
+         * Create a new guild command. New guild commands will be available in the guild immediately. Returns an application command object.
+         * @exception CreateGuildApplicationCommandException if the Discord API didn't return `200 OK` or `201 Created`.
+         */
         fun createGuildApplicationCommand(applicationCommand: ApplicationCommandCreate): Promise<ApplicationCommand> =
             GlobalScope.promise {
                 val response =
@@ -227,6 +255,10 @@ import kotlinx.serialization.json.Json
                 }
             }
 
+        /**
+         * Fetch all of the guild commands for your application for a specific guild. Returns an array of application command objects.
+         * @exception GetGuildApplicationCommandException if the Discord API didn't return `200 OK`.
+         */
         fun getGuildApplicationCommand(commandId: String): Promise<ApplicationCommand> =
             GlobalScope.promise {
                 val response =
@@ -244,6 +276,10 @@ import kotlinx.serialization.json.Json
                 }
             }
 
+        /**
+         * Edit a guild command. Updates for guild commands will be available immediately. Returns an application command object. All fields are optional, but any fields provided will entirely overwrite the existing values of those fields.
+         * @exception EditGuildApplicationCommandException if the Discord API didn't return `200 OK`.
+         */
         fun editGuildApplicationCommand(
             commandId: String,
             applicationCommand: ApplicationCommandEdit,
@@ -268,6 +304,10 @@ import kotlinx.serialization.json.Json
             }
         }
 
+        /**
+         * Delete a guild command.
+         * @exception DeleteGuildApplicationCommandException if the Discord API didn't return `204 No Content`.
+         */
         fun deleteGuildApplicationCommand(commandId: String): Promise<Unit> =
             GlobalScope.promise {
                 val response =
@@ -283,6 +323,10 @@ import kotlinx.serialization.json.Json
                 }
             }
 
+        /**
+         * Takes a list of application commands, overwriting the existing command list for this application for the targeted guild. Returns an array of application command objects.
+         * @exception BulkOverwriteGuildApplicationCommandsException if the Discord API didn't return `200 OK`.
+         */
         fun bulkOverwriteGuildApplicationCommands(applicationCommands: Array<ApplicationCommandCreate>): Promise<Array<ApplicationCommand>> =
             GlobalScope.promise {
                 val response =

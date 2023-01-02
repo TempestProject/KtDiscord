@@ -169,6 +169,10 @@ actual class ApplicationCommandClient actual constructor(
     }
 
     inner class Guild(private val guildId: String) {
+        /**
+         * Fetch all of the guild commands for your application for a specific guild. Returns an array of application command objects.
+         * @exception GetGuildApplicationCommandsException if the Discord API didn't return `200 OK`.
+         */
         suspend fun getGuildApplicationCommands(withLocalizations: Boolean? = null): Array<ApplicationCommand> {
             val response =
                 ktorClient.get("/applications/$applicationId/guilds/$guildId/commands") {
@@ -193,6 +197,10 @@ actual class ApplicationCommandClient actual constructor(
             }
         }
 
+        /**
+         * Create a new guild command. New guild commands will be available in the guild immediately. Returns an application command object.
+         * @exception CreateGuildApplicationCommandException if the Discord API didn't return `200 OK` or `201 Created`.
+         */
         suspend fun createGuildApplicationCommand(applicationCommand: ApplicationCommandCreate): ApplicationCommand {
             val response =
                 ktorClient.post("/applications/$applicationId/guilds/$guildId/commands") {
@@ -212,6 +220,10 @@ actual class ApplicationCommandClient actual constructor(
             }
         }
 
+        /**
+         * Fetch all of the guild commands for your application for a specific guild. Returns an array of application command objects.
+         * @exception GetGuildApplicationCommandException if the Discord API didn't return `200 OK`.
+         */
         suspend fun getGuildApplicationCommand(commandId: String): ApplicationCommand {
             val response =
                 ktorClient.get("/applications/$applicationId/guilds/$guildId/commands/$commandId")
@@ -228,6 +240,10 @@ actual class ApplicationCommandClient actual constructor(
             }
         }
 
+        /**
+         * Edit a guild command. Updates for guild commands will be available immediately. Returns an application command object. All fields are optional, but any fields provided will entirely overwrite the existing values of those fields.
+         * @exception EditGuildApplicationCommandException if the Discord API didn't return `200 OK`.
+         */
         suspend fun editGuildApplicationCommand(
             commandId: String,
             applicationCommand: ApplicationCommandEdit,
@@ -252,6 +268,10 @@ actual class ApplicationCommandClient actual constructor(
             }
         }
 
+        /**
+         * Delete a guild command.
+         * @exception DeleteGuildApplicationCommandException if the Discord API didn't return `204 No Content`.
+         */
         suspend fun deleteGuildApplicationCommand(commandId: String) {
             val response =
                 ktorClient.delete("/applications/$applicationId/guilds/$guildId/commands/$commandId")
@@ -266,6 +286,10 @@ actual class ApplicationCommandClient actual constructor(
             }
         }
 
+        /**
+         * Takes a list of application commands, overwriting the existing command list for this application for the targeted guild. Returns an array of application command objects.
+         * @exception BulkOverwriteGuildApplicationCommandsException if the Discord API didn't return `200 OK`.
+         */
         suspend fun bulkOverwriteGuildApplicationCommands(applicationCommands: Array<ApplicationCommandCreate>): Array<ApplicationCommand> {
             val response =
                 ktorClient.put("/applications/$applicationId/guilds/$guildId/commands") {
