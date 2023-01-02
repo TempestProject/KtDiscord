@@ -78,6 +78,14 @@ kotlin {
 
 npmPublish {
     organization.set("tempestproject")
+    packages {
+        named("js") {
+            packageJson {
+                "license" by "AGPL - 3.0 - only"
+            }
+            packageJsonTemplateFile.set(projectDir.resolve("build/js/packages/ktdiscord/package.json"))
+        }
+    }
     readme.set(rootDir.resolve("README.md"))
     registries {
         github {
