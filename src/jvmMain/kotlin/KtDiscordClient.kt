@@ -108,8 +108,8 @@ actual class KtDiscordClient actual constructor(
             Key.fromHexString(publicKey)
         )
 
-        private fun createMultiPartFormDataContent(webhook: Webhook): MultiPartFormDataContent {
-            return MultiPartFormDataContent(formData {
+        private fun createMultiPartFormDataContent(webhook: Webhook): MultiPartFormDataContent =
+            MultiPartFormDataContent(formData {
                 append("payload_json", Json.encodeToString(webhook))
                 for (i in webhook.files !!) {
                     append("files[" + i.id + "]", i.bytes, Headers.build {
@@ -121,7 +121,6 @@ actual class KtDiscordClient actual constructor(
                     })
                 }
             })
-        }
 
         /**
          * Create a response to an Interaction from the gateway. Body is an interaction response.

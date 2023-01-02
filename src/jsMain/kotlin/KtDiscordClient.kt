@@ -89,8 +89,8 @@ import kotlinx.serialization.json.Json
     //    }
 
     inner class Interaction(private val publicKey: String) {
-        private fun createMultiPartFormDataContent(webhook: Webhook): MultiPartFormDataContent {
-            return MultiPartFormDataContent(formData {
+        private fun createMultiPartFormDataContent(webhook: Webhook): MultiPartFormDataContent =
+            MultiPartFormDataContent(formData {
                 append("payload_json", Json.encodeToString(webhook))
                 for (i in webhook.files !!) {
                     append("files[" + i.id + "]", i.bytes, Headers.build {
@@ -102,7 +102,6 @@ import kotlinx.serialization.json.Json
                     })
                 }
             })
-        }
 
         /**
          * Create a response to an Interaction from the gateway. Body is an interaction response.
