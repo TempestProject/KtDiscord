@@ -81,8 +81,11 @@ npmPublish {
     packages {
         named("js") {
             packageJson {
+                "bugs" by "https://github.com/TempestProject/KtDiscord/issues"
+                "homepage" by "https://github.com/TempestProject/KtDiscord"
                 "license" by "AGPL - 3.0 - only"
                 "name" by "@tempestproject/ktdiscord"
+                "repository" by "github:TempestProject/KtDiscord"
             }
             packageJsonTemplateFile.set(projectDir.resolve("build/js/packages/ktdiscord/package.json"))
         }
