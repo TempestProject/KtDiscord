@@ -10,6 +10,8 @@ KtDiscord is a Kotlin Multiplatform and JavaScript/TypeScript library for workin
 
 * All Discord Interactions objects are exposed as classes
 * All Interactions endpoints are supported by KtDiscord and their usage is exposed as functions
+* Helper functions are provided for creating Global/Guild Application Commands, as are classes that expose the
+  Application Command objects
 
 ## Installation
 
@@ -32,7 +34,7 @@ repositories {
 }
     
 dependencies {
-    implementation("cloud.drakon:ktdiscord:2.0.0")
+    implementation("cloud.drakon:ktdiscord:3.0.0")
 }
 ```
 
@@ -41,7 +43,7 @@ dependencies {
 ### `package.json`
 
 ```json
-"@tempestproject/ktdiscord": "2.0.0"
+"@tempestproject/ktdiscord": "3.0.0"
 ```
 
 #### Command line
