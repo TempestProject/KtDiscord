@@ -82,6 +82,7 @@ npmPublish {
         named("js") {
             packageJson {
                 "license" by "AGPL - 3.0 - only"
+                "name" by "@tempestproject/ktdiscord"
             }
             packageJsonTemplateFile.set(projectDir.resolve("build/js/packages/ktdiscord/package.json"))
         }
