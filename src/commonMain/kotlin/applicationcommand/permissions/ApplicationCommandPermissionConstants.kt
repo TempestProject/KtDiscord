@@ -2,10 +2,10 @@ package cloud.drakon.ktdiscord.applicationcommand.permissions
 
 import kotlin.js.JsExport
 
-@JsExport class ApplicationCommandPermissionConstants(val guildId: String) {
+@JsExport object ApplicationCommandPermissionConstants {
     /** All members in a guild */
-    val everyone: String = guildId
+    const val everyone = "guild_id"
 
     /** All channels in a guild */
-    val allChannels: String = (guildId.toLong() - 1).toString()
+    const val allChannels = "guild_id - 1"
 }
