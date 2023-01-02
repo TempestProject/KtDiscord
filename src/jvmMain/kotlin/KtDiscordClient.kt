@@ -340,7 +340,7 @@ actual class KtDiscordClient actual constructor(
                 if (withLocalizations == true) {
                     url {
                         parameters.append(
-                            "with_localizations", "true"
+                            "with_localizations", "1"
                         )
                     }
                 }
@@ -457,7 +457,7 @@ actual class KtDiscordClient actual constructor(
                         if (withLocalizations == true) {
                             url {
                                 parameters.append(
-                                    "with_localizations", "true"
+                                    "with_localizations", "1"
                                 )
                             }
                         }

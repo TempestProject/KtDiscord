@@ -332,7 +332,7 @@ import kotlinx.serialization.json.Json
                     if (withLocalizations == true) {
                         url {
                             parameters.append(
-                                "with_localizations", "true"
+                                "with_localizations", "1"
                             )
                         }
                     }
@@ -479,7 +479,7 @@ import kotlinx.serialization.json.Json
                             if (withLocalizations == true) {
                                 url {
                                     parameters.append(
-                                        "with_localizations", "true"
+                                        "with_localizations", "1"
                                     )
                                 }
                             }
