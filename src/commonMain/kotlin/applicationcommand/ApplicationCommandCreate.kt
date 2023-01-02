@@ -1,5 +1,6 @@
 package cloud.drakon.ktdiscord.applicationcommand
 
+import cloud.drakon.ktdiscord.applicationcommand.option.ApplicationCommandOption
 import kotlin.js.JsExport
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

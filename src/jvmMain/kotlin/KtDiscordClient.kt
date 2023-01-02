@@ -1,18 +1,18 @@
 package cloud.drakon.ktdiscord
 
 import cloud.drakon.ktdiscord.channel.message.Message
-import cloud.drakon.ktdiscord.exception.CreateFollowupMessageException
-import cloud.drakon.ktdiscord.exception.CreateInteractionResponseException
-import cloud.drakon.ktdiscord.exception.DeleteFollowupMessageException
-import cloud.drakon.ktdiscord.exception.DeleteOriginalInteractionResponseException
-import cloud.drakon.ktdiscord.exception.EditFollowupMessageException
-import cloud.drakon.ktdiscord.exception.EditOriginalInteractionResponseException
-import cloud.drakon.ktdiscord.exception.GetFollowupMessageException
-import cloud.drakon.ktdiscord.exception.GetOriginalInteractionResponseException
 import cloud.drakon.ktdiscord.interaction.response.InteractionResponse
+import cloud.drakon.ktdiscord.interaction.response.exception.CreateInteractionResponseException
+import cloud.drakon.ktdiscord.interaction.response.exception.DeleteOriginalInteractionResponseException
+import cloud.drakon.ktdiscord.interaction.response.exception.GetOriginalInteractionResponseException
 import cloud.drakon.ktdiscord.webhook.EditWebhookMessage
 import cloud.drakon.ktdiscord.webhook.ExecuteWebhook
 import cloud.drakon.ktdiscord.webhook.Webhook
+import cloud.drakon.ktdiscord.webhook.exception.CreateFollowupMessageException
+import cloud.drakon.ktdiscord.webhook.exception.DeleteFollowupMessageException
+import cloud.drakon.ktdiscord.webhook.exception.EditFollowupMessageException
+import cloud.drakon.ktdiscord.webhook.exception.EditOriginalInteractionResponseException
+import cloud.drakon.ktdiscord.webhook.exception.GetFollowupMessageException
 import com.goterl.lazysodium.LazySodiumJava
 import com.goterl.lazysodium.SodiumJava
 import com.goterl.lazysodium.utils.Key

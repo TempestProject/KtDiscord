@@ -1,4 +1,4 @@
-package cloud.drakon.ktdiscord.applicationcommand
+package cloud.drakon.ktdiscord.applicationcommand.option
 
 import kotlin.js.JsExport
 import kotlinx.serialization.SerialName
