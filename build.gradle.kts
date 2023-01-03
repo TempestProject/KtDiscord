@@ -7,7 +7,7 @@ plugins {
 }
 
 group = "cloud.drakon"
-version = "4.0.0"
+version = "4.0.1"
 
 repositories {
     mavenCentral()
@@ -29,7 +29,7 @@ kotlin {
     }
 
     sourceSets {
-        val ktorVersion = "2.2.1"
+        val ktorVersion = "2.2.2"
 
         val commonMain by getting {
             dependencies {
