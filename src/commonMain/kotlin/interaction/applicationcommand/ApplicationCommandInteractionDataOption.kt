@@ -1,7 +1,6 @@
 package cloud.drakon.ktdiscord.interaction.applicationcommand
 
 import kotlin.js.JsExport
-import kotlinx.serialization.Contextual
 import kotlinx.serialization.Serializable
 
 /**
@@ -17,7 +16,7 @@ import kotlinx.serialization.Serializable
 @JsExport @Serializable class ApplicationCommandInteractionDataOption(
     val name: String,
     val type: Byte,
-    @Contextual val value: Any? = null,
+    val value: String? = null,
     val options: Array<ApplicationCommandInteractionDataOption>? = null,
     val focused: Boolean? = null,
 )
