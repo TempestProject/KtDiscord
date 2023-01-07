@@ -1,3 +1,3 @@
 package cloud.drakon.ktdiscord.webhook.exception
 
-class EditOriginalInteractionResponseException(s: String): Exception()
+class EditOriginalInteractionResponseException(message: String): Throwable(message)

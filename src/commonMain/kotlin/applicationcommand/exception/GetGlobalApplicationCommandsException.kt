@@ -1,3 +1,3 @@
 package cloud.drakon.ktdiscord.applicationcommand.exception
 
-class GetGlobalApplicationCommandsException(s: String): Exception()
+class GetGlobalApplicationCommandsException(message: String): Throwable(message)

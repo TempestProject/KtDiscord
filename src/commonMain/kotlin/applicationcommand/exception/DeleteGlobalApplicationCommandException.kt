@@ -1,3 +1,3 @@
 package cloud.drakon.ktdiscord.applicationcommand.exception
 
-class DeleteGlobalApplicationCommandException(s: String): Exception()
+class DeleteGlobalApplicationCommandException(message: String): Throwable(message)

@@ -1,3 +1,3 @@
 package cloud.drakon.ktdiscord.applicationcommand.exception
 
-class BulkOverwriteGlobalApplicationCommandsException(s: String): Exception()
+class BulkOverwriteGlobalApplicationCommandsException(message: String): Throwable(message)

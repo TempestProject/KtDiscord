@@ -1,3 +1,3 @@
 package cloud.drakon.ktdiscord.webhook.exception
 
-class GetFollowupMessageException(s: String): Exception()
+class GetFollowupMessageException(message: String): Throwable(message)

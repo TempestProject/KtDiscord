@@ -1,3 +1,3 @@
 package cloud.drakon.ktdiscord.applicationcommand.exception
 
-class EditGuildApplicationCommandException(s: String): Exception()
+class EditGuildApplicationCommandException(message: String): Throwable(message)

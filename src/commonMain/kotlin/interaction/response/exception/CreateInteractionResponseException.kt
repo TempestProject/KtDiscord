@@ -1,3 +1,3 @@
 package cloud.drakon.ktdiscord.interaction.response.exception
 
-class CreateInteractionResponseException(s: String): Exception()
+class CreateInteractionResponseException(message: String): Throwable(message)
