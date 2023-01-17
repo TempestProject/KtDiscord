@@ -83,6 +83,7 @@ npmPublish {
             packageJson {
                 "bugs" by "https://github.com/TempestProject/KtDiscord/issues"
                 "homepage" by "https://github.com/TempestProject/KtDiscord"
+                "keywords" by arrayOf("discord-interactions", "discord")
                 "license" by "AGPL - 3.0 - only"
                 "main" by "ktdiscord.js"
                 "name" by "@tempestproject/ktdiscord"
