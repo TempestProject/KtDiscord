@@ -7,7 +7,7 @@ plugins {
 }
 
 group = "cloud.drakon"
-version = "5.0.1"
+version = "5.0.2"
 
 repositories {
     mavenCentral()
@@ -84,6 +84,7 @@ npmPublish {
                 "bugs" by "https://github.com/TempestProject/KtDiscord/issues"
                 "homepage" by "https://github.com/TempestProject/KtDiscord"
                 "license" by "AGPL - 3.0 - only"
+                "main" by "ktdiscord.js"
                 "name" by "@tempestproject/ktdiscord"
                 "repository" by "github:TempestProject/KtDiscord"
             }
