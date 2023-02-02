@@ -33,7 +33,7 @@ repositories {
 }
     
 dependencies {
-    implementation("cloud.drakon:ktdiscord:5.0.2")
+    implementation("cloud.drakon:ktdiscord:5.0.3")
 }
 ```
 
@@ -42,7 +42,7 @@ dependencies {
 ### `package.json`
 
 ```json
-"@tempestproject/ktdiscord": "5.0.2"
+"@tempestproject/ktdiscord": "5.0.3"
 ```
 
 #### Command line
