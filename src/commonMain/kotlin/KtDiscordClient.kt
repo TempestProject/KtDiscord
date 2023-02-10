@@ -2,7 +2,7 @@ package cloud.drakon.ktdiscord
 
 import io.ktor.client.statement.HttpResponse
 
-internal const val VERSION = "5.1.0"
+internal const val VERSION = "5.1.1"
 
 expect class KtDiscordClient(applicationId: String, botToken: String)
 
