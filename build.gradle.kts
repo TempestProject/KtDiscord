@@ -119,32 +119,32 @@ signing {
     sign(publishing.publications)
 }
 
-//npmPublish {
-//    organization.set("tempestproject")
-//    packages {
-//        named("js") {
-//            packageJson {
-//                "bugs" by "https://github.com/TempestProject/KtDiscord/issues"
-//                "homepage" by "https://github.com/TempestProject/KtDiscord"
-//                "keywords" by arrayOf("discord-interactions", "discord")
-//                "license" by "AGPL - 3.0 - only"
-//                "main" by "ktdiscord.js"
-//                "name" by "@tempestproject/ktdiscord"
-//                "repository" by "github:TempestProject/KtDiscord"
-//            }
-//            packageJsonTemplateFile.set(projectDir.resolve("build/js/packages/ktdiscord/package.json"))
-//        }
-//    }
-//    readme.set(rootDir.resolve("README.md"))
-//    registries {
-//        github {
-//            authToken.set(System.getenv("GITHUB_TOKEN"))
-//        }
-//        npmjs {
-//            authToken.set(System.getenv("NPM_ACCESS_TOKEN"))
-//        }
-//    }
-//}
+npmPublish {
+    organization.set("tempestproject")
+    packages {
+        named("js") {
+            packageJson {
+                "bugs" by "https://github.com/TempestProject/KtDiscord/issues"
+                "homepage" by "https://github.com/TempestProject/KtDiscord"
+                "keywords" by arrayOf("discord-interactions", "discord")
+                "license" by "AGPL - 3.0 - only"
+                "main" by "ktdiscord.js"
+                "name" by "@tempestproject/ktdiscord"
+                "repository" by "github:TempestProject/KtDiscord"
+            }
+            packageJsonTemplateFile.set(projectDir.resolve("build/js/packages/ktdiscord/package.json"))
+        }
+    }
+    readme.set(rootDir.resolve("README.md"))
+    registries {
+        github {
+            authToken.set(System.getenv("GITHUB_TOKEN"))
+        }
+        npmjs {
+            authToken.set(System.getenv("NPM_ACCESS_TOKEN"))
+        }
+    }
+}
 
 tasks.dokkaJekyll.configure {
     outputDirectory.set(buildDir.resolve("dokka"))
