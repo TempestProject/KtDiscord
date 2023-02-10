@@ -15,6 +15,7 @@ import kotlinx.serialization.json.jsonPrimitive
     ) {
     override fun selectDeserializer(element: JsonElement): DeserializationStrategy<out Interaction<*>> {
         return when (val type = element.jsonObject["type"]?.jsonPrimitive?.intOrNull) {
+            1    -> Interaction.serializer(Ping.serializer())
             2, 4 -> Interaction.serializer(ApplicationCommandData.serializer())
             3    -> Interaction.serializer(MessageComponentData.serializer())
             5    -> Interaction.serializer(ModalSubmitData.serializer())
