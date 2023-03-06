@@ -7,7 +7,7 @@ plugins {
     signing
     id("dev.petuska.npm.publish") version "3.2.0"
 
-    id("org.jetbrains.dokka") version "1.7.20"
+    id("org.jetbrains.dokka") version "1.8.10"
 }
 
 group = "cloud.drakon"
