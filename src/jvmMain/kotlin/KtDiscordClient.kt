@@ -75,19 +75,6 @@ actual class KtDiscordClient actual constructor(
         }
     }
 
-    //    private val rateLimit = Hashtable<String, RateLimit>()
-    //
-    //    private fun updateRateLimits(response: HttpResponse) {
-    //        rateLimit[response.headers["X-RateLimit-Bucket"] !!] = RateLimit(
-    //            response.headers["X-RateLimit-Limit"] !!.toByte(),
-    //            response.headers["X-RateLimit-Remaining"] !!.toByte(),
-    //            response.headers["X-RateLimit-Reset"] !!.toDouble(),
-    //            response.headers["X-RateLimit-Reset-After"] !!.toDouble(),
-    //            response.headers["X-RateLimit-Scope"]
-    //        )
-    //        println("Bucket: " + rateLimit[response.headers["X-RateLimit-Bucket"] !!])
-    //    }
-
     actual inner class Interaction(private val publicKey: String) {
         private val lazySodium =
             LazySodiumJava(SodiumJava(LibraryLoader.Mode.BUNDLED_ONLY))
@@ -137,8 +124,6 @@ actual class KtDiscordClient actual constructor(
                     setBody(interactionResponse)
                 }
 
-            //        updateRateLimits(response)
-
             if (response.status.value != 204 && response.status.value != 429) {
                 throw CreateInteractionResponseException("Code: ${response.status.value}, message: ${response.body() as String}")
             } else if (response.status.value == 429) {
@@ -158,8 +143,6 @@ actual class KtDiscordClient actual constructor(
         ): Message {
             val response =
                 ktorClient.get("webhooks/$applicationId/$interactionToken/messages/@original")
-
-            //        updateRateLimits(response)
 
             return if (response.status.value != 200 && response.status.value != 429) {
                 throw GetOriginalInteractionResponseException("Code: ${response.status.value}, message: ${response.body() as String}")
@@ -189,8 +172,6 @@ actual class KtDiscordClient actual constructor(
                 }
             }
 
-            //        updateRateLimits(response)
-
             return if (response.status.value != 200 && response.status.value != 429) {
                 throw EditOriginalInteractionResponseException("Code: ${response.status.value}, message: ${response.body() as String}")
             } else if (response.status.value == 429) {
@@ -208,8 +189,6 @@ actual class KtDiscordClient actual constructor(
         suspend fun deleteOriginalInteractionResponse(interactionToken: String) {
             val response =
                 ktorClient.delete("webhooks/$applicationId/$interactionToken/messages/@original")
-
-            //        updateRateLimits(response)
 
             if (response.status.value != 204 && response.status.value != 429) {
                 throw DeleteOriginalInteractionResponseException("Code: ${response.status.value}, message: ${response.body() as String}")
@@ -244,8 +223,6 @@ actual class KtDiscordClient actual constructor(
                 }
             }
 
-            //        updateRateLimits(response)
-
             return if (response.status.value != 200 && response.status.value != 429) {
                 throw CreateFollowupMessageException("Code: ${response.status.value}, message: ${response.body() as String}")
             } else if (response.status.value == 429) {
@@ -266,8 +243,6 @@ actual class KtDiscordClient actual constructor(
         ): Message {
             val response =
                 ktorClient.get("webhooks/$applicationId/$interactionToken/messages/$messageId")
-
-            //        updateRateLimits(response)
 
             return if (response.status.value != 200 && response.status.value != 429) {
                 throw GetFollowupMessageException("Code: ${response.status.value}, message: ${response.body() as String}")
@@ -294,8 +269,6 @@ actual class KtDiscordClient actual constructor(
                     setBody(editWebhookMessage)
                 }
 
-            //        updateRateLimits(response)
-
             return if (response.status.value != 200 && response.status.value != 429) {
                 throw EditFollowupMessageException("Code: ${response.status.value}, message: ${response.body() as String}")
             } else if (response.status.value == 429) {
@@ -316,8 +289,6 @@ actual class KtDiscordClient actual constructor(
         ) {
             val response =
                 ktorClient.delete("webhooks/$applicationId/$interactionToken/messages/$messageId")
-
-            //        updateRateLimits(response)
 
             if (response.status.value != 204 && response.status.value != 429) {
                 throw DeleteFollowupMessageException("Code: ${response.status.value}, message: ${response.body() as String}")
@@ -345,8 +316,6 @@ actual class KtDiscordClient actual constructor(
                 }
             }
 
-            //        updateRateLimits(response)
-
             return if (response.status.value != 200 && response.status.value != 429) {
                 throw GetGlobalApplicationCommandsException("Code: ${response.status.value}, message: ${response.body() as String}")
             } else if (response.status.value == 429) {
@@ -363,8 +332,6 @@ actual class KtDiscordClient actual constructor(
                 setBody(applicationCommand)
             }
 
-            //        updateRateLimits(response)
-
             return if (response.status.value != 200 && response.status.value != 201 && response.status.value != 429) {
                 throw CreateGlobalApplicationCommandException("Code: ${response.status.value}, message: ${response.body() as String}")
             } else if (response.status.value == 429) {
@@ -378,8 +345,6 @@ actual class KtDiscordClient actual constructor(
         suspend fun getGlobalApplicationCommand(commandId: String): ApplicationCommand {
             val response =
                 ktorClient.get("/applications/$applicationId/commands/$commandId")
-
-            //        updateRateLimits(response)
 
             return if (response.status.value != 200 && response.status.value != 429) {
                 throw GetGlobalApplicationCommandException("Code: ${response.status.value}, message: ${response.body() as String}")
@@ -401,8 +366,6 @@ actual class KtDiscordClient actual constructor(
                     setBody(applicationCommand)
                 }
 
-            //        updateRateLimits(response)
-
             return if (response.status.value != 200 && response.status.value != 429) {
                 throw EditGlobalApplicationCommandException("Code: ${response.status.value}, message: ${response.body() as String}")
             } else if (response.status.value == 429) {
@@ -417,8 +380,6 @@ actual class KtDiscordClient actual constructor(
             val response =
                 ktorClient.delete("/applications/$applicationId/commands/$commandId")
 
-            //        updateRateLimits(response)
-
             if (response.status.value != 204 && response.status.value != 429) {
                 throw DeleteGlobalApplicationCommandException("Code: ${response.status.value}, message: ${response.body() as String}")
             } else if (response.status.value == 429) {
@@ -432,8 +393,6 @@ actual class KtDiscordClient actual constructor(
                 contentType(ContentType.Application.Json)
                 setBody(applicationCommands)
             }
-
-            //        updateRateLimits(response)
 
             return if (response.status.value != 200 && response.status.value != 429) {
                 throw BulkOverwriteGlobalApplicationCommandsException("Code: ${response.status.value}, message: ${response.body() as String}")
@@ -462,8 +421,6 @@ actual class KtDiscordClient actual constructor(
                         }
                     }
 
-                //        updateRateLimits(response)
-
                 return if (response.status.value != 200 && response.status.value != 429) {
                     throw GetGuildApplicationCommandsException("Code: ${response.status.value}, message: ${response.body() as String}")
                 } else if (response.status.value == 429) {
@@ -485,8 +442,6 @@ actual class KtDiscordClient actual constructor(
                         setBody(applicationCommand)
                     }
 
-                //        updateRateLimits(response)
-
                 return if (response.status.value != 200 && response.status.value != 201 && response.status.value != 429) {
                     throw CreateGuildApplicationCommandException("Code: ${response.status.value}, message: ${response.body() as String}")
                 } else if (response.status.value == 429) {
@@ -504,8 +459,6 @@ actual class KtDiscordClient actual constructor(
             suspend fun getGuildApplicationCommand(commandId: String): ApplicationCommand {
                 val response =
                     ktorClient.get("/applications/$applicationId/guilds/$guildId/commands/$commandId")
-
-                //        updateRateLimits(response)
 
                 return if (response.status.value != 200 && response.status.value != 429) {
                     throw GetGuildApplicationCommandException("Code: ${response.status.value}, message: ${response.body() as String}")
@@ -531,8 +484,6 @@ actual class KtDiscordClient actual constructor(
                         setBody(applicationCommand)
                     }
 
-                //        updateRateLimits(response)
-
                 return if (response.status.value != 200 && response.status.value != 429) {
                     throw EditGuildApplicationCommandException("Code: ${response.status.value}, message: ${response.body() as String}")
                 } else if (response.status.value == 429) {
@@ -553,8 +504,6 @@ actual class KtDiscordClient actual constructor(
                 val response =
                     ktorClient.delete("/applications/$applicationId/guilds/$guildId/commands/$commandId")
 
-                //        updateRateLimits(response)
-
                 if (response.status.value != 204 && response.status.value != 429) {
                     throw DeleteGuildApplicationCommandException("Code: ${response.status.value}, message: ${response.body() as String}")
                 } else if (response.status.value == 429) {
@@ -573,8 +522,6 @@ actual class KtDiscordClient actual constructor(
                         contentType(ContentType.Application.Json)
                         setBody(applicationCommands)
                     }
-
-                //        updateRateLimits(response)
 
                 return if (response.status.value != 200 && response.status.value != 429) {
                     throw BulkOverwriteGuildApplicationCommandsException("Code: ${response.status.value}, message: ${response.body() as String}")
