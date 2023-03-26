@@ -88,7 +88,7 @@ import kotlinx.serialization.json.Json
     //        println("Bucket: " + rateLimit[response.headers["X-RateLimit-Bucket"] !!])
     //    }
 
-    inner class Interaction(private val publicKey: String) {
+    actual inner class Interaction(private val publicKey: String) {
         private fun createMultiPartFormDataContent(webhook: Webhook): MultiPartFormDataContent =
             MultiPartFormDataContent(formData {
                 append("payload_json", Json.encodeToString(webhook))
@@ -319,7 +319,7 @@ import kotlinx.serialization.json.Json
         }
     }
 
-    inner class ApplicationCommands {
+    actual inner class ApplicationCommands {
         /**
          * Fetch all of the global commands for your application. Returns an array of application command objects.
          * @param withLocalizations Whether to include full localization dictionaries (`name_localizations` and `description_localizations`) in the returned objects, instead of the `name_localized` and `description_localized` fields. Default `false`.
@@ -466,7 +466,7 @@ import kotlinx.serialization.json.Json
                 }
             }
 
-        inner class Guild(private val guildId: String) {
+        actual inner class Guild(private val guildId: String) {
             /**
              * Fetch all of the guild commands for your application for a specific guild. Returns an array of application command objects.
              * @exception GetGuildApplicationCommandsException if the Discord API didn't return `200 OK`.
