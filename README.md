@@ -1,6 +1,6 @@
 # KtDiscord
 
-[![Kotlin](https://img.shields.io/badge/kotlin-1.8.0-blue.svg?logo=kotlin)](http://kotlinlang.org)
+[![Kotlin](https://img.shields.io/badge/kotlin-1.8.10-blue.svg?logo=kotlin)](http://kotlinlang.org)
 [![License](https://img.shields.io/github/license/TempestProject/KtDiscord)](https://www.gnu.org/licenses/agpl-3.0.en.html)
 
 KtDiscord is a Kotlin Multiplatform and JavaScript/TypeScript library for working with Discord Interactions.
