@@ -22,7 +22,7 @@ Add the following to your `build.gradle.kts` file to install KtDiscord:
 
 ```kotlin
 dependencies {
-    implementation("cloud.drakon:ktdiscord:5.1.1")
+    implementation("cloud.drakon:ktdiscord:5.2.0")
 }
 ```
 
@@ -31,7 +31,7 @@ dependencies {
 ### `package.json`
 
 ```json
-"@tempestproject/ktdiscord": "5.1.1"
+"@tempestproject/ktdiscord": "5.2.0"
 ```
 
 #### Command line
