@@ -20,7 +20,7 @@ Add the following to your `build.gradle.kts` file to install KtDiscord:
 
 ```kotlin
 dependencies {
-    implementation("cloud.drakon:ktdiscord:6.0.0-SNAPSHOT")
+    implementation("cloud.drakon:ktdiscord:6.0.0")
 }
 ```
 
