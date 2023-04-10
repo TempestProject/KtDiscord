@@ -1,7 +1,6 @@
 package cloud.drakon.ktdiscord.teams
 
 import cloud.drakon.ktdiscord.user.User
-import kotlin.js.JsExport
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -11,7 +10,7 @@ import kotlinx.serialization.Serializable
  * @property teamId the id of the parent team of which they are a member
  * @property user the avatar, discriminator, id, and username of the user
  */
-@JsExport @Serializable class TeamMember(
+@Serializable class TeamMember(
     @SerialName("membership_state") val membershipState: Byte,
     val permissions: Array<String>,
     @SerialName("team_id") val teamId: String,

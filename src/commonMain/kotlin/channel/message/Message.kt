@@ -12,7 +12,6 @@ import cloud.drakon.ktdiscord.permissions.Role
 import cloud.drakon.ktdiscord.sticker.Sticker
 import cloud.drakon.ktdiscord.sticker.StickerItem
 import cloud.drakon.ktdiscord.user.User
-import kotlin.js.JsExport
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -49,7 +48,7 @@ import kotlinx.serialization.Serializable
  * @property stickers **Deprecated** the stickers sent with the message
  * @property position A generally increasing integer (there may be gaps or duplicates) that represents the approximate position of the message in a thread, it can be used to estimate the relative position of the message in a thread in company with `total_message_sent` on parent thread
  */
-@JsExport @Serializable class Message(
+@Serializable class Message(
     val id: String,
     @SerialName("channel_id") val channelId: String,
     val author: User,

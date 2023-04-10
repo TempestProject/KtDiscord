@@ -1,6 +1,5 @@
 package cloud.drakon.ktdiscord.channel
 
-import kotlin.js.JsExport
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -16,7 +15,7 @@ import kotlinx.serialization.Serializable
  * @property width width of file (if image)
  * @property ephemeral whether this attachment is ephemeral
  */
-@JsExport @Serializable class Attachment(
+@Serializable class Attachment(
     val id: String,
     val filename: String,
     val description: String? = null,

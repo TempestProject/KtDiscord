@@ -1,8 +1,6 @@
 package cloud.drakon.ktdiscord.interaction.response
 
-import kotlin.js.JsExport
-
-@JsExport object InteractionCallbackType {
+object InteractionCallbackType {
     /** ACK a `Ping` */
     const val PONG: Byte = 1
 

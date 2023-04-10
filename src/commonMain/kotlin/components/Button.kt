@@ -1,7 +1,6 @@
 package cloud.drakon.ktdiscord.components
 
 import cloud.drakon.ktdiscord.emoji.Emoji
-import kotlin.js.JsExport
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -11,7 +10,7 @@ import kotlinx.serialization.Serializable
  * - An Action Row can contain up to 5 buttons
  * - An Action Row containing buttons cannot also contain any select menu components
  */
-@JsExport @Serializable class Button(
+@Serializable class Button(
     val style: Byte,
     val label: String? = null,
     val emoji: Emoji? = null,

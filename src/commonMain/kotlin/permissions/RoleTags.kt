@@ -1,6 +1,5 @@
 package cloud.drakon.ktdiscord.permissions
 
-import kotlin.js.JsExport
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -12,7 +11,7 @@ import kotlinx.serialization.Serializable
  * @property availableForPurchase whether this role is available for purchase
  * @property guildConnections whether this role is a guild's linked role
  */
-@JsExport @Serializable class RoleTags(
+@Serializable class RoleTags(
     @SerialName("bot_id") val botId: String? = null,
     @SerialName("integration_id") val integrationId: String? = null,
     @SerialName("premium_subscriber") val premiumSubscriber: Boolean? = false,

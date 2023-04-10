@@ -3,7 +3,6 @@ package cloud.drakon.ktdiscord.interaction
 import cloud.drakon.ktdiscord.channel.message.Message
 import cloud.drakon.ktdiscord.guild.GuildMember
 import cloud.drakon.ktdiscord.user.User
-import kotlin.js.JsExport
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -30,7 +29,7 @@ import kotlinx.serialization.Serializable
  * @property locale Selected language of the invoking user
  * @property guildLocale Guild's preferred locale, if invoked in a guild
  */
-@JsExport @Serializable class Interaction<T: InteractionData?>(
+@Serializable class Interaction<T: InteractionData?>(
     val id: String,
     @SerialName("application_id") val applicationId: String,
     val type: Int,

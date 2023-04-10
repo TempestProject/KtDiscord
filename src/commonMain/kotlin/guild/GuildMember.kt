@@ -1,11 +1,10 @@
 package cloud.drakon.ktdiscord.guild
 
 import cloud.drakon.ktdiscord.user.User
-import kotlin.js.JsExport
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
-@JsExport @Serializable class GuildMember(
+@Serializable class GuildMember(
     val user: User? = null,
     val nick: String? = null,
     val avatar: String? = null,

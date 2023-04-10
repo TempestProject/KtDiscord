@@ -1,6 +1,5 @@
 package cloud.drakon.ktdiscord.sticker
 
-import kotlin.js.JsExport
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -10,7 +9,7 @@ import kotlinx.serialization.Serializable
  * @property name name of the sticker
  * @property formatType type of sticker format
  */
-@JsExport @Serializable class StickerItem(
+@Serializable class StickerItem(
     val id: String,
     val name: String,
     @SerialName("format_type") val formatType: Byte,

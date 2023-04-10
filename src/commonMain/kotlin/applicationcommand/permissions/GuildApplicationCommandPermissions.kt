@@ -1,6 +1,5 @@
 package cloud.drakon.ktdiscord.applicationcommand.permissions
 
-import kotlin.js.JsExport
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -14,7 +13,7 @@ import kotlinx.serialization.Serializable
  * @property guildId ID of the guild
  * @property permissions Permissions for the command in the guild, max of 100
  */
-@JsExport @Serializable class GuildApplicationCommandPermissions(
+@Serializable class GuildApplicationCommandPermissions(
     val id: String,
     @SerialName("application_id") val applicationId: String,
     @SerialName("guild_id") val guildId: String,

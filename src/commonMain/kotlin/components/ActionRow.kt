@@ -1,6 +1,5 @@
 package cloud.drakon.ktdiscord.components
 
-import kotlin.js.JsExport
 import kotlinx.serialization.Serializable
 
 /**
@@ -8,6 +7,6 @@ import kotlinx.serialization.Serializable
  * - You can have up to 5 Action Rows per message
  * - An Action Row cannot contain another Action Row
  */
-@JsExport @Serializable class ActionRow(val components: Array<Component>): Component {
+@Serializable class ActionRow(val components: Array<Component>): Component {
     val type: Byte = 1
 }

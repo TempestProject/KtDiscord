@@ -1,6 +1,5 @@
 package cloud.drakon.ktdiscord.components.selectmenu
 
-import kotlin.js.JsExport
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -11,7 +10,7 @@ import kotlinx.serialization.Serializable
  * @property maxValues Maximum number of items that can be chosen (defaults to 1); max 25
  * @property disabled Whether select menu is disabled (defaults to `false`)
  */
-@JsExport @Serializable class MentionableSelectMenu(
+@Serializable class MentionableSelectMenu(
     @SerialName("custom_id") val customId: String,
     val placeholder: String? = null,
     @SerialName("min_values") val minValues: Byte? = null,

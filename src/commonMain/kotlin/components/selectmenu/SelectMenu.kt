@@ -1,7 +1,6 @@
 package cloud.drakon.ktdiscord.components.selectmenu
 
 import cloud.drakon.ktdiscord.components.Component
-import kotlin.js.JsExport
 
 /**
  * Select menus are interactive components that allow users to select one or more options from a dropdown list in messages. On desktop, clicking on a select menu opens a dropdown-style UI; on mobile, tapping a select menu opens up a half-sheet with the options.
@@ -11,4 +10,4 @@ import kotlin.js.JsExport
  * - An Action Row can contain only one select menu
  * - An Action Row containing a select menu cannot also contain buttons
  */
-@JsExport interface SelectMenu: Component
+interface SelectMenu: Component

@@ -1,7 +1,6 @@
 package cloud.drakon.ktdiscord.interaction.response.interactioncallbackdata
 
 import cloud.drakon.ktdiscord.components.Component
-import kotlin.js.JsExport
 import kotlinx.serialization.Serializable
 
 /**
@@ -9,7 +8,7 @@ import kotlinx.serialization.Serializable
  * @property title the title of the popup modal, max 45 characters
  * @property components between 1 and 5 (inclusive) components that make up the modal
  */
-@JsExport @Serializable class ModalCallbackData(
+@Serializable class ModalCallbackData(
     val custom_id: String,
     val title: String,
     val components: Array<Component>,

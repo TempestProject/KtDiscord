@@ -1,6 +1,5 @@
 package cloud.drakon.ktdiscord.channel.embed
 
-import kotlin.js.JsExport
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -10,7 +9,7 @@ import kotlinx.serialization.Serializable
  * @property height height of thumbnail
  * @property width width of thumbnail
  */
-@JsExport @Serializable class EmbedThumbnail(
+@Serializable class EmbedThumbnail(
     val url: String,
     @SerialName("proxy_url") val proxyUrl: String? = null,
     val height: Short? = null,

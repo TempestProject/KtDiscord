@@ -1,6 +1,5 @@
 package cloud.drakon.ktdiscord.applicationcommand.option
 
-import kotlin.js.JsExport
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -20,7 +19,7 @@ import kotlinx.serialization.Serializable
  * @property maxLength For option type `STRING`, the maximum allowed length (minimum of `1`, maximum of `6000`)
  * @property autocomplete If autocomplete interactions are enabled for this `STRING`, `INTEGER`, or `NUMBER` type option
  */
-@JsExport @Serializable class ApplicationCommandOption(
+@Serializable class ApplicationCommandOption(
     val type: Byte,
     val name: String,
     @SerialName("name_localizations") val nameLocalizations: Map<String, String>,

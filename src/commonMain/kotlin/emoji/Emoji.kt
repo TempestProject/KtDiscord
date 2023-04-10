@@ -2,7 +2,6 @@ package cloud.drakon.ktdiscord.emoji
 
 import cloud.drakon.ktdiscord.permissions.Role
 import cloud.drakon.ktdiscord.user.User
-import kotlin.js.JsExport
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -16,7 +15,7 @@ import kotlinx.serialization.Serializable
  * @property animated whether this emoji is animated
  * @property available whether this emoji can be used, may be false due to loss of Server Boosts
  */
-@JsExport @Serializable class Emoji(
+@Serializable class Emoji(
     val id: String?,
     val name: String?,
     val roles: Array<Role>? = null,

@@ -1,6 +1,5 @@
 package cloud.drakon.ktdiscord.applicationcommand.option
 
-import kotlin.js.JsExport
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -10,7 +9,7 @@ import kotlinx.serialization.Serializable
  * @property nameLocalizations Localization dictionary for the `name` field. Values follow the same restrictions as `name`
  * @property value Value for the choice, up to 100 characters if string
  */
-@JsExport @Serializable class ApplicationCommandOptionChoice(
+@Serializable class ApplicationCommandOptionChoice(
     val name: String,
     @SerialName("name_localizations") val nameLocalizations: Map<String, String>,
     val value: String,

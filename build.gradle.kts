@@ -5,13 +5,14 @@ plugins {
     id("maven-publish")
     id("io.github.gradle-nexus.publish-plugin") version "1.3.0"
     signing
-    id("dev.petuska.npm.publish") version "3.2.1"
+
+    //    id("dev.petuska.npm.publish") version "3.2.1"
 
     id("org.jetbrains.dokka") version "1.8.10"
 }
 
 group = "cloud.drakon"
-version = "5.2.0"
+version = "6.0.0-SNAPSHOT"
 
 repositories {
     mavenCentral()
@@ -29,7 +30,8 @@ kotlin {
     js(IR) {
         nodejs()
         useCommonJs()
-        binaries.library()
+
+        //        binaries.library()
     }
 
     sourceSets {
@@ -119,7 +121,7 @@ signing {
     sign(publishing.publications)
 }
 
-npmPublish {
+/*npmPublish {
     organization.set("tempestproject")
     packages {
         named("js") {
@@ -144,7 +146,7 @@ npmPublish {
             authToken.set(System.getenv("NPM_ACCESS_TOKEN"))
         }
     }
-}
+}*/
 
 tasks.dokkaJekyll.configure {
     outputDirectory.set(buildDir.resolve("dokka"))

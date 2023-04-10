@@ -1,8 +1,6 @@
 package cloud.drakon.ktdiscord.applicationcommand.option
 
-import kotlin.js.JsExport
-
-@JsExport object ApplicationCommandOptionType {
+object ApplicationCommandOptionType {
     const val SUB_COMMAND: Byte = 1
     const val SUB_COMMAND_GROUP: Byte = 2
     const val STRING: Byte = 3
