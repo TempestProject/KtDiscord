@@ -1,8 +1,6 @@
 package cloud.drakon.ktdiscord.interaction
 
-import kotlin.js.JsExport
-
-@JsExport object InteractionType {
+object InteractionType {
     const val PING: Int = 1
     const val APPLICATION_COMMAND: Int = 2
     const val MESSAGE_COMPONENT: Int = 3

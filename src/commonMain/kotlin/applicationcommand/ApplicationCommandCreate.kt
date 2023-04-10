@@ -1,7 +1,6 @@
 package cloud.drakon.ktdiscord.applicationcommand
 
 import cloud.drakon.ktdiscord.applicationcommand.option.ApplicationCommandOption
-import kotlin.js.JsExport
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -19,7 +18,7 @@ import kotlinx.serialization.Serializable
  * @property type Type of command, defaults to `1`
  * @property nsfw Indicates whether the command is age-restricted, defaults to `false`
  */
-@JsExport @Serializable class ApplicationCommandCreate(
+@Serializable class ApplicationCommandCreate(
     val name: String,
     @SerialName("name_localizations")
     val nameLocalizations: Map<String, String>? = null,

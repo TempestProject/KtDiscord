@@ -1,6 +1,5 @@
 package cloud.drakon.ktdiscord.sticker
 
-import kotlin.js.JsExport
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -19,7 +18,7 @@ import kotlinx.serialization.Serializable
  * @property user the user that uploaded the guild sticker
  * @property sortValue the standard sticker's sort order within its pack
  */
-@JsExport @Serializable class Sticker(
+@Serializable class Sticker(
     val id: String,
     @SerialName("pack_id") val packId: String? = null,
     val name: String,

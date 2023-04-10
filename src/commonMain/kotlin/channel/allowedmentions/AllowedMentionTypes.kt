@@ -1,8 +1,6 @@
 package cloud.drakon.ktdiscord.channel.allowedmentions
 
-import kotlin.js.JsExport
-
-@JsExport object AllowedMentionTypes {
+object AllowedMentionTypes {
     /** Controls role mentions */
     const val ROLE_MENTIONS: String = "roles"
 

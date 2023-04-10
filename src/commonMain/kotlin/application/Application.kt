@@ -2,7 +2,6 @@ package cloud.drakon.ktdiscord.application
 
 import cloud.drakon.ktdiscord.teams.Team
 import cloud.drakon.ktdiscord.user.User
-import kotlin.js.JsExport
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -29,7 +28,7 @@ import kotlinx.serialization.Serializable
  * @property installParams settings for the application's default in-app authorization link, if enabled
  * @property customInstallUrl the application's default custom authorization link, if enabled
  */
-@JsExport @Serializable class Application(
+@Serializable class Application(
     val id: String,
     val name: String,
     val icon: String?,

@@ -1,6 +1,5 @@
 package cloud.drakon.ktdiscord.channel.embed
 
-import kotlin.js.JsExport
 import kotlinx.serialization.Serializable
 
 /**
@@ -18,7 +17,7 @@ import kotlinx.serialization.Serializable
  * @property author author information
  * @property fields fields information
  */
-@JsExport @Serializable class Embed(
+@Serializable class Embed(
     val title: String? = null,
     val type: String? = null,
     val description: String? = null,

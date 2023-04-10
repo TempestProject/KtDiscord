@@ -1,7 +1,5 @@
 package cloud.drakon.ktdiscord.interaction
 
-import kotlin.js.JsExport
-
 /**
  * An Interaction is the message that your application receives when a user uses an application command or a message component.
  *
@@ -11,4 +9,4 @@ import kotlin.js.JsExport
  *
  * For Message Components it includes identifying information about the component that was used. It will also include some metadata about how the interaction was triggered: the `guild_id`, `channel_id`, `member` and other fields. You can find all the values in our data models below.
  */
-@JsExport interface InteractionData
+interface InteractionData

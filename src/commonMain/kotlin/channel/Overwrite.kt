@@ -1,6 +1,5 @@
 package cloud.drakon.ktdiscord.channel
 
-import kotlin.js.JsExport
 import kotlinx.serialization.Serializable
 
 /**
@@ -9,7 +8,7 @@ import kotlinx.serialization.Serializable
  * @property allow permission bit set
  * @property deny permission bit set
  */
-@JsExport @Serializable class Overwrite(
+@Serializable class Overwrite(
     val id: String,
     val type: Byte,
     val allow: String,

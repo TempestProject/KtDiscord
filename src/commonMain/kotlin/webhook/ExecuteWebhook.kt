@@ -5,12 +5,11 @@ import cloud.drakon.ktdiscord.channel.allowedmentions.AllowedMentions
 import cloud.drakon.ktdiscord.channel.embed.Embed
 import cloud.drakon.ktdiscord.components.Component
 import cloud.drakon.ktdiscord.file.File
-import kotlin.js.JsExport
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Transient
 
-@JsExport @Serializable class ExecuteWebhook(
+@Serializable class ExecuteWebhook(
     val content: String? = null,
     val tts: Boolean? = null,
     val embeds: Array<Embed>? = null,

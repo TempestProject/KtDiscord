@@ -1,6 +1,5 @@
 package cloud.drakon.ktdiscord.applicationcommand.permissions
 
-import kotlin.js.JsExport
 import kotlinx.serialization.Serializable
 
 /**
@@ -10,7 +9,7 @@ import kotlinx.serialization.Serializable
  * @property type role (`1`), user (`2`), or channel (`3`)
  * @property permission `true` to allow, `false` to disallow
  */
-@JsExport @Serializable class ApplicationCommandPermissions(
+@Serializable class ApplicationCommandPermissions(
     val id: String,
     val type: Byte,
     val permission: Boolean,

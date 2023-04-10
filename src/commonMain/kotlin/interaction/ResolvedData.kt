@@ -6,7 +6,6 @@ import cloud.drakon.ktdiscord.channel.message.Message
 import cloud.drakon.ktdiscord.guild.GuildMember
 import cloud.drakon.ktdiscord.permissions.Role
 import cloud.drakon.ktdiscord.user.User
-import kotlin.js.JsExport
 import kotlinx.serialization.Serializable
 
 /**
@@ -18,7 +17,7 @@ import kotlinx.serialization.Serializable
  * @property messages the ids and partial Message objects
  * @property attachments the ids and attachment objects
  */
-@JsExport @Serializable class ResolvedData(
+@Serializable class ResolvedData(
     val users: Map<String, User>? = null,
     val members: Map<String, GuildMember>? = null,
     val roles: Map<String, Role>? = null,

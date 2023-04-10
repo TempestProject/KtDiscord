@@ -1,6 +1,5 @@
 package cloud.drakon.ktdiscord.channel
 
-import kotlin.js.JsExport
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -10,7 +9,7 @@ import kotlinx.serialization.Serializable
  * @property guildId the id of the guild
  * @property position sorting position of the channel
  */
-@JsExport @Serializable class Channel(
+@Serializable class Channel(
     val id: String,
     val type: Byte,
     @SerialName("guild_id") val guildId: String? = null,

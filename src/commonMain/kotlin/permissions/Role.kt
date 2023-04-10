@@ -1,6 +1,5 @@
 package cloud.drakon.ktdiscord.permissions
 
-import kotlin.js.JsExport
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -18,7 +17,7 @@ import kotlinx.serialization.Serializable
  * @property mentionable whether this role is mentionable
  * @property tags the tags this role has
  */
-@JsExport @Serializable class Role(
+@Serializable class Role(
     val id: String,
     val name: String,
     val color: Int,

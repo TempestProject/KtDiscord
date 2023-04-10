@@ -1,6 +1,5 @@
 package cloud.drakon.ktdiscord.interaction.applicationcommand
 
-import kotlin.js.JsExport
 import kotlinx.serialization.Serializable
 
 /**
@@ -13,7 +12,7 @@ import kotlinx.serialization.Serializable
  * @property options Present if this option is a group or subcommand
  * @property focused `true` if this option is the currently focused option for autocomplete
  */
-@JsExport @Serializable class ApplicationCommandInteractionDataOption(
+@Serializable class ApplicationCommandInteractionDataOption(
     val name: String,
     val type: Byte,
     val value: String? = null,

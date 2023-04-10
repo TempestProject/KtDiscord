@@ -1,7 +1,6 @@
 package cloud.drakon.ktdiscord.components.selectmenu
 
 import cloud.drakon.ktdiscord.emoji.Emoji
-import kotlin.js.JsExport
 import kotlinx.serialization.Serializable
 
 /**
@@ -11,7 +10,7 @@ import kotlinx.serialization.Serializable
  * @property emoji `id`, `name`, and `animated`
  * @property default Will show this option as selected by default
  */
-@JsExport @Serializable class SelectOption(
+@Serializable class SelectOption(
     val label: String,
     val value: String,
     val description: String? = null,

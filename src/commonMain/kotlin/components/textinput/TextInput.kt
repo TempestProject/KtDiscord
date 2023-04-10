@@ -1,7 +1,6 @@
 package cloud.drakon.ktdiscord.components.textinput
 
 import cloud.drakon.ktdiscord.components.Component
-import kotlin.js.JsExport
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -15,7 +14,7 @@ import kotlinx.serialization.Serializable
  * @property value Pre-filled value for this component; max 4000 characters
  * @property placeholder Custom placeholder text if the input is empty; max 100 characters
  */
-@JsExport @Serializable class TextInput(
+@Serializable class TextInput(
     @SerialName("custom_id") val customId: String,
     val style: Byte,
     val label: String,

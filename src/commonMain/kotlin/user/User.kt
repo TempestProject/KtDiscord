@@ -1,6 +1,5 @@
 package cloud.drakon.ktdiscord.user
 
-import kotlin.js.JsExport
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -35,7 +34,7 @@ import kotlinx.serialization.Serializable
  * @property premium_type the type of Nitro subscription on a user's account
  * @property public_flags the public flags on a user's account
  */
-@JsExport @Serializable class User(
+@Serializable class User(
     val id: String,
     val username: String,
     val discriminator: String,

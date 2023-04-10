@@ -2,7 +2,6 @@ package cloud.drakon.ktdiscord.interaction.applicationcommand
 
 import cloud.drakon.ktdiscord.interaction.InteractionData
 import cloud.drakon.ktdiscord.interaction.ResolvedData
-import kotlin.js.JsExport
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -15,7 +14,7 @@ import kotlinx.serialization.Serializable
  * @property guildId the id of the guild the command is registered to
  * @property targetId id of the user or message targeted by a user or message command
  */
-@JsExport @Serializable class ApplicationCommandData(
+@Serializable class ApplicationCommandData(
     val id: String,
     val name: String,
     val type: Int,

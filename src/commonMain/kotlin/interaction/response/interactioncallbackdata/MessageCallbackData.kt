@@ -4,7 +4,6 @@ import cloud.drakon.ktdiscord.channel.Attachment
 import cloud.drakon.ktdiscord.channel.allowedmentions.AllowedMentions
 import cloud.drakon.ktdiscord.channel.embed.Embed
 import cloud.drakon.ktdiscord.components.Component
-import kotlin.js.JsExport
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -17,7 +16,7 @@ import kotlinx.serialization.Serializable
  * @property components message components
  * @property attachments attachment objects with filename and description
  */
-@JsExport @Serializable class MessageCallbackData(
+@Serializable class MessageCallbackData(
     val tts: Boolean? = null,
     val content: String? = null,
     val embeds: Array<Embed>? = null,
