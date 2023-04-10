@@ -52,7 +52,7 @@ import kotlinx.coroutines.delay
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
-actual class KtDiscordClient actual constructor(
+actual class KtDiscord actual constructor(
     private val applicationId: String,
     private val botToken: String,
 ) {
