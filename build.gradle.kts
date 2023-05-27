@@ -1,3 +1,5 @@
+import org.jetbrains.dokka.gradle.DokkaTask
+
 plugins {
     kotlin("multiplatform") version "1.8.21"
     kotlin("plugin.serialization") version "1.8.21"
@@ -81,13 +83,23 @@ nexusPublishing {
     }
 }
 
-val javadocJar by tasks.registering(Jar::class) {
+val dokkaHtml by tasks.getting(DokkaTask::class)
+val htmlJar: TaskProvider<Jar> by tasks.registering(Jar::class) {
+    dependsOn(tasks.dokkaHtml)
+    archiveClassifier.set("html-docs")
+    from(tasks.dokkaHtml.flatMap { it.outputDirectory })
+}
+
+val javadocJar: TaskProvider<Jar> by tasks.registering(Jar::class) {
+    dependsOn(tasks.dokkaJavadoc)
     archiveClassifier.set("javadoc")
+    from(tasks.dokkaJavadoc.flatMap { it.outputDirectory })
 }
 
 publishing {
     publications.withType<MavenPublication> {
         artifact(javadocJar.get())
+        artifact(htmlJar.get())
 
         pom {
             name.set("KtDiscord")
