@@ -1,6 +1,6 @@
 plugins {
-    kotlin("multiplatform") version "1.8.20"
-    kotlin("plugin.serialization") version "1.8.20"
+    kotlin("multiplatform") version "1.8.21"
+    kotlin("plugin.serialization") version "1.8.21"
 
     id("maven-publish")
     id("io.github.gradle-nexus.publish-plugin") version "1.3.0"
@@ -12,7 +12,7 @@ plugins {
 }
 
 group = "cloud.drakon"
-version = "6.0.0"
+version = "6.1.0"
 
 repositories {
     mavenCentral()
@@ -35,11 +35,11 @@ kotlin {
     }
 
     sourceSets {
-        val ktorVersion = "2.2.4"
+        val ktorVersion = "2.3.0"
 
         val commonMain by getting {
             dependencies {
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.0")
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1")
 
                 implementation("io.ktor:ktor-client-core:$ktorVersion")
                 implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
