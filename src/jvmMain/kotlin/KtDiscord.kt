@@ -52,6 +52,7 @@ import io.ktor.http.Headers
 import io.ktor.http.HttpHeaders
 import io.ktor.http.contentType
 import io.ktor.serialization.kotlinx.json.json
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
@@ -117,7 +118,7 @@ actual class KtDiscord actual constructor(
             interactionResponse: InteractionResponse,
             interactionId: String,
             interactionToken: String,
-        ) {
+        ): Unit = coroutineScope {
             val response =
                 ktorClient.post("interactions/$interactionId/$interactionToken/callback") {
                     contentType(ContentType.Application.Json)
@@ -140,11 +141,11 @@ actual class KtDiscord actual constructor(
          */
         suspend fun getOriginalInteractionResponse(
             interactionToken: String,
-        ): Message {
+        ): Message = coroutineScope {
             val response =
                 ktorClient.get("webhooks/$applicationId/$interactionToken/messages/@original")
 
-            return if (response.status.value != 200 && response.status.value != 429) {
+            return@coroutineScope if (response.status.value != 200 && response.status.value != 429) {
                 throw GetOriginalInteractionResponseException("Code: ${response.status.value}, message: ${response.body() as String}")
             } else if (response.status.value == 429) {
                 delay(rateLimitToMilliseconds(response))
@@ -160,7 +161,7 @@ actual class KtDiscord actual constructor(
          */
         suspend fun editOriginalInteractionResponse(
             editWebhookMessage: EditWebhookMessage, interactionToken: String,
-        ): Message {
+        ): Message = coroutineScope {
             val response = if (editWebhookMessage.files == null) {
                 ktorClient.patch("webhooks/$applicationId/$interactionToken/messages/@original") {
                     contentType(ContentType.Application.Json)
@@ -172,7 +173,7 @@ actual class KtDiscord actual constructor(
                 }
             }
 
-            return if (response.status.value != 200 && response.status.value != 429) {
+            return@coroutineScope if (response.status.value != 200 && response.status.value != 429) {
                 throw EditOriginalInteractionResponseException("Code: ${response.status.value}, message: ${response.body() as String}")
             } else if (response.status.value == 429) {
                 delay(rateLimitToMilliseconds(response))
@@ -186,17 +187,18 @@ actual class KtDiscord actual constructor(
          * Deletes the initial Interaction response.
          * @exception DeleteOriginalInteractionResponseException if the Discord API didn't return `204 No Content`.
          */
-        suspend fun deleteOriginalInteractionResponse(interactionToken: String) {
-            val response =
-                ktorClient.delete("webhooks/$applicationId/$interactionToken/messages/@original")
+        suspend fun deleteOriginalInteractionResponse(interactionToken: String): Unit =
+            coroutineScope {
+                val response =
+                    ktorClient.delete("webhooks/$applicationId/$interactionToken/messages/@original")
 
-            if (response.status.value != 204 && response.status.value != 429) {
-                throw DeleteOriginalInteractionResponseException("Code: ${response.status.value}, message: ${response.body() as String}")
-            } else if (response.status.value == 429) {
-                delay(rateLimitToMilliseconds(response))
-                deleteOriginalInteractionResponse(interactionToken)
+                if (response.status.value != 204 && response.status.value != 429) {
+                    throw DeleteOriginalInteractionResponseException("Code: ${response.status.value}, message: ${response.body() as String}")
+                } else if (response.status.value == 429) {
+                    delay(rateLimitToMilliseconds(response))
+                    deleteOriginalInteractionResponse(interactionToken)
+                }
             }
-        }
 
         /**
          * Create a followup message for an Interaction.
@@ -207,7 +209,7 @@ actual class KtDiscord actual constructor(
         suspend fun createFollowupMessage(
             executeWebhook: ExecuteWebhook,
             interactionToken: String,
-        ): Message {
+        ): Message = coroutineScope {
             val response = if (executeWebhook.files == null) {
                 ktorClient.post("webhooks/$applicationId/$interactionToken") {
                     contentType(
@@ -223,7 +225,7 @@ actual class KtDiscord actual constructor(
                 }
             }
 
-            return if (response.status.value != 200 && response.status.value != 429) {
+            return@coroutineScope if (response.status.value != 200 && response.status.value != 429) {
                 throw CreateFollowupMessageException("Code: ${response.status.value}, message: ${response.body() as String}")
             } else if (response.status.value == 429) {
                 delay(rateLimitToMilliseconds(response))
@@ -240,11 +242,11 @@ actual class KtDiscord actual constructor(
         suspend fun getFollowupMessage(
             messageId: String,
             interactionToken: String,
-        ): Message {
+        ): Message = coroutineScope {
             val response =
                 ktorClient.get("webhooks/$applicationId/$interactionToken/messages/$messageId")
 
-            return if (response.status.value != 200 && response.status.value != 429) {
+            return@coroutineScope if (response.status.value != 200 && response.status.value != 429) {
                 throw GetFollowupMessageException("Code: ${response.status.value}, message: ${response.body() as String}")
             } else if (response.status.value == 429) {
                 delay(rateLimitToMilliseconds(response))
@@ -262,14 +264,14 @@ actual class KtDiscord actual constructor(
             editWebhookMessage: EditWebhookMessage,
             interactionToken: String,
             messageId: String,
-        ): Message {
+        ): Message = coroutineScope {
             val response =
                 ktorClient.patch("webhooks/$applicationId/$interactionToken/messages/$messageId") {
                     contentType(ContentType.Application.Json)
                     setBody(editWebhookMessage)
                 }
 
-            return if (response.status.value != 200 && response.status.value != 429) {
+            return@coroutineScope if (response.status.value != 200 && response.status.value != 429) {
                 throw EditFollowupMessageException("Code: ${response.status.value}, message: ${response.body() as String}")
             } else if (response.status.value == 429) {
                 delay(rateLimitToMilliseconds(response))
@@ -286,7 +288,7 @@ actual class KtDiscord actual constructor(
         suspend fun deleteFollowupMessage(
             interactionToken: String,
             messageId: String,
-        ) {
+        ): Unit = coroutineScope {
             val response =
                 ktorClient.delete("webhooks/$applicationId/$interactionToken/messages/$messageId")
 
@@ -305,68 +307,72 @@ actual class KtDiscord actual constructor(
          * @param withLocalizations Whether to include full localization dictionaries (`name_localizations` and `description_localizations`) in the returned objects, instead of the `name_localized` and `description_localized` fields. Default `false`.
          * @exception CreateInteractionResponseException if the Discord API didn't return `200 OK`.
          */
-        suspend fun getGlobalApplicationCommands(withLocalizations: Boolean? = null): Array<ApplicationCommand> {
-            val response = ktorClient.get("/applications/$applicationId/commands") {
-                if (withLocalizations == true) {
-                    url {
-                        parameters.append(
-                            "with_localizations", "1"
-                        )
+        suspend fun getGlobalApplicationCommands(withLocalizations: Boolean? = null): Array<ApplicationCommand> =
+            coroutineScope {
+                val response = ktorClient.get("/applications/$applicationId/commands") {
+                    if (withLocalizations == true) {
+                        url {
+                            parameters.append(
+                                "with_localizations", "1"
+                            )
+                        }
                     }
+                }
+
+                return@coroutineScope if (response.status.value != 200 && response.status.value != 429) {
+                    throw GetGlobalApplicationCommandsException("Code: ${response.status.value}, message: ${response.body() as String}")
+                } else if (response.status.value == 429) {
+                    rateLimitToMilliseconds(response)
+                    getGlobalApplicationCommands(withLocalizations)
+                } else {
+                    response.body()
                 }
             }
 
-            return if (response.status.value != 200 && response.status.value != 429) {
-                throw GetGlobalApplicationCommandsException("Code: ${response.status.value}, message: ${response.body() as String}")
-            } else if (response.status.value == 429) {
-                rateLimitToMilliseconds(response)
-                getGlobalApplicationCommands(withLocalizations)
-            } else {
-                response.body()
-            }
-        }
+        suspend fun createGlobalApplicationCommand(applicationCommand: ApplicationCommandCreate): ApplicationCommand =
+            coroutineScope {
+                val response =
+                    ktorClient.post("/applications/$applicationId/commands") {
+                        contentType(ContentType.Application.Json)
+                        setBody(applicationCommand)
+                    }
 
-        suspend fun createGlobalApplicationCommand(applicationCommand: ApplicationCommandCreate): ApplicationCommand {
-            val response = ktorClient.post("/applications/$applicationId/commands") {
-                contentType(ContentType.Application.Json)
-                setBody(applicationCommand)
+                return@coroutineScope if (response.status.value != 200 && response.status.value != 201 && response.status.value != 429) {
+                    throw CreateGlobalApplicationCommandException("Code: ${response.status.value}, message: ${response.body() as String}")
+                } else if (response.status.value == 429) {
+                    rateLimitToMilliseconds(response)
+                    createGlobalApplicationCommand(applicationCommand)
+                } else {
+                    response.body()
+                }
             }
 
-            return if (response.status.value != 200 && response.status.value != 201 && response.status.value != 429) {
-                throw CreateGlobalApplicationCommandException("Code: ${response.status.value}, message: ${response.body() as String}")
-            } else if (response.status.value == 429) {
-                rateLimitToMilliseconds(response)
-                createGlobalApplicationCommand(applicationCommand)
-            } else {
-                response.body()
-            }
-        }
+        suspend fun getGlobalApplicationCommand(commandId: String): ApplicationCommand =
+            coroutineScope {
+                val response =
+                    ktorClient.get("/applications/$applicationId/commands/$commandId")
 
-        suspend fun getGlobalApplicationCommand(commandId: String): ApplicationCommand {
-            val response =
-                ktorClient.get("/applications/$applicationId/commands/$commandId")
-
-            return if (response.status.value != 200 && response.status.value != 429) {
-                throw GetGlobalApplicationCommandException("Code: ${response.status.value}, message: ${response.body() as String}")
-            } else if (response.status.value == 429) {
-                rateLimitToMilliseconds(response)
-                getGlobalApplicationCommand(commandId)
-            } else {
-                response.body()
+                return@coroutineScope if (response.status.value != 200 && response.status.value != 429) {
+                    throw GetGlobalApplicationCommandException("Code: ${response.status.value}, message: ${response.body() as String}")
+                } else if (response.status.value == 429) {
+                    rateLimitToMilliseconds(response)
+                    getGlobalApplicationCommand(commandId)
+                } else {
+                    response.body()
+                }
             }
-        }
 
         suspend fun editGlobalApplicationCommand(
             commandId: String,
             applicationCommand: ApplicationCommandEdit,
-        ): ApplicationCommand {
+        ): ApplicationCommand = coroutineScope {
             val response =
                 ktorClient.patch("/applications/$applicationId/commands/$commandId") {
                     contentType(ContentType.Application.Json)
                     setBody(applicationCommand)
                 }
 
-            return if (response.status.value != 200 && response.status.value != 429) {
+            return@coroutineScope if (response.status.value != 200 && response.status.value != 429) {
                 throw EditGlobalApplicationCommandException("Code: ${response.status.value}, message: ${response.body() as String}")
             } else if (response.status.value == 429) {
                 rateLimitToMilliseconds(response)
@@ -376,99 +382,104 @@ actual class KtDiscord actual constructor(
             }
         }
 
-        suspend fun deleteGlobalApplicationCommand(commandId: String) {
-            val response =
-                ktorClient.delete("/applications/$applicationId/commands/$commandId")
+        suspend fun deleteGlobalApplicationCommand(commandId: String): Unit =
+            coroutineScope {
+                val response =
+                    ktorClient.delete("/applications/$applicationId/commands/$commandId")
 
-            if (response.status.value != 204 && response.status.value != 429) {
-                throw DeleteGlobalApplicationCommandException("Code: ${response.status.value}, message: ${response.body() as String}")
-            } else if (response.status.value == 429) {
-                rateLimitToMilliseconds(response)
-                deleteGlobalApplicationCommand(commandId)
-            }
-        }
-
-        suspend fun bulkOverwriteGlobalApplicationCommands(applicationCommands: Array<ApplicationCommandCreate>): Array<ApplicationCommand> {
-            val response = ktorClient.put("/applications/$applicationId/commands") {
-                contentType(ContentType.Application.Json)
-                setBody(applicationCommands)
+                if (response.status.value != 204 && response.status.value != 429) {
+                    throw DeleteGlobalApplicationCommandException("Code: ${response.status.value}, message: ${response.body() as String}")
+                } else if (response.status.value == 429) {
+                    rateLimitToMilliseconds(response)
+                    deleteGlobalApplicationCommand(commandId)
+                }
             }
 
-            return if (response.status.value != 200 && response.status.value != 429) {
-                throw BulkOverwriteGlobalApplicationCommandsException("Code: ${response.status.value}, message: ${response.body() as String}")
-            } else if (response.status.value == 429) {
-                rateLimitToMilliseconds(response)
-                bulkOverwriteGlobalApplicationCommands(applicationCommands)
-            } else {
-                response.body()
+        suspend fun bulkOverwriteGlobalApplicationCommands(applicationCommands: Array<ApplicationCommandCreate>): Array<ApplicationCommand> =
+            coroutineScope {
+                val response = ktorClient.put("/applications/$applicationId/commands") {
+                    contentType(ContentType.Application.Json)
+                    setBody(applicationCommands)
+                }
+
+                return@coroutineScope if (response.status.value != 200 && response.status.value != 429) {
+                    throw BulkOverwriteGlobalApplicationCommandsException("Code: ${response.status.value}, message: ${response.body() as String}")
+                } else if (response.status.value == 429) {
+                    rateLimitToMilliseconds(response)
+                    bulkOverwriteGlobalApplicationCommands(applicationCommands)
+                } else {
+                    response.body()
+                }
             }
-        }
 
         actual inner class Guild(private val guildId: String) {
             /**
              * Fetch all of the guild commands for your application for a specific guild. Returns an array of application command objects.
              * @exception GetGuildApplicationCommandsException if the Discord API didn't return `200 OK`.
              */
-            suspend fun getGuildApplicationCommands(withLocalizations: Boolean? = null): Array<ApplicationCommand> {
-                val response =
-                    ktorClient.get("/applications/$applicationId/guilds/$guildId/commands") {
-                        if (withLocalizations == true) {
-                            url {
-                                parameters.append(
-                                    "with_localizations", "1"
-                                )
+            suspend fun getGuildApplicationCommands(withLocalizations: Boolean? = null): Array<ApplicationCommand> =
+                coroutineScope {
+                    val response =
+                        ktorClient.get("/applications/$applicationId/guilds/$guildId/commands") {
+                            if (withLocalizations == true) {
+                                url {
+                                    parameters.append(
+                                        "with_localizations", "1"
+                                    )
+                                }
                             }
                         }
-                    }
 
-                return if (response.status.value != 200 && response.status.value != 429) {
-                    throw GetGuildApplicationCommandsException("Code: ${response.status.value}, message: ${response.body() as String}")
-                } else if (response.status.value == 429) {
-                    rateLimitToMilliseconds(response)
-                    getGuildApplicationCommands(withLocalizations)
-                } else {
-                    response.body()
+                    return@coroutineScope if (response.status.value != 200 && response.status.value != 429) {
+                        throw GetGuildApplicationCommandsException("Code: ${response.status.value}, message: ${response.body() as String}")
+                    } else if (response.status.value == 429) {
+                        rateLimitToMilliseconds(response)
+                        getGuildApplicationCommands(withLocalizations)
+                    } else {
+                        response.body()
+                    }
                 }
-            }
 
             /**
              * Create a new guild command. New guild commands will be available in the guild immediately. Returns an application command object.
              * @exception CreateGuildApplicationCommandException if the Discord API didn't return `200 OK` or `201 Created`.
              */
-            suspend fun createGuildApplicationCommand(applicationCommand: ApplicationCommandCreate): ApplicationCommand {
-                val response =
-                    ktorClient.post("/applications/$applicationId/guilds/$guildId/commands") {
-                        contentType(ContentType.Application.Json)
-                        setBody(applicationCommand)
-                    }
+            suspend fun createGuildApplicationCommand(applicationCommand: ApplicationCommandCreate): ApplicationCommand =
+                coroutineScope {
+                    val response =
+                        ktorClient.post("/applications/$applicationId/guilds/$guildId/commands") {
+                            contentType(ContentType.Application.Json)
+                            setBody(applicationCommand)
+                        }
 
-                return if (response.status.value != 200 && response.status.value != 201 && response.status.value != 429) {
-                    throw CreateGuildApplicationCommandException("Code: ${response.status.value}, message: ${response.body() as String}")
-                } else if (response.status.value == 429) {
-                    rateLimitToMilliseconds(response)
-                    createGuildApplicationCommand(applicationCommand)
-                } else {
-                    response.body()
+                    return@coroutineScope if (response.status.value != 200 && response.status.value != 201 && response.status.value != 429) {
+                        throw CreateGuildApplicationCommandException("Code: ${response.status.value}, message: ${response.body() as String}")
+                    } else if (response.status.value == 429) {
+                        rateLimitToMilliseconds(response)
+                        createGuildApplicationCommand(applicationCommand)
+                    } else {
+                        response.body()
+                    }
                 }
-            }
 
             /**
              * Fetch all of the guild commands for your application for a specific guild. Returns an array of application command objects.
              * @exception GetGuildApplicationCommandException if the Discord API didn't return `200 OK`.
              */
-            suspend fun getGuildApplicationCommand(commandId: String): ApplicationCommand {
-                val response =
-                    ktorClient.get("/applications/$applicationId/guilds/$guildId/commands/$commandId")
+            suspend fun getGuildApplicationCommand(commandId: String): ApplicationCommand =
+                coroutineScope {
+                    val response =
+                        ktorClient.get("/applications/$applicationId/guilds/$guildId/commands/$commandId")
 
-                return if (response.status.value != 200 && response.status.value != 429) {
-                    throw GetGuildApplicationCommandException("Code: ${response.status.value}, message: ${response.body() as String}")
-                } else if (response.status.value == 429) {
-                    rateLimitToMilliseconds(response)
-                    getGuildApplicationCommand(commandId)
-                } else {
-                    response.body()
+                    return@coroutineScope if (response.status.value != 200 && response.status.value != 429) {
+                        throw GetGuildApplicationCommandException("Code: ${response.status.value}, message: ${response.body() as String}")
+                    } else if (response.status.value == 429) {
+                        rateLimitToMilliseconds(response)
+                        getGuildApplicationCommand(commandId)
+                    } else {
+                        response.body()
+                    }
                 }
-            }
 
             /**
              * Edit a guild command. Updates for guild commands will be available immediately. Returns an application command object. All fields are optional, but any fields provided will entirely overwrite the existing values of those fields.
@@ -477,14 +488,14 @@ actual class KtDiscord actual constructor(
             suspend fun editGuildApplicationCommand(
                 commandId: String,
                 applicationCommand: ApplicationCommandEdit,
-            ): ApplicationCommand {
+            ): ApplicationCommand = coroutineScope {
                 val response =
                     ktorClient.patch("/applications/$applicationId/guilds/$guildId/commands/$commandId") {
                         contentType(ContentType.Application.Json)
                         setBody(applicationCommand)
                     }
 
-                return if (response.status.value != 200 && response.status.value != 429) {
+                return@coroutineScope if (response.status.value != 200 && response.status.value != 429) {
                     throw EditGuildApplicationCommandException("Code: ${response.status.value}, message: ${response.body() as String}")
                 } else if (response.status.value == 429) {
                     rateLimitToMilliseconds(response)
@@ -500,38 +511,40 @@ actual class KtDiscord actual constructor(
              * Delete a guild command.
              * @exception DeleteGuildApplicationCommandException if the Discord API didn't return `204 No Content`.
              */
-            suspend fun deleteGuildApplicationCommand(commandId: String) {
-                val response =
-                    ktorClient.delete("/applications/$applicationId/guilds/$guildId/commands/$commandId")
+            suspend fun deleteGuildApplicationCommand(commandId: String): Unit =
+                coroutineScope {
+                    val response =
+                        ktorClient.delete("/applications/$applicationId/guilds/$guildId/commands/$commandId")
 
-                if (response.status.value != 204 && response.status.value != 429) {
-                    throw DeleteGuildApplicationCommandException("Code: ${response.status.value}, message: ${response.body() as String}")
-                } else if (response.status.value == 429) {
-                    rateLimitToMilliseconds(response)
-                    deleteGuildApplicationCommand(commandId)
+                    if (response.status.value != 204 && response.status.value != 429) {
+                        throw DeleteGuildApplicationCommandException("Code: ${response.status.value}, message: ${response.body() as String}")
+                    } else if (response.status.value == 429) {
+                        rateLimitToMilliseconds(response)
+                        deleteGuildApplicationCommand(commandId)
+                    }
                 }
-            }
 
             /**
              * Takes a list of application commands, overwriting the existing command list for this application for the targeted guild. Returns an array of application command objects.
              * @exception BulkOverwriteGuildApplicationCommandsException if the Discord API didn't return `200 OK`.
              */
-            suspend fun bulkOverwriteGuildApplicationCommands(applicationCommands: Array<ApplicationCommandCreate>): Array<ApplicationCommand> {
-                val response =
-                    ktorClient.put("/applications/$applicationId/guilds/$guildId/commands") {
-                        contentType(ContentType.Application.Json)
-                        setBody(applicationCommands)
-                    }
+            suspend fun bulkOverwriteGuildApplicationCommands(applicationCommands: Array<ApplicationCommandCreate>): Array<ApplicationCommand> =
+                coroutineScope {
+                    val response =
+                        ktorClient.put("/applications/$applicationId/guilds/$guildId/commands") {
+                            contentType(ContentType.Application.Json)
+                            setBody(applicationCommands)
+                        }
 
-                return if (response.status.value != 200 && response.status.value != 429) {
-                    throw BulkOverwriteGuildApplicationCommandsException("Code: ${response.status.value}, message: ${response.body() as String}")
-                } else if (response.status.value == 429) {
-                    rateLimitToMilliseconds(response)
-                    bulkOverwriteGuildApplicationCommands(applicationCommands)
-                } else {
-                    response.body()
+                    return@coroutineScope if (response.status.value != 200 && response.status.value != 429) {
+                        throw BulkOverwriteGuildApplicationCommandsException("Code: ${response.status.value}, message: ${response.body() as String}")
+                    } else if (response.status.value == 429) {
+                        rateLimitToMilliseconds(response)
+                        bulkOverwriteGuildApplicationCommands(applicationCommands)
+                    } else {
+                        response.body()
+                    }
                 }
-            }
         }
     }
 }
