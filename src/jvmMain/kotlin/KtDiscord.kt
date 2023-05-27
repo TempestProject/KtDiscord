@@ -52,8 +52,10 @@ import io.ktor.http.Headers
 import io.ktor.http.HttpHeaders
 import io.ktor.http.contentType
 import io.ktor.serialization.kotlinx.json.json
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.future.future
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
@@ -136,6 +138,20 @@ actual class KtDiscord actual constructor(
         }
 
         /**
+         * Create a response to an Interaction from the gateway. Body is an interaction response. For use outside of Kotlin coroutines.
+         * @exception CreateInteractionResponseException if the Discord API didn't return `204 No Content`.
+         */
+        fun createInteractionResponseAsync(
+            interactionResponse: InteractionResponse,
+            interactionId: String,
+            interactionToken: String,
+        ) = GlobalScope.future {
+            return@future createInteractionResponse(
+                interactionResponse, interactionId, interactionToken
+            )
+        }
+
+        /**
          * Returns the initial Interaction response.
          * @exception GetOriginalInteractionResponseException if the Discord API didn't return `200 OK`.
          */
@@ -153,6 +169,16 @@ actual class KtDiscord actual constructor(
             } else {
                 response.body()
             }
+        }
+
+        /**
+         * Returns the initial Interaction response. For use outside of Kotlin coroutines.
+         * @exception GetOriginalInteractionResponseException if the Discord API didn't return `200 OK`.
+         */
+        fun getOriginalInteractionResponseAsync(
+            interactionToken: String,
+        ) = GlobalScope.future {
+            return@future getOriginalInteractionResponse(interactionToken)
         }
 
         /**
@@ -184,6 +210,18 @@ actual class KtDiscord actual constructor(
         }
 
         /**
+         * Edits the initial Interaction response. For use outside of Kotlin coroutines.
+         * @exception EditOriginalInteractionResponseException if the Discord API didn't return `200 OK`.
+         */
+        fun editOriginalInteractionResponseAsync(
+            editWebhookMessage: EditWebhookMessage, interactionToken: String,
+        ) = GlobalScope.future {
+            return@future editOriginalInteractionResponse(
+                editWebhookMessage, interactionToken
+            )
+        }
+
+        /**
          * Deletes the initial Interaction response.
          * @exception DeleteOriginalInteractionResponseException if the Discord API didn't return `204 No Content`.
          */
@@ -198,6 +236,15 @@ actual class KtDiscord actual constructor(
                     delay(rateLimitToMilliseconds(response))
                     deleteOriginalInteractionResponse(interactionToken)
                 }
+            }
+
+        /**
+         * Deletes the initial Interaction response. For use outside of Kotlin coroutines.
+         * @exception DeleteOriginalInteractionResponseException if the Discord API didn't return `204 No Content`.
+         */
+        fun deleteOriginalInteractionResponseAsync(interactionToken: String) =
+            GlobalScope.future {
+                return@future deleteOriginalInteractionResponse(interactionToken)
             }
 
         /**
@@ -236,6 +283,19 @@ actual class KtDiscord actual constructor(
         }
 
         /**
+         * Create a followup message for an Interaction. For use outside of Kotlin coroutines.
+         *
+         * `flags` can be set to `64` to mark the message as ephemeral, except when it is the first followup message to a deferred Interactions Response. In that case, the `flags` field will be ignored, and the ephemerality of the message will be determined by the `flags` value in your original ACK.
+         * @exception CreateFollowupMessageException if the Discord API didn't return `200 OK`.
+         */
+        fun createFollowupMessageAsync(
+            executeWebhook: ExecuteWebhook,
+            interactionToken: String,
+        ) = GlobalScope.future {
+            return@future createFollowupMessage(executeWebhook, interactionToken)
+        }
+
+        /**
          * Returns a followup message for an Interaction.
          * @exception GetFollowupMessageException if the Discord API didn't return `200 OK`.
          */
@@ -254,6 +314,17 @@ actual class KtDiscord actual constructor(
             } else {
                 response.body()
             }
+        }
+
+        /**
+         * Returns a followup message for an Interaction. For use outside of Kotlin coroutines.
+         * @exception GetFollowupMessageException if the Discord API didn't return `200 OK`.
+         */
+        fun getFollowupMessageAsync(
+            messageId: String,
+            interactionToken: String,
+        ) = GlobalScope.future {
+            return@future getFollowupMessage(messageId, interactionToken)
         }
 
         /**
@@ -282,6 +353,20 @@ actual class KtDiscord actual constructor(
         }
 
         /**
+         * Edits a followup message for an Interaction. For use outside of Kotlin coroutines.
+         * @exception EditFollowupMessageException if the Discord API didn't return `200 OK`.
+         */
+        fun editFollowupMessageAsync(
+            editWebhookMessage: EditWebhookMessage,
+            interactionToken: String,
+            messageId: String,
+        ) = GlobalScope.future {
+            return@future editFollowupMessage(
+                editWebhookMessage, interactionToken, messageId
+            )
+        }
+
+        /**
          * Deletes a followup message for an Interaction.
          * @exception DeleteFollowupMessageException if the Discord API didn't return `204 No Content`.
          */
@@ -298,6 +383,17 @@ actual class KtDiscord actual constructor(
                 delay(rateLimitToMilliseconds(response))
                 deleteFollowupMessage(interactionToken, messageId)
             }
+        }
+
+        /**
+         * Deletes a followup message for an Interaction. For use outside of Kotlin coroutines.
+         * @exception DeleteFollowupMessageException if the Discord API didn't return `204 No Content`.
+         */
+        fun deleteFollowupMessageAsync(
+            interactionToken: String,
+            messageId: String,
+        ) = GlobalScope.future {
+            deleteFollowupMessage(interactionToken, messageId)
         }
     }
 
@@ -329,6 +425,16 @@ actual class KtDiscord actual constructor(
                 }
             }
 
+        /**
+         * Fetch all of the global commands for your application. Returns an array of application command objects. For use outside of Kotlin coroutines.
+         * @param withLocalizations Whether to include full localization dictionaries (`name_localizations` and `description_localizations`) in the returned objects, instead of the `name_localized` and `description_localized` fields. Default `false`.
+         * @exception CreateInteractionResponseException if the Discord API didn't return `200 OK`.
+         */
+        fun getGlobalApplicationCommandsAsync(withLocalizations: Boolean? = null) =
+            GlobalScope.future {
+                return@future getGlobalApplicationCommands(withLocalizations)
+            }
+
         suspend fun createGlobalApplicationCommand(applicationCommand: ApplicationCommandCreate): ApplicationCommand =
             coroutineScope {
                 val response =
@@ -347,6 +453,11 @@ actual class KtDiscord actual constructor(
                 }
             }
 
+        fun createGlobalApplicationCommandAsync(applicationCommand: ApplicationCommandCreate) =
+            GlobalScope.future {
+                return@future createGlobalApplicationCommand(applicationCommand)
+            }
+
         suspend fun getGlobalApplicationCommand(commandId: String): ApplicationCommand =
             coroutineScope {
                 val response =
@@ -361,6 +472,10 @@ actual class KtDiscord actual constructor(
                     response.body()
                 }
             }
+
+        fun getGlobalApplicationCommandAsync(commandId: String) = GlobalScope.future {
+            return@future getGlobalApplicationCommand(commandId)
+        }
 
         suspend fun editGlobalApplicationCommand(
             commandId: String,
@@ -382,6 +497,13 @@ actual class KtDiscord actual constructor(
             }
         }
 
+        fun editGlobalApplicationCommandAsync(
+            commandId: String,
+            applicationCommand: ApplicationCommandEdit,
+        ) = GlobalScope.future {
+            return@future editGlobalApplicationCommand(commandId, applicationCommand)
+        }
+
         suspend fun deleteGlobalApplicationCommand(commandId: String): Unit =
             coroutineScope {
                 val response =
@@ -393,6 +515,11 @@ actual class KtDiscord actual constructor(
                     rateLimitToMilliseconds(response)
                     deleteGlobalApplicationCommand(commandId)
                 }
+            }
+
+        fun deleteGlobalApplicationCommandAsync(commandId: String) =
+            GlobalScope.future {
+                return@future deleteGlobalApplicationCommand(commandId)
             }
 
         suspend fun bulkOverwriteGlobalApplicationCommands(applicationCommands: Array<ApplicationCommandCreate>): Array<ApplicationCommand> =
@@ -410,6 +537,11 @@ actual class KtDiscord actual constructor(
                 } else {
                     response.body()
                 }
+            }
+
+        fun bulkOverwriteGlobalApplicationCommandsAsync(applicationCommands: Array<ApplicationCommandCreate>) =
+            GlobalScope.future {
+                return@future bulkOverwriteGlobalApplicationCommands(applicationCommands)
             }
 
         actual inner class Guild(private val guildId: String) {
@@ -441,6 +573,15 @@ actual class KtDiscord actual constructor(
                 }
 
             /**
+             * Fetch all of the guild commands for your application for a specific guild. Returns an array of application command objects. For use outside of Kotlin coroutines.
+             * @exception GetGuildApplicationCommandsException if the Discord API didn't return `200 OK`.
+             */
+            fun getGuildApplicationCommandsAsync(withLocalizations: Boolean? = null) =
+                GlobalScope.future {
+                    return@future getGuildApplicationCommands(withLocalizations)
+                }
+
+            /**
              * Create a new guild command. New guild commands will be available in the guild immediately. Returns an application command object.
              * @exception CreateGuildApplicationCommandException if the Discord API didn't return `200 OK` or `201 Created`.
              */
@@ -463,6 +604,15 @@ actual class KtDiscord actual constructor(
                 }
 
             /**
+             * Create a new guild command. New guild commands will be available in the guild immediately. Returns an application command object. For use outside of Kotlin coroutines.
+             * @exception CreateGuildApplicationCommandException if the Discord API didn't return `200 OK` or `201 Created`.
+             */
+            fun createGuildApplicationCommandAsync(applicationCommand: ApplicationCommandCreate) =
+                GlobalScope.future {
+                    return@future createGuildApplicationCommand(applicationCommand)
+                }
+
+            /**
              * Fetch all of the guild commands for your application for a specific guild. Returns an array of application command objects.
              * @exception GetGuildApplicationCommandException if the Discord API didn't return `200 OK`.
              */
@@ -479,6 +629,15 @@ actual class KtDiscord actual constructor(
                     } else {
                         response.body()
                     }
+                }
+
+            /**
+             * Fetch all of the guild commands for your application for a specific guild. Returns an array of application command objects. For use outside of Kotlin coroutines.
+             * @exception GetGuildApplicationCommandException if the Discord API didn't return `200 OK`.
+             */
+            fun getGuildApplicationCommandAsync(commandId: String) =
+                GlobalScope.future {
+                    return@future getGuildApplicationCommand(commandId)
                 }
 
             /**
@@ -508,6 +667,17 @@ actual class KtDiscord actual constructor(
             }
 
             /**
+             * Edit a guild command. Updates for guild commands will be available immediately. Returns an application command object. All fields are optional, but any fields provided will entirely overwrite the existing values of those fields. For use outside of Kotlin coroutines.
+             * @exception EditGuildApplicationCommandException if the Discord API didn't return `200 OK`.
+             */
+            fun editGuildApplicationCommandAsync(
+                commandId: String,
+                applicationCommand: ApplicationCommandEdit,
+            ) = GlobalScope.future {
+                return@future editGuildApplicationCommand(commandId, applicationCommand)
+            }
+
+            /**
              * Delete a guild command.
              * @exception DeleteGuildApplicationCommandException if the Discord API didn't return `204 No Content`.
              */
@@ -522,6 +692,15 @@ actual class KtDiscord actual constructor(
                         rateLimitToMilliseconds(response)
                         deleteGuildApplicationCommand(commandId)
                     }
+                }
+
+            /**
+             * Delete a guild command. For use outside of Kotlin coroutines.
+             * @exception DeleteGuildApplicationCommandException if the Discord API didn't return `204 No Content`.
+             */
+            fun deleteGuildApplicationCommandAsync(commandId: String) =
+                GlobalScope.future {
+                    return@future deleteGuildApplicationCommand(commandId)
                 }
 
             /**
@@ -544,6 +723,17 @@ actual class KtDiscord actual constructor(
                     } else {
                         response.body()
                     }
+                }
+
+            /**
+             * Takes a list of application commands, overwriting the existing command list for this application for the targeted guild. Returns an array of application command objects. For use outside of Kotlin coroutines.
+             * @exception BulkOverwriteGuildApplicationCommandsException if the Discord API didn't return `200 OK`.
+             */
+            fun bulkOverwriteGuildApplicationCommandsAsync(applicationCommands: Array<ApplicationCommandCreate>) =
+                GlobalScope.future {
+                    return@future bulkOverwriteGuildApplicationCommands(
+                        applicationCommands
+                    )
                 }
         }
     }
