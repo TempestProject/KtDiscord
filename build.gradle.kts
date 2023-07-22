@@ -106,7 +106,6 @@ val javadocJar: TaskProvider<Jar> by tasks.registering(Jar::class) {
 publishing {
     publications.withType<MavenPublication> {
         artifact(javadocJar.get())
-        artifact(htmlJar.get())
 
         pom {
             name.set("KtDiscord")
