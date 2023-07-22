@@ -1,8 +1,10 @@
 import org.jetbrains.dokka.gradle.DokkaTask
 
 plugins {
-    kotlin("multiplatform") version "1.8.21"
-    kotlin("plugin.serialization") version "1.8.21"
+    val kotlinVersion = "1.9.0"
+
+    kotlin("multiplatform") version kotlinVersion
+    kotlin("plugin.serialization") version kotlinVersion
 
     id("maven-publish")
     id("io.github.gradle-nexus.publish-plugin") version "1.3.0"
@@ -10,11 +12,11 @@ plugins {
 
     //    id("dev.petuska.npm.publish") version "3.2.1"
 
-    id("org.jetbrains.dokka") version "1.8.10"
+    id("org.jetbrains.dokka") version "1.8.20"
 }
 
 group = "cloud.drakon"
-version = "6.1.0"
+version = "6.1.1-SNAPSHOT"
 
 repositories {
     mavenCentral()
@@ -37,7 +39,7 @@ kotlin {
     }
 
     sourceSets {
-        val ktorVersion = "2.3.0"
+        val ktorVersion = "2.3.2"
 
         val commonMain by getting {
             dependencies {
