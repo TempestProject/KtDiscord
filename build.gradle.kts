@@ -22,11 +22,12 @@ repositories {
     mavenCentral()
 }
 
+val jvmToolchain = 11
+
 kotlin {
     jvm {
-        compilations.all {
-            kotlinOptions.jvmTarget = "11"
-        }
+        jvmToolchain(jvmToolchain)
+
         testRuns["test"].executionTask.configure {
             useJUnitPlatform()
         }
@@ -166,7 +167,7 @@ tasks.dokkaJekyll.configure {
 
     dokkaSourceSets {
         configureEach {
-            jdkVersion.set(11)
+            jdkVersion.set(jvmToolchain)
         }
     }
 }
