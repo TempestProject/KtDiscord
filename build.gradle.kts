@@ -33,7 +33,6 @@ kotlin {
     }
     js(IR) {
         nodejs()
-        useCommonJs()
 
         //        binaries.library()
     }
