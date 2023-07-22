@@ -1,4 +1,4 @@
-package cloud.drakon.ktdiscord.interaction
+package cloud.drakon.ktdiscord.interaction.interactiondata
 
 import kotlinx.serialization.Serializable
 

@@ -2,6 +2,7 @@ package cloud.drakon.ktdiscord.interaction
 
 import cloud.drakon.ktdiscord.channel.message.Message
 import cloud.drakon.ktdiscord.guild.GuildMember
+import cloud.drakon.ktdiscord.interaction.interactiondata.InteractionData
 import cloud.drakon.ktdiscord.user.User
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
