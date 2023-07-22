@@ -92,10 +92,15 @@ val htmlJar: TaskProvider<Jar> by tasks.registering(Jar::class) {
     from(tasks.dokkaHtml.flatMap { it.outputDirectory })
 }
 
+//val javadocJar: TaskProvider<Jar> by tasks.registering(Jar::class) {
+//    dependsOn(tasks.dokkaJavadoc)
+//    archiveClassifier.set("javadoc")
+//    from(tasks.dokkaJavadoc.flatMap { it.outputDirectory })
+//}
 val javadocJar: TaskProvider<Jar> by tasks.registering(Jar::class) {
-    dependsOn(tasks.dokkaJavadoc)
-    archiveClassifier.set("javadoc")
-    from(tasks.dokkaJavadoc.flatMap { it.outputDirectory })
+    dependsOn(tasks.dokkaHtml)
+    archiveClassifier.set("html-docs")
+    from(tasks.dokkaHtml.flatMap { it.outputDirectory })
 }
 
 publishing {
