@@ -13,7 +13,7 @@ import kotlinx.serialization.Serializable
  */
 @Serializable class TextSelectMenu(
     @SerialName("custom_id") val customId: String,
-    val options: Array<SelectOption>? = null,
+    val options: List<SelectOption>? = null,
     val placeholder: String? = null,
     @SerialName("min_values") val minValues: Byte? = null,
     @SerialName("max_values") val maxValues: Byte? = null,

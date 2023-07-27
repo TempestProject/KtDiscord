@@ -11,5 +11,5 @@ import kotlinx.serialization.Serializable
 @Serializable class ModalCallbackData(
     val custom_id: String,
     val title: String,
-    val components: Array<Component>,
+    val components: List<Component>,
 ): InteractionCallbackData

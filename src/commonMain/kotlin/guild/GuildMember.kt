@@ -8,7 +8,7 @@ import kotlinx.serialization.Serializable
     val user: User? = null,
     val nick: String? = null,
     val avatar: String? = null,
-    val roles: Array<String>,
+    val roles: List<String>,
     @SerialName("joined_at") val joinedAt: String,
     @SerialName("premium_since") val premiumSince: String? = null,
     val deaf: Boolean? = null,

@@ -19,9 +19,9 @@ import kotlinx.serialization.Serializable
 @Serializable class MessageCallbackData(
     val tts: Boolean? = null,
     val content: String? = null,
-    val embeds: Array<Embed>? = null,
+    val embeds: List<Embed>? = null,
     @SerialName("allowed_mentions") val allowedMentions: AllowedMentions? = null,
     val flags: Short? = null,
-    val components: Array<Component>? = null,
-    val attachments: Array<Attachment>? = null,
+    val components: List<Component>? = null,
+    val attachments: List<Attachment>? = null,
 ): InteractionCallbackData

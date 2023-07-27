@@ -17,5 +17,5 @@ import kotlinx.serialization.Serializable
     val id: String,
     @SerialName("application_id") val applicationId: String,
     @SerialName("guild_id") val guildId: String,
-    val permissions: Array<ApplicationCommandPermissions>,
+    val permissions: List<ApplicationCommandPermissions>,
 )

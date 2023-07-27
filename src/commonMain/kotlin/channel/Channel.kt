@@ -15,6 +15,6 @@ import kotlinx.serialization.Serializable
     @SerialName("guild_id") val guildId: String? = null,
     val position: Int? = null,
     @SerialName("permission_overwrites")
-    val permissionOverwrites: Array<Overwrite>? = null,
+    val permissionOverwrites: List<Overwrite>? = null,
     val name: String? = null,
 )

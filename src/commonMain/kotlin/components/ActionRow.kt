@@ -7,6 +7,6 @@ import kotlinx.serialization.Serializable
  * - You can have up to 5 Action Rows per message
  * - An Action Row cannot contain another Action Row
  */
-@Serializable class ActionRow(val components: Array<Component>): Component {
+@Serializable class ActionRow(val components: List<Component>): Component {
     val type: Byte = 1
 }

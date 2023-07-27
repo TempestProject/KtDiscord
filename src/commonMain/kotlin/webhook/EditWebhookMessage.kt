@@ -11,10 +11,10 @@ import kotlinx.serialization.Transient
 
 @Serializable class EditWebhookMessage(
     val content: String? = null,
-    val embeds: Array<Embed>? = null,
+    val embeds: List<Embed>? = null,
     @SerialName("allowed_mentions") val allowedMentions: AllowedMentions? = null,
-    val components: Array<Component>? = null,
-    @Transient override val files: Array<File>? = null,
+    val components: List<Component>? = null,
+    @Transient override val files: List<File>? = null,
     @SerialName("payload_json") val payloadJson: String? = null,
-    val attachments: Array<Attachment>? = null,
+    val attachments: List<Attachment>? = null,
 ): Webhook

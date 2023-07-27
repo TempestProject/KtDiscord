@@ -18,7 +18,7 @@ import kotlinx.serialization.Serializable
     val name: String,
     val type: Int,
     val resolved: ResolvedData? = null,
-    val options: Array<ApplicationCommandInteractionDataOption>? = null,
+    val options: List<ApplicationCommandInteractionDataOption>? = null,
     @SerialName("guild_id") val guildId: String? = null,
     @SerialName("target_id") val targetId: String? = null,
 ): InteractionData

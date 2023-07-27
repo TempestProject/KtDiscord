@@ -7,5 +7,5 @@ import kotlinx.serialization.Serializable
  * @property choices autocomplete choices (max of 25 choices)
  */
 @Serializable
-class AutocompleteCallbackData(val choices: Array<ApplicationCommandOptionChoice>):
+class AutocompleteCallbackData(val choices: List<ApplicationCommandOptionChoice>):
     InteractionCallbackData

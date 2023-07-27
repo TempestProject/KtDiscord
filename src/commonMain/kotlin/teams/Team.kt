@@ -13,7 +13,7 @@ import kotlinx.serialization.Serializable
 @Serializable class Team(
     val icon: String?,
     val id: String,
-    val members: Array<TeamMember>,
+    val members: List<TeamMember>,
     val name: String,
     @SerialName("owner_user_id") val ownerUserId: String,
 )

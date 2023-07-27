@@ -16,6 +16,6 @@ import kotlinx.serialization.Serializable
     val name: String,
     val type: Byte,
     val value: String? = null,
-    val options: Array<ApplicationCommandInteractionDataOption>? = null,
+    val options: List<ApplicationCommandInteractionDataOption>? = null,
     val focused: Boolean? = null,
 )

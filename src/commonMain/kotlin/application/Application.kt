@@ -48,7 +48,7 @@ import kotlinx.serialization.Serializable
     val slug: String? = null,
     @SerialName("cover_image") val coverImage: String? = null,
     val flags: String? = null,
-    val tags: Array<String>? = null,
+    val tags: List<String>? = null,
     @SerialName("install_params") val installParams: InstallParams? = null,
     @SerialName("custom_install_url") val customInstallUrl: String? = null,
 )

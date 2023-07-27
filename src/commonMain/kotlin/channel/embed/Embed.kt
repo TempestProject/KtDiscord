@@ -30,5 +30,5 @@ import kotlinx.serialization.Serializable
     val video: EmbedVideo? = null,
     val provider: EmbedProvider? = null,
     val author: EmbedAuthor? = null,
-    val fields: Array<EmbedField>? = null,
+    val fields: List<EmbedField>? = null,
 )

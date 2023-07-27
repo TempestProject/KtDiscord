@@ -33,7 +33,7 @@ import kotlinx.serialization.Serializable
     val description: String = "",
     @SerialName("description_localizations")
     val descriptionLocalizations: Map<String, String>? = null,
-    val options: Array<ApplicationCommandOption>? = null,
+    val options: List<ApplicationCommandOption>? = null,
     @SerialName("default_member_permissions")
     val defaultMemberPermissions: String? = null,
     @SerialName("dm_permission") val dmPermission: Boolean? = null,

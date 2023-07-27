@@ -7,6 +7,6 @@ import kotlinx.serialization.Serializable
  * @property permissions the permissions to request for the bot role
  */
 @Serializable class InstallParams(
-    val scopes: Array<String>,
+    val scopes: List<String>,
     val permissions: String,
 )

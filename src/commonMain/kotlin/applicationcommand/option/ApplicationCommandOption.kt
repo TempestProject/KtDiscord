@@ -27,8 +27,8 @@ import kotlinx.serialization.Serializable
     @SerialName("description_localizations")
     val descriptionLocalizations: Map<String, String>,
     val required: Boolean? = null,
-    val choices: Array<ApplicationCommandOptionChoice>? = null,
-    val options: Array<ApplicationCommandOption>? = null,
+    val choices: List<ApplicationCommandOptionChoice>? = null,
+    val options: List<ApplicationCommandOption>? = null,
     @SerialName("channel_types") val channelTypes: ByteArray? = null,
     @SerialName("min_value") val minValue: Double? = null,
     @SerialName("max_value") val maxValue: Double? = null,

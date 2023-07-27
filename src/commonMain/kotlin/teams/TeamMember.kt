@@ -12,7 +12,7 @@ import kotlinx.serialization.Serializable
  */
 @Serializable class TeamMember(
     @SerialName("membership_state") val membershipState: Byte,
-    val permissions: Array<String>,
+    val permissions: List<String>,
     @SerialName("team_id") val teamId: String,
     val user: User,
 )
