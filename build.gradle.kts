@@ -1,5 +1,3 @@
-import org.jetbrains.dokka.gradle.DokkaTask
-
 plugins {
     val kotlinVersion = "1.9.0"
 
@@ -85,13 +83,6 @@ nexusPublishing {
     }
 }
 
-val dokkaHtml by tasks.getting(DokkaTask::class)
-val htmlJar: TaskProvider<Jar> by tasks.registering(Jar::class) {
-    dependsOn(tasks.dokkaHtml)
-    archiveClassifier.set("html-docs")
-    from(tasks.dokkaHtml.flatMap { it.outputDirectory })
-}
-
 //val javadocJar: TaskProvider<Jar> by tasks.registering(Jar::class) {
 //    dependsOn(tasks.dokkaJavadoc)
 //    archiveClassifier.set("javadoc")
@@ -102,6 +93,12 @@ val javadocJar: TaskProvider<Jar> by tasks.registering(Jar::class) {
     archiveClassifier.set("html-docs")
     from(tasks.dokkaHtml.flatMap { it.outputDirectory })
 }
+
+//val htmlJar: TaskProvider<Jar> by tasks.registering(Jar::class) {
+//    dependsOn(tasks.dokkaHtml)
+//    archiveClassifier.set("html-docs")
+//    from(tasks.dokkaHtml.flatMap { it.outputDirectory })
+//}
 
 publishing {
     publications.withType<MavenPublication> {
@@ -177,9 +174,7 @@ signing {
     }
 }*/
 
-tasks.dokkaJekyll.configure {
-    outputDirectory.set(buildDir.resolve("dokka"))
-
+tasks.dokkaHtml.configure {
     dokkaSourceSets {
         configureEach {
             jdkVersion.set(jvmToolchain)
