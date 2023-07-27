@@ -21,7 +21,7 @@ import kotlinx.serialization.Serializable
     val content: String? = null,
     val embeds: List<Embed>? = null,
     @SerialName("allowed_mentions") val allowedMentions: AllowedMentions? = null,
-    val flags: Short? = null,
+    val flags: Int? = null,
     val components: List<Component>? = null,
     val attachments: List<Attachment>? = null,
 ): InteractionCallbackData

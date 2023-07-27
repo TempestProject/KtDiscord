@@ -11,6 +11,6 @@ import kotlinx.serialization.Serializable
  */
 @Serializable class MessageComponentData(
     @SerialName("custom_id") val customId: String,
-    @SerialName("component_type") val componentType: Byte,
+    @SerialName("component_type") val componentType: Int,
     val values: List<SelectOption>? = null,
 ): InteractionData

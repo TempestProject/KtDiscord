@@ -6,7 +6,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable class MessageInteraction(
     val id: String,
-    val type: Byte,
+    val type: Int,
     val name: String,
     val user: User,
     val member: GuildMember? = null,

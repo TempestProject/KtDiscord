@@ -14,7 +14,7 @@ import kotlinx.serialization.Serializable
  */
 @Serializable class ApplicationCommandInteractionDataOption(
     val name: String,
-    val type: Byte,
+    val type: Int,
     val value: String? = null,
     val options: List<ApplicationCommandInteractionDataOption>? = null,
     val focused: Boolean? = null,

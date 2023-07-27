@@ -8,6 +8,6 @@ import kotlinx.serialization.Serializable
  * @property data an optional response message
  */
 @Serializable class InteractionResponse(
-    val type: Byte,
+    val type: Int,
     val data: InteractionCallbackData? = null,
 )

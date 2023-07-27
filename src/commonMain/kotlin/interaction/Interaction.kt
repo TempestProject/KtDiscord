@@ -40,7 +40,7 @@ import kotlinx.serialization.Serializable
     val member: GuildMember? = null,
     val user: User? = null,
     val token: String,
-    val version: Byte,
+    val version: Int,
     val message: Message? = null,
     @SerialName("app_permissions") val appPermissions: String? = null,
     val locale: String? = null,
