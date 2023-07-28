@@ -102,11 +102,10 @@ actual class KtDiscord actual constructor(
             MultiPartFormDataContent(formData {
                 append("payload_json", Json.encodeToString(webhook))
                 for (i in webhook.files !!) {
-                    append("files[" + i.id + "]", i.bytes, Headers.build {
+                    append("files[${i.id}]", i.bytes, Headers.build {
                         append(HttpHeaders.ContentType, i.contentType)
                         append(
-                            HttpHeaders.ContentDisposition,
-                            "filename=\"" + i.filename + "\""
+                            HttpHeaders.ContentDisposition, "filename=\"${i.filename}\""
                         )
                     })
                 }
