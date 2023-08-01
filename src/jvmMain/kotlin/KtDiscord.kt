@@ -28,10 +28,6 @@ import cloud.drakon.ktdiscord.webhook.exception.DeleteFollowupMessageException
 import cloud.drakon.ktdiscord.webhook.exception.EditFollowupMessageException
 import cloud.drakon.ktdiscord.webhook.exception.EditOriginalInteractionResponseException
 import cloud.drakon.ktdiscord.webhook.exception.GetFollowupMessageException
-import com.goterl.lazysodium.LazySodiumJava
-import com.goterl.lazysodium.SodiumJava
-import com.goterl.lazysodium.utils.Key
-import com.goterl.lazysodium.utils.LibraryLoader
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.engine.java.Java
@@ -52,6 +48,14 @@ import io.ktor.http.Headers
 import io.ktor.http.HttpHeaders
 import io.ktor.http.contentType
 import io.ktor.serialization.kotlinx.json.json
+import io.ktor.utils.io.core.toByteArray
+import java.math.BigInteger
+import java.security.KeyFactory
+import java.security.Signature
+import java.security.spec.EdECPoint
+import java.security.spec.EdECPublicKeySpec
+import java.security.spec.NamedParameterSpec
+import java.util.HexFormat
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
@@ -79,9 +83,6 @@ actual class KtDiscord actual constructor(
     }
 
     actual inner class Interaction(private val publicKey: String) {
-        private val lazySodium =
-            LazySodiumJava(SodiumJava(LibraryLoader.Mode.BUNDLED_ONLY))
-
         /**
          * Validate a received interaction. If the signature passes validation this will return `true`, otherwise it will return `false`.
          * @param timestamp The value of the `X-Signature-Timestamp` header from the interaction request
@@ -92,11 +93,23 @@ actual class KtDiscord actual constructor(
             timestamp: String,
             body: String,
             signature: String,
-        ): Boolean = lazySodium.cryptoSignVerifyDetached(
-            Key.fromHexString(signature).asHexString,
-            timestamp + body,
-            Key.fromHexString(publicKey)
-        )
+        ): Boolean {
+            val signatureInstance = Signature.getInstance("Ed25519")
+            signatureInstance.initVerify(
+                KeyFactory.getInstance("EdDSA").generatePublic(
+                    EdECPublicKeySpec(
+                        NamedParameterSpec("ED25519"), EdECPoint(
+                            false, BigInteger(
+                                1, HexFormat.of().parseHex(publicKey)
+                            )
+                        )
+                    )
+                )
+            )
+            signatureInstance.update((timestamp + body).toByteArray())
+
+            return signatureInstance.verify(signature.toByteArray())
+        }
 
         private fun createMultiPartFormDataContent(webhook: Webhook): MultiPartFormDataContent =
             MultiPartFormDataContent(formData {
