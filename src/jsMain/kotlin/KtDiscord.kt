@@ -281,7 +281,7 @@ actual class KtDiscord actual constructor(
          * @param withLocalizations Whether to include full localization dictionaries (`name_localizations` and `description_localizations`) in the returned objects, instead of the `name_localized` and `description_localized` fields. Default `false`.
          * @exception CreateInteractionResponseException if the Discord API didn't return `200 OK`.
          */
-        suspend fun getGlobalApplicationCommands(withLocalizations: Boolean? = null): Array<ApplicationCommand> {
+        suspend fun getGlobalApplicationCommands(withLocalizations: Boolean? = null): List<ApplicationCommand> {
             val response = ktorClient.get("/applications/$applicationId/commands") {
                 if (withLocalizations == true) {
                     url {
@@ -364,7 +364,7 @@ actual class KtDiscord actual constructor(
             }
         }
 
-        suspend fun bulkOverwriteGlobalApplicationCommands(applicationCommands: Array<ApplicationCommandCreate>): Array<ApplicationCommand> {
+        suspend fun bulkOverwriteGlobalApplicationCommands(applicationCommands: List<ApplicationCommandCreate>): List<ApplicationCommand> {
             val response = ktorClient.put("/applications/$applicationId/commands") {
                 contentType(ContentType.Application.Json)
                 setBody(applicationCommands)
@@ -385,7 +385,7 @@ actual class KtDiscord actual constructor(
              * Fetch all of the guild commands for your application for a specific guild. Returns an array of application command objects.
              * @exception GetGuildApplicationCommandsException if the Discord API didn't return `200 OK`.
              */
-            suspend fun getGuildApplicationCommands(withLocalizations: Boolean? = null): Array<ApplicationCommand> {
+            suspend fun getGuildApplicationCommands(withLocalizations: Boolean? = null): List<ApplicationCommand> {
                 val response =
                     ktorClient.get("/applications/$applicationId/guilds/$guildId/commands") {
                         if (withLocalizations == true) {
@@ -492,7 +492,7 @@ actual class KtDiscord actual constructor(
              * Takes a list of application commands, overwriting the existing command list for this application for the targeted guild. Returns an array of application command objects.
              * @exception BulkOverwriteGuildApplicationCommandsException if the Discord API didn't return `200 OK`.
              */
-            suspend fun bulkOverwriteGuildApplicationCommands(applicationCommands: Array<ApplicationCommandCreate>): Array<ApplicationCommand> {
+            suspend fun bulkOverwriteGuildApplicationCommands(applicationCommands: List<ApplicationCommandCreate>): List<ApplicationCommand> {
                 val response =
                     ktorClient.put("/applications/$applicationId/guilds/$guildId/commands") {
                         contentType(ContentType.Application.Json)
