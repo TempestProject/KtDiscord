@@ -55,7 +55,6 @@ import java.security.Signature
 import java.security.spec.EdECPoint
 import java.security.spec.EdECPublicKeySpec
 import java.security.spec.NamedParameterSpec
-import java.util.HexFormat
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
@@ -89,7 +88,7 @@ actual class KtDiscord actual constructor(
          * @param body The raw body of the request
          * @param signature The value of the `X-Signature-Ed25519` header from the interaction request
          */
-        fun validateRequest(
+        @OptIn(ExperimentalStdlibApi::class) fun validateRequest(
             timestamp: String,
             body: String,
             signature: String,
@@ -100,7 +99,7 @@ actual class KtDiscord actual constructor(
                     EdECPublicKeySpec(
                         NamedParameterSpec("ED25519"), EdECPoint(
                             false, BigInteger(
-                                1, HexFormat.of().parseHex(publicKey)
+                                1, publicKey.hexToByteArray()
                             )
                         )
                     )
