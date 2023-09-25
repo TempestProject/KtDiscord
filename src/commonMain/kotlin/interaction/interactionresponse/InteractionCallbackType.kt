@@ -1,11 +1,28 @@
 package cloud.drakon.ktdiscord.interaction.interactionresponse
 
-enum class InteractionCallbackType {
-    PONG,
-    CHANNEL_MESSAGE_WITH_SOURCE,
-    DEFERRED_CHANNEL_MESSAGE_WITH_SOURCE,
-    DEFERRED_UPDATE_MESSAGE,
-    UPDATE_MESSAGE,
-    APPLICATION_COMMAND_AUTOCOMPLETE_RESULT,
-    MODAL
+import kotlin.js.JsExport
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+
+@JsExport @Serializable enum class InteractionCallbackType {
+    /** ACK a `Ping` */
+    @SerialName("1") PONG,
+
+    /** Respond to an interaction with a message */
+    @SerialName("4") CHANNEL_MESSAGE_WITH_SOURCE,
+
+    /** ACK an interaction and edit a response later, the user sees a loading state */
+    @SerialName("5") DEFERRED_CHANNEL_MESSAGE_WITH_SOURCE,
+
+    /** For components, ACK an interaction and edit the original message later; the user does not see a loading state */
+    @SerialName("6") DEFERRED_UPDATE_MESSAGE,
+
+    /** For components, edit the message the component was attached to */
+    @SerialName("7") UPDATE_MESSAGE,
+
+    /** Respond to an autocomplete interaction with suggested choices */
+    @SerialName("8") APPLICATION_COMMAND_AUTOCOMPLETE_RESULT,
+
+    /** Respond to an interaction with a popup modal */
+    @SerialName("9") MODAL
 }
