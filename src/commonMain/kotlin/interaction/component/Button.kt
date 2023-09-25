@@ -1,9 +1,8 @@
 @file:OptIn(ExperimentalJsExport::class)
 
-package cloud.drakon.ktdiscord.interaction.component.button
+package cloud.drakon.ktdiscord.interaction.component
 
-import cloud.drakon.ktdiscord.interaction.component.ActionRow
-import cloud.drakon.ktdiscord.interaction.component.ComponentType
+import cloud.drakon.ktdiscord.interaction.component.button.ButtonStyle
 import kotlin.js.ExperimentalJsExport
 import kotlin.js.JsExport
 import kotlinx.serialization.Serializable
