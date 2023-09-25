@@ -8,4 +8,6 @@ import kotlin.js.JsExport
 import kotlinx.serialization.Serializable
 
 @JsExport @Serializable class Button(val style: ButtonStyle, val label: String? = null):
-    ActionRow(ComponentType.BUTTON)
+    Component {
+    override val type = 2
+}

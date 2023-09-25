@@ -6,6 +6,6 @@ import kotlin.js.ExperimentalJsExport
 import kotlin.js.JsExport
 import kotlinx.serialization.Serializable
 
-@JsExport @Serializable class ActionRow: Component {
-    override val type = 1
+@JsExport @Serializable sealed interface Component {
+    val type: Int
 }
