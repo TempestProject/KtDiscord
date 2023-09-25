@@ -10,7 +10,7 @@ import kotlin.js.JsExport
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
-@JsExport @Serializable class Messages(
+@JsExport @Serializable class Message(
     val tts: Boolean? = null,
     val content: String? = null,
     val embeds: Array<Embed>? = null,
