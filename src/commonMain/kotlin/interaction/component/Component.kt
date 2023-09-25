@@ -4,8 +4,7 @@ package cloud.drakon.ktdiscord.interaction.component
 
 import kotlin.js.ExperimentalJsExport
 import kotlin.js.JsExport
-import kotlinx.serialization.Serializable
 
-@JsExport @Serializable sealed interface Component {
+@JsExport sealed interface Component {
     val type: Int
 }
