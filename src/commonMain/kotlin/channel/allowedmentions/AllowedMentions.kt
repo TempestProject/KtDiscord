@@ -11,5 +11,5 @@ import kotlinx.serialization.Serializable
     val parse: Array<AllowedMentionTypes>,
     val roles: Array<String>,
     val users: Array<String>,
-    @SerialName("replied_user") val repliedUser: Boolean = false,
+    @SerialName("replied_user") val repliedUser: Boolean,
 )
