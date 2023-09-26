@@ -7,7 +7,9 @@ import kotlin.js.ExperimentalJsExport
 import kotlin.js.JsExport
 import kotlinx.serialization.Serializable
 
-@JsExport @Serializable class DoubleOptionChoice(
+@Deprecated("Will be replaced with a single `OptionChoice` class when union types are available in Kotlin.")
+@JsExport
+@Serializable class DoubleOptionChoice(
     override val name: String,
     override val nameLocalizations: Map<Locale, String>?,
     val value: Double,

@@ -7,7 +7,9 @@ import kotlin.js.ExperimentalJsExport
 import kotlin.js.JsExport
 import kotlinx.serialization.SerialName
 
-@JsExport sealed interface OptionChoice {
+@Deprecated("Will be replaced with a single `OptionChoice` class when union types are available in Kotlin.")
+@JsExport
+sealed interface OptionChoice {
     val name: String
     @SerialName("name_localizations") val nameLocalizations: Map<Locale, String>?
 }
