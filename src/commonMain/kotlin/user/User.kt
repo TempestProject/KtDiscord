@@ -2,7 +2,7 @@
 
 package cloud.drakon.ktdiscord.user
 
-import cloud.drakon.ktdiscord.Locale
+import cloud.drakon.ktdiscord.reference.Locale
 import kotlin.js.ExperimentalJsExport
 import kotlin.js.JsExport
 import kotlinx.serialization.SerialName
