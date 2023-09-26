@@ -48,7 +48,7 @@ class KtDiscord(
         applicationId: String,
         interactionToken: String,
     ): String = ktorClient.get(
-        "webhooks/$applicationId}/$interactionToken}/messages/@original"
+        "webhooks/$applicationId/$interactionToken/messages/@original"
     ).let {
         when (it.status.value) {
             200  -> it.body()
