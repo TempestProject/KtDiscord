@@ -1,13 +1,9 @@
-@file:OptIn(ExperimentalJsExport::class)
-
 package cloud.drakon.ktdiscord.reference
 
-import kotlin.js.ExperimentalJsExport
-import kotlin.js.JsExport
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
-@JsExport @Serializable enum class Locale {
+@Serializable enum class Locale {
     @SerialName("id") INDONESIAN,
     @SerialName("da") DANISH,
     @SerialName("de") GERMAN,

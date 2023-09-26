@@ -1,15 +1,11 @@
-@file:OptIn(ExperimentalJsExport::class)
-
 package cloud.drakon.ktdiscord.interaction.component
 
 import cloud.drakon.ktdiscord.channel.ChannelType
 import cloud.drakon.ktdiscord.interaction.component.selectmenu.SelectDefaultValue
-import kotlin.js.ExperimentalJsExport
-import kotlin.js.JsExport
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
-@JsExport @Serializable class ChannelSelectMenu(
+@Serializable class ChannelSelectMenu(
     @SerialName("custom_id") val customId: String? = null,
     @SerialName("channel_types") val channelTypes: Array<ChannelType>? = null,
     val placeholder: String? = null,

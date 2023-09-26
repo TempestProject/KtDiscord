@@ -1,9 +1,5 @@
-@file:OptIn(ExperimentalJsExport::class)
-
 package cloud.drakon.ktdiscord.channel.embed
 
-import kotlin.js.ExperimentalJsExport
-import kotlin.js.JsExport
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -11,9 +7,8 @@ import kotlinx.serialization.Serializable
  * Embed types are "loosely defined" and, for the most part, are not used by the client for rendering. Embed attributes power what is rendered.
  */
 @Deprecated("Embed attributes power what is rendered. Embed types should be considered deprecated and might be removed in a future API version.")
-@JsExport
-@Serializable
-enum class EmbedType {
+
+@Serializable enum class EmbedType {
     /** Generic embed rendered from embed attributes */
     @SerialName("rich") RICH,
 

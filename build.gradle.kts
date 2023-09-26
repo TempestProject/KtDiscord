@@ -27,9 +27,6 @@ kotlin {
 
     js {
         nodejs()
-
-        binaries.executable()
-        generateTypeScriptDefinitions()
     }
 
     sourceSets {

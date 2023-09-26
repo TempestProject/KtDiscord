@@ -1,14 +1,10 @@
-@file:OptIn(ExperimentalJsExport::class)
-
 package cloud.drakon.ktdiscord.user
 
 import cloud.drakon.ktdiscord.reference.Locale
-import kotlin.js.ExperimentalJsExport
-import kotlin.js.JsExport
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
-@JsExport @Serializable class User(
+@Serializable class User(
     val id: String,
     val username: String,
     @Deprecated("") val discriminator: String,

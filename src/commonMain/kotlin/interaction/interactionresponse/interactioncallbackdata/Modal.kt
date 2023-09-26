@@ -1,14 +1,10 @@
-@file:OptIn(ExperimentalJsExport::class)
-
 package cloud.drakon.ktdiscord.interaction.interactionresponse.interactioncallbackdata
 
 import cloud.drakon.ktdiscord.interaction.component.TextInput
-import kotlin.js.ExperimentalJsExport
-import kotlin.js.JsExport
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
-@JsExport @Serializable class Modal(
+@Serializable class Modal(
     /** A developer-defined identifier for the modal, max 100 characters */
     @SerialName("custom_id") val customId: String,
 

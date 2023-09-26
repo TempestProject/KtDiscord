@@ -1,13 +1,9 @@
-@file:OptIn(ExperimentalJsExport::class)
-
 package cloud.drakon.ktdiscord.permissions
 
-import kotlin.js.ExperimentalJsExport
-import kotlin.js.JsExport
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
-@JsExport @Serializable class RoleTag(
+@Serializable class RoleTag(
     @SerialName("bot_id") val botId: String? = null,
     @SerialName("integration_id") val integrationId: String? = null,
 

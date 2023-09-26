@@ -1,9 +1,5 @@
-@file:OptIn(ExperimentalJsExport::class)
-
 package cloud.drakon.ktdiscord.interaction.component.button
 
-import kotlin.js.ExperimentalJsExport
-import kotlin.js.JsExport
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -14,7 +10,7 @@ import kotlinx.serialization.Serializable
  * * Link buttons must have a URL, and cannot have a `customId`
  * * Link buttons do not send an [interaction](https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object) to your app when clicked
  */
-@JsExport @Serializable enum class ButtonStyle {
+@Serializable enum class ButtonStyle {
     /** Blurple */
     @SerialName("1") PRIMARY,
 

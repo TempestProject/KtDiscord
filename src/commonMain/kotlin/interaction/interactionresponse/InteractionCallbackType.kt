@@ -1,10 +1,9 @@
 package cloud.drakon.ktdiscord.interaction.interactionresponse
 
-import kotlin.js.JsExport
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
-@JsExport @Serializable enum class InteractionCallbackType {
+@Serializable enum class InteractionCallbackType {
     /** ACK a `Ping` */
     @SerialName("1") PONG,
 
