@@ -4,8 +4,10 @@ import cloud.drakon.ktdiscord.interaction.interactionresponse.InteractionCallbac
 import cloud.drakon.ktdiscord.interaction.interactionresponse.InteractionResponse
 import cloud.drakon.ktdiscord.interaction.interactionresponse.interactioncallbackdata.InteractionCallbackData
 import io.ktor.client.HttpClient
+import io.ktor.client.call.body
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.defaultRequest
+import io.ktor.client.request.get
 import io.ktor.client.request.post
 import io.ktor.client.request.setBody
 import io.ktor.http.ContentType
@@ -28,24 +30,41 @@ private val ktorClient = HttpClient {
 expect class KtDiscord(
     publicKey: String,
     botToken: String,
-    applicationId: Long? = null,
+    applicationId: String? = null,
 ) {
     suspend fun createInteractionResponse(
         type: InteractionCallbackType,
         data: InteractionCallbackData,
-        id: Long,
-        token: String,
+        interactionId: String,
+        interactionToken: String,
     )
+
+    suspend fun getOriginalInteractionResponse(
+        applicationId: String,
+        interactionToken: String,
+    ): String
 }
 
 internal suspend fun createInteractionResponseSuspend(
     type: InteractionCallbackType,
     data: InteractionCallbackData,
-    id: Long,
-    token: String,
-) = ktorClient.post("interactions/$id/$token/callback") {
+    interactionId: String,
+    interactionToken: String,
+) = ktorClient.post("interactions/$interactionId/$interactionToken/callback") {
     contentType(ContentType.Application.Json)
     setBody(InteractionResponse(type, data))
 }.let {
     if (it.status.value != 204) throw Throwable()
+}
+
+internal suspend fun getOriginalInteractionResponseSuspend(
+    applicationId: String,
+    interactionToken: String,
+): String = ktorClient.get(
+    "webhooks/$applicationId}/$interactionToken}/messages/@original"
+).let {
+    when (it.status.value) {
+        200  -> it.body()
+        else -> throw Throwable()
+    }
 }

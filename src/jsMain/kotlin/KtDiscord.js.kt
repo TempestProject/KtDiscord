@@ -11,21 +11,33 @@ import kotlinx.coroutines.promise
 @JsExport actual class KtDiscord actual constructor(
     private val publicKey: String,
     private val botToken: String,
-    private val applicationId: Long?,
+    private val applicationId: String?,
 ) {
     @JsExport.Ignore actual suspend fun createInteractionResponse(
         type: InteractionCallbackType,
         data: InteractionCallbackData,
-        id: Long,
-        token: String,
-    ) = createInteractionResponseSuspend(type, data, id, token)
+        interactionId: String,
+        interactionToken: String,
+    ) = createInteractionResponseSuspend(type, data, interactionId, interactionToken)
 
     @JsName("createInteractionResponse") fun createInteractionResponseAsync(
         type: InteractionCallbackType,
         data: InteractionCallbackData,
-        id: Long,
-        token: String,
+        interactionId: String,
+        interactionToken: String,
     ) = GlobalScope.promise {
-        createInteractionResponseSuspend(type, data, id, token)
+        createInteractionResponseSuspend(type, data, interactionId, interactionToken)
+    }
+
+    @JsExport.Ignore actual suspend fun getOriginalInteractionResponse(
+        applicationId: String,
+        interactionToken: String,
+    ) = getOriginalInteractionResponseSuspend(applicationId, interactionToken)
+
+    @JsName("getOriginalInteractionResponse") fun getOriginalInteractionResponseAsync(
+        applicationId: String,
+        interactionToken: String,
+    ) = GlobalScope.promise {
+        getOriginalInteractionResponseSuspend(applicationId, interactionToken)
     }
 }
