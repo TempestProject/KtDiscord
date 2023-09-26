@@ -4,5 +4,6 @@ package cloud.drakon.ktdiscord.interaction.interactionresponse.interactioncallba
 
 import kotlin.js.ExperimentalJsExport
 import kotlin.js.JsExport
+import kotlinx.serialization.Serializable
 
-@JsExport sealed interface InteractionCallbackData
+@JsExport @Serializable sealed interface InteractionCallbackData

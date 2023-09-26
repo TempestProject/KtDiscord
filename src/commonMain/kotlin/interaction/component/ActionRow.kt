@@ -7,5 +7,5 @@ import kotlin.js.JsExport
 import kotlinx.serialization.Serializable
 
 @JsExport @Serializable class ActionRow(val components: Array<Component>): Component {
-    override val type = 1
+    override val type: Byte = 1
 }

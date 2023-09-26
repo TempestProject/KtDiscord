@@ -4,7 +4,6 @@ package cloud.drakon.ktdiscord
 
 import io.ktor.client.HttpClient
 import io.ktor.client.plugins.defaultRequest
-import io.ktor.client.request.post
 import kotlin.js.ExperimentalJsExport
 import kotlin.js.JsExport
 
@@ -14,9 +13,4 @@ import kotlin.js.JsExport
             url("https://discord.com/api/v10/")
         }
     }
-
-    @JsExport.Ignore suspend fun createInteractionResponse(
-        interactionId: String,
-        interactionToken: String,
-    ) = ktorClient.post("interactions/$interactionId/$interactionToken/callback")
 }
