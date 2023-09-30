@@ -1,3 +1,0 @@
-package cloud.drakon.ktdiscord.interaction.interactionresponse.interactioncallbackdata
-
-sealed interface InteractionCallbackData
