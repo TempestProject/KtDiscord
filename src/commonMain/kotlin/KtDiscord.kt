@@ -6,7 +6,6 @@ import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.defaultRequest
 import io.ktor.client.request.header
 import io.ktor.serialization.kotlinx.json.json
-import kotlinx.serialization.json.Json
 
 class KtDiscord(
     applicationId: Snowflake,
@@ -24,9 +23,10 @@ class KtDiscord(
         }
 
         install(ContentNegotiation) {
-            json(Json {
-                ignoreUnknownKeys = true
-            })
+            json()
+//            json(Json {
+//                ignoreUnknownKeys = true
+//            })
         }
     }
 }
