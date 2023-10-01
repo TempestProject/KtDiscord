@@ -6,11 +6,13 @@ import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.defaultRequest
 import io.ktor.client.request.header
 import io.ktor.serialization.kotlinx.json.json
+import kotlinx.serialization.json.Json
 
 class KtDiscord(
     applicationId: Snowflake,
     publicKey: String,
     botToken: String,
+    ignoreUnknownKeys: Boolean = false,
 ) {
     private val ktorClient = HttpClient {
         install(UserAgent) {
@@ -23,10 +25,9 @@ class KtDiscord(
         }
 
         install(ContentNegotiation) {
-            json()
-//            json(Json {
-//                ignoreUnknownKeys = true
-//            })
+            json(if (ignoreUnknownKeys) Json {
+                this.ignoreUnknownKeys = true
+            } else Json)
         }
     }
 }

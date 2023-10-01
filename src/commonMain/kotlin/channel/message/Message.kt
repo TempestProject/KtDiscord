@@ -5,6 +5,7 @@ package cloud.drakon.ktdiscord.channel.message
 import cloud.drakon.ktdiscord.Snowflake
 import cloud.drakon.ktdiscord.channel.attachment.Attachment
 import cloud.drakon.ktdiscord.channel.embed.Embed
+import cloud.drakon.ktdiscord.component.ActionRow
 import cloud.drakon.ktdiscord.permissions.Role
 import cloud.drakon.ktdiscord.user.User
 import kotlinx.serialization.SerialName
@@ -41,7 +42,7 @@ class Message(
     val author: User,
     val content: String,
     val timestamp: String,
-    @SerialName("edited_timestamp") val editedTimestamp: String,
+    @SerialName("edited_timestamp") val editedTimestamp: String?,
     val tts: Boolean,
     @SerialName("mention_everyone") val mentionEveryone: Boolean,
     val mentions: Array<User>,
@@ -51,4 +52,7 @@ class Message(
     val pinned: Boolean,
     @SerialName("webhook_id") val webhookId: Snowflake? = null,
     val type: MessageType,
+    @SerialName("application_id") val applicationId: Snowflake? = null,
+    val flags: Int? = null,
+    val components: Array<ActionRow>? = null,
 )

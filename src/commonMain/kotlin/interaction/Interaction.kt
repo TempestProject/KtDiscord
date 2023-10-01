@@ -2,11 +2,11 @@
 
 package cloud.drakon.ktdiscord.interaction
 
-import cloud.drakon.ktdiscord.Entitlement
 import cloud.drakon.ktdiscord.Locale
 import cloud.drakon.ktdiscord.Snowflake
 import cloud.drakon.ktdiscord.channel.Channel
 import cloud.drakon.ktdiscord.channel.message.Message
+import cloud.drakon.ktdiscord.entitlement.Entitlement
 import cloud.drakon.ktdiscord.guild.GuildMember
 import cloud.drakon.ktdiscord.interaction.data.InteractionData
 import cloud.drakon.ktdiscord.user.User
