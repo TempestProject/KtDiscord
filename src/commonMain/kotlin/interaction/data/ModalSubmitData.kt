@@ -16,4 +16,4 @@ import kotlin.js.JsExport
 class ModalSubmitData(
     @SerialName("custom_id") val customId: String,
     val components: Array<ActionRow>,
-)
+) : InteractionData
