@@ -6,6 +6,7 @@ import cloud.drakon.ktdiscord.Snowflake
 import cloud.drakon.ktdiscord.channel.attachment.Attachment
 import cloud.drakon.ktdiscord.channel.embed.Embed
 import cloud.drakon.ktdiscord.component.ActionRow
+import cloud.drakon.ktdiscord.interaction.MessageInteraction
 import cloud.drakon.ktdiscord.permissions.Role
 import cloud.drakon.ktdiscord.user.User
 import kotlinx.serialization.SerialName
@@ -54,5 +55,6 @@ data class Message(
     val type: MessageType,
     @SerialName("application_id") val applicationId: Snowflake? = null,
     val flags: Int? = null,
+    val interaction: MessageInteraction? = null,
     val components: Array<ActionRow>? = null,
 )
