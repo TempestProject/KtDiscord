@@ -15,6 +15,6 @@ import kotlin.js.JsExport
 @JsExport @Serializable
 class EmbedFooter(
     val text: String,
-    @SerialName("icon_url") val iconUrl: String,
-    @SerialName("proxy_icon_url") val proxyIconUrl: String,
+    @SerialName("icon_url") val iconUrl: String? = null,
+    @SerialName("proxy_icon_url") val proxyIconUrl: String? = null,
 )
