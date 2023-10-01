@@ -15,7 +15,7 @@ import kotlin.js.JsExport
  * @property default Will show this option as selected by default.
  */
 @JsExport @Serializable
-class SelectOption(
+data class SelectOption(
     val label: String,
     val value: String,
     val description: String? = null,

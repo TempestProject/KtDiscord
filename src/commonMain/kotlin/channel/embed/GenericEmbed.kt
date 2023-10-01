@@ -14,7 +14,7 @@ import kotlin.js.JsExport
  * @property width Width.
  */
 @JsExport @Serializable
-class GenericEmbed(
+data class GenericEmbed(
     val url: String,
     @SerialName("proxy_url") val proxyUrl: String? = null,
     val height: Int? = null,

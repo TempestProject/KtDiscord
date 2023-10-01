@@ -19,7 +19,7 @@ import kotlin.js.JsExport
  * @property attachments The IDs and [Attachment] objects.
  */
 @JsExport @Serializable
-class ResolvedData(
+data class ResolvedData(
     val users: Map<Snowflake, User>? = null,
     val members: Map<Snowflake, GuildMember>? = null,
     val roles: Map<Snowflake, Role>? = null,

@@ -21,7 +21,7 @@ import kotlin.js.JsExport
  * @property available Whether this emoji can be used, may be false due to loss of Server Boosts.
  */
 @JsExport @Serializable
-class Emoji(
+data class Emoji(
     val id: Snowflake? = null,
     val name: String? = null,
     val roles: Array<Role>? = null,

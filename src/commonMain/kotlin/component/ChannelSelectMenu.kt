@@ -18,7 +18,7 @@ import kotlin.js.JsExport
  * @property disabled Whether select menu is disabled (defaults to `false`).
  */
 @JsExport @Serializable
-class ChannelSelectMenu(
+data class ChannelSelectMenu(
     @SerialName("custom_id") val customId: String,
     @SerialName("channel_types") val channelTypes: Array<ChannelType>? = null,
     val placeholder: String? = null,

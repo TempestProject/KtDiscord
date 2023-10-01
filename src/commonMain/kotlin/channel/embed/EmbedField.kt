@@ -12,4 +12,4 @@ import kotlin.js.JsExport
  * @property inline Whether or not this field should display inline.
  */
 @JsExport @Serializable
-class EmbedField(val name: String, val value: String, val inline: Boolean? = null)
+data class EmbedField(val name: String, val value: String, val inline: Boolean? = null)

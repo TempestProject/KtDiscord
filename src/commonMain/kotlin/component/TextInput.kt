@@ -18,7 +18,7 @@ import kotlin.js.JsExport
  * @property placeholder Custom placeholder text if the input is empty; max 100 characters.
  */
 @JsExport @Serializable
-class TextInput(
+data class TextInput(
     @SerialName("custom_id") val customId: String,
     val style: TextInputStyle,
     val label: String,

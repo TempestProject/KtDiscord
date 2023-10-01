@@ -13,6 +13,6 @@ import kotlin.js.JsExport
  * * An [ActionRow] cannot contain another [ActionRow].
  */
 @JsExport @Serializable
-class ActionRow(val components: Array<Component>? = null) {
+data class ActionRow(val components: Array<Component>? = null) {
     val type = ComponentType.ACTION_ROW
 }

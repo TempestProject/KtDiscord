@@ -24,7 +24,7 @@ import kotlin.js.JsExport
  * @property flags [AttachmentFlags] combined as a [bitfield](https://en.wikipedia.org/wiki/Bit_field).
  */
 @JsExport @Serializable
-class Attachment(
+data class Attachment(
     val id: Snowflake,
     val filename: String,
     val description: String? = null,

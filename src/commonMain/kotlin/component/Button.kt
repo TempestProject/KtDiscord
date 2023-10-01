@@ -15,7 +15,7 @@ import kotlin.js.JsExport
  * * An Action Row containing buttons cannot also contain any select menu components.
  */
 @JsExport @Serializable
-class Button(
+data class Button(
     val style: ButtonStyle,
     val label: String? = null,
     val emoji: Emoji? = null,

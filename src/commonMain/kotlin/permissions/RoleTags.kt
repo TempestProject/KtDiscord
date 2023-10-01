@@ -15,7 +15,7 @@ import kotlin.js.JsExport
  * @property subscriptionListingId The ID of this [Role]'s subscription SKU and listing.
  */
 @JsExport @Serializable
-class RoleTags(
+data class RoleTags(
     @SerialName("bot_id") val botId: Snowflake? = null,
     @SerialName("integration_id") val integrationId: Snowflake? = null,
     //TODO @SerialName("premium_subscriber") val premiumSubscriber: Boolean? = null,

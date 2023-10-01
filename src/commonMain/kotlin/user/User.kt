@@ -30,7 +30,7 @@ import kotlin.js.JsExport
  * @property avatarDecoration The user's [avatar decoration hash](https://discord.com/developers/docs/reference#image-formatting).
  */
 @JsExport @Serializable
-class User(
+data class User(
     val id: Snowflake,
     val username: String,
     @Deprecated("https://support.discord.com/hc/en-us/articles/12620128861463-New-Usernames-Display-Names") val discriminator: String,

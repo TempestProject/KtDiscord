@@ -36,7 +36,7 @@ import kotlin.js.JsExport
  * @property components Sent if the message contains components like [Button]s, [ActionRow]s, or other interactive components.
  */
 @JsExport @Serializable
-class Message(
+data class Message(
     val id: Snowflake,
     @SerialName("channel_id") val channelId: Snowflake,
     val author: User,

@@ -15,7 +15,7 @@ import kotlin.js.JsExport
  * @property values Values the user selected in a [SelectMenu] [Component]. This is always present for [SelectMenu] [Component]s.
  */
 @JsExport @Serializable
-class MessageComponentData(
+data class MessageComponentData(
     @SerialName("custom_id") val customId: String,
     @SerialName("component_type") val componentType: ComponentType,
     val values: Array<SelectOption>? = null,

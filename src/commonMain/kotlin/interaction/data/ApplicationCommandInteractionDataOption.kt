@@ -18,7 +18,7 @@ import kotlin.js.JsExport
  * @property focused `true` if this option is the currently focused option for autocomplete.
  */
 @JsExport @Serializable
-class ApplicationCommandInteractionDataOption(
+data class ApplicationCommandInteractionDataOption(
     val name: String,
     val type: ApplicationCommandOptionType,
     val value: String? = null,

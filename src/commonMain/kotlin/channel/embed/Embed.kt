@@ -22,7 +22,7 @@ import kotlin.js.JsExport
  * @property fields Fields information.
  */
 @JsExport @Serializable
-class Embed(
+data class Embed(
     val title: String? = null,
     val type: EmbedType? = null,
     val description: String? = null,

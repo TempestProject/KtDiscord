@@ -17,7 +17,7 @@ import kotlin.js.JsExport
  * @property createTimestamp Timestamp when the thread was created; only populated for threads created after 2022-01-09.
  */
 @JsExport @Serializable
-class ThreadMetadata(
+data class ThreadMetadata(
     val archived: Boolean,
     @SerialName("auto_archive_duration") val autoArchiveDuration: Short,
     @SerialName("archive_timestamp") val archiveTimestamp: String,

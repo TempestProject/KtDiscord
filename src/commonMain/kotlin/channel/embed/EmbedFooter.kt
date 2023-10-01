@@ -13,7 +13,7 @@ import kotlin.js.JsExport
  * @property proxyIconUrl A proxied URL of footer icon.
  */
 @JsExport @Serializable
-class EmbedFooter(
+data class EmbedFooter(
     val text: String,
     @SerialName("icon_url") val iconUrl: String? = null,
     @SerialName("proxy_icon_url") val proxyIconUrl: String? = null,

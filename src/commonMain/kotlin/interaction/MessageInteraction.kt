@@ -18,7 +18,7 @@ import kotlin.js.JsExport
  * @property member [GuildMember] who invoked the interaction in the guild.
  */
 @JsExport @Serializable
-class MessageInteraction(
+data class MessageInteraction(
     val id: Snowflake,
     val type: InteractionType,
     val name: String,

@@ -14,7 +14,7 @@ import kotlin.js.JsExport
  * @property proxyIconUrl A proxied URL of author icon.
  */
 @JsExport @Serializable
-class EmbedAuthor(
+data class EmbedAuthor(
     val name: String,
     val url: String? = null,
     @SerialName("icon_url") val iconUrl: String? = null,

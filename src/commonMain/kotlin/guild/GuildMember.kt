@@ -20,7 +20,7 @@ import kotlin.js.JsExport
  * @property communicationDisabledUntil When the user's [timeout](https://support.discord.com/hc/en-us/articles/4413305239191-Time-Out-FAQ) will expire and the user will be able to communicate in the guild again, `null` or a time in the past if the user is not timed out.
  */
 @JsExport @Serializable
-class GuildMember(
+data class GuildMember(
     val nick: String? = null,
     val avatar: String? = null,
     val roles: Array<Role>,

@@ -21,7 +21,7 @@ import kotlin.js.JsExport
  * @property endsAt Date at which the entitlement is no longer valid. Not present when using test entitlements.
  */
 @JsExport @Serializable
-class Entitlement(
+data class Entitlement(
     val id: Snowflake,
     @SerialName("sku_id") val skuId: Snowflake,
     @SerialName("user_id") val userId: Snowflake? = null,

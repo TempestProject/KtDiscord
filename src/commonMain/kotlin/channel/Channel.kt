@@ -18,7 +18,7 @@ import kotlin.js.JsExport
  * @property permissions Computed permissions for the invoking user in the channel, including overwrites, only included when part of the `resolved` data received on a slash command interaction. This does not include [implicit permissions](https://discord.com/developers/docs/topics/permissions#implicit-permissions), which may need to be checked separately.
  */
 @JsExport @Serializable
-class Channel(
+data class Channel(
     val id: Snowflake,
     val type: ChannelType,
     val name: String,

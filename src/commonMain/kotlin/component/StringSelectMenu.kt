@@ -16,7 +16,7 @@ import kotlin.js.JsExport
  * @property disabled Whether select menu is disabled (defaults to `false`).
  */
 @JsExport @Serializable
-class StringSelectMenu(
+data class StringSelectMenu(
     @SerialName("custom_id") val customId: String,
     val options: Array<SelectOption>? = null,
     val placeholder: String? = null,

@@ -41,7 +41,7 @@ import kotlin.js.JsExport
  * @property entitlements For monetized apps, any entitlements for the invoking user, representing access to premium SKUs.
  */
 @JsExport @Serializable
-class Interaction(
+data class Interaction(
     val id: Snowflake,
     @SerialName("application_id") val applicationId: Snowflake,
     val type: InteractionType,

@@ -12,4 +12,4 @@ import kotlin.js.JsExport
  * @property type Type of value that [id] represents. Either [SelectDefaultValueType.USER], [SelectDefaultValueType.ROLE], or [SelectDefaultValueType.CHANNEL].
  */
 @JsExport @Serializable
-class SelectDefaultValue(val id: Snowflake, val type: SelectDefaultValueType)
+data class SelectDefaultValue(val id: Snowflake, val type: SelectDefaultValueType)

@@ -13,7 +13,7 @@ import kotlin.js.JsExport
  * @property components The values submitted by the user.
  */
 @JsExport @Serializable
-class ModalSubmitData(
+data class ModalSubmitData(
     @SerialName("custom_id") val customId: String,
     val components: Array<ActionRow>,
 ) : InteractionData

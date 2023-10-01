@@ -11,4 +11,4 @@ import kotlin.js.JsExport
  * @property url URL of provider.
  */
 @JsExport @Serializable
-class EmbedProvider(val name: String? = null, val url: String? = null)
+data class EmbedProvider(val name: String? = null, val url: String? = null)

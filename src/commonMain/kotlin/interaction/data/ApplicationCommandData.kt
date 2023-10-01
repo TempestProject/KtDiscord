@@ -21,7 +21,7 @@ import kotlin.js.JsExport
  * @property targetId ID of the [User] or [Message] targeted by a [ApplicationCommandType.USER] or [ApplicationCommandType.MESSAGE] command.
  */
 @JsExport @Serializable
-class ApplicationCommandData(
+data class ApplicationCommandData(
     val id: Snowflake,
     val name: String,
     val type: ApplicationCommandType,

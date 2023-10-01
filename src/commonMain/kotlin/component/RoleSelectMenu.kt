@@ -15,7 +15,7 @@ import kotlin.js.JsExport
  * @property disabled Whether select menu is disabled (defaults to `false`).
  */
 @JsExport @Serializable
-class RoleSelectMenu(
+data class RoleSelectMenu(
     @SerialName("custom_id") val customId: String,
     val placeholder: String? = null,
     @SerialName("min_values") val minValues: Byte? = null,

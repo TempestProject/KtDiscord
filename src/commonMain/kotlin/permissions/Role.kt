@@ -24,7 +24,7 @@ import kotlin.js.JsExport
  * @property flags [RoleFlags] combined as a [bitfield](https://en.wikipedia.org/wiki/Bit_field).
  */
 @JsExport @Serializable
-class Role(
+data class Role(
     val id: Snowflake,
     val name: String,
     val color: Int,
