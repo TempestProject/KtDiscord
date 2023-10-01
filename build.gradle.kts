@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.dsl.KotlinJsCompile
+
 plugins {
     val kotlinVersion = "1.9.10"
 
@@ -27,6 +29,12 @@ kotlin {
 
     js {
         nodejs()
+
+        binaries.library()
+        generateTypeScriptDefinitions()
+
+        // https://youtrack.jetbrains.com/issue/KTOR-6158
+        useEsModules()
     }
 
     sourceSets {
@@ -60,5 +68,11 @@ kotlin {
             }
         }
         val jsTest by getting
+    }
+}
+
+tasks.withType<KotlinJsCompile>().configureEach {
+    kotlinOptions {
+        useEsClasses = true
     }
 }
