@@ -1,21 +1,25 @@
+@file:OptIn(ExperimentalJsExport::class)
+
 package cloud.drakon.ktdiscord.permissions
 
+import cloud.drakon.ktdiscord.Snowflake
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlin.js.ExperimentalJsExport
+import kotlin.js.JsExport
 
 /**
- * @property botId the id of the bot this role belongs to
- * @property integrationId the id of the integration this role belongs to
- * @property premiumSubscriber whether this is the guild's premium subscriber role
- * @property subscriptionListingId the id of this role's subscription sku and listing
- * @property availableForPurchase whether this role is available for purchase
- * @property guildConnections whether this role is a guild's linked role
+ * Tags with type `null` represent booleans. They will be present and set to `null` if they are `true`, and will be not present if they are `false`.
+ * @property botId The ID of the bot this [Role] belongs to.
+ * @property integrationId The ID of the integration this [Role] belongs to.
+ * @property subscriptionListingId The ID of this [Role]'s subscription SKU and listing.
  */
-@Serializable class RoleTags(
-    @SerialName("bot_id") val botId: String? = null,
-    @SerialName("integration_id") val integrationId: String? = null,
-    @SerialName("premium_subscriber") val premiumSubscriber: Boolean? = false,
-    @SerialName("subscription_listing_id") val subscriptionListingId: String? = null,
-    @SerialName("available_for_purchase") val availableForPurchase: Boolean? = false,
-    @SerialName("guild_connections") val guildConnections: Boolean? = false,
+@JsExport @Serializable
+data class RoleTags(
+    @SerialName("bot_id") val botId: Snowflake? = null,
+    @SerialName("integration_id") val integrationId: Snowflake? = null,
+    //TODO @SerialName("premium_subscriber") val premiumSubscriber: Boolean? = null,
+    @SerialName("subscription_listing_id") val subscriptionListingId: Snowflake? = null,
+    //TODO @SerialName("available_for_purchase") val availableForPurchase: Boolean? = null,
+    //TODO @SerialName("guild_connections") val guildConnections: Boolean? = null,
 )

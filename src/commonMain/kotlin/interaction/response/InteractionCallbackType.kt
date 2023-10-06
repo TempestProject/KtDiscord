@@ -1,24 +1,32 @@
+@file:OptIn(ExperimentalJsExport::class)
+
 package cloud.drakon.ktdiscord.interaction.response
 
-object InteractionCallbackType {
-    /** ACK a `Ping` */
-    const val PONG: Byte = 1
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+import kotlin.js.ExperimentalJsExport
+import kotlin.js.JsExport
 
-    /** respond to an interaction with a message */
-    const val CHANNEL_MESSAGE_WITH_SOURCE: Byte = 4
+@JsExport @Serializable
+enum class InteractionCallbackType {
+    /** ACK a `Ping`. */
+    @SerialName("1") PONG,
 
-    /** ACK an interaction and edit a response later, the user sees a loading state */
-    const val DEFERRED_CHANNEL_MESSAGE_WITH_SOURCE: Byte = 5
+    /** Respond to an interaction with a message. */
+    @SerialName("4") CHANNEL_MESSAGE_WITH_SOURCE,
 
-    /** for components, ACK an interaction and edit the original message later; the user does not see a loading state. */
-    const val DEFERRED_UPDATE_MESSAGE: Byte = 6
+    /** ACK an interaction and edit a response later, the user sees a loading state. */
+    @SerialName("5") DEFERRED_CHANNEL_MESSAGE_WITH_SOURCE,
 
-    /** for components, edit the message the component was attached to */
-    const val UPDATE_MESSAGE: Byte = 7
+    /** For components, ACK an interaction and edit the original message later; the user does not see a loading state. */
+    @SerialName("6") DEFERRED_UPDATE_MESSAGE,
 
-    /** respond to an autocomplete interaction with suggested choices */
-    const val APPLICATION_COMMAND_AUTOCOMPLETE_RESULT: Byte = 8
+    /** For components, edit the message the component was attached to. */
+    @SerialName("7") UPDATE_MESSAGE,
 
-    /** respond to an interaction with a popup modal */
-    const val MODAL: Byte = 9
+    /** Respond to an autocomplete interaction with suggested choices. */
+    @SerialName("8") APPLICATION_COMMAND_AUTOCOMPLETE_RESULT,
+
+    /** Respond to an interaction with a popup modal. */
+    @SerialName("9") MODAL,
 }

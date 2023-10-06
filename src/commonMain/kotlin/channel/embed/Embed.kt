@@ -1,25 +1,30 @@
+@file:OptIn(ExperimentalJsExport::class)
+
 package cloud.drakon.ktdiscord.channel.embed
 
 import kotlinx.serialization.Serializable
+import kotlin.js.ExperimentalJsExport
+import kotlin.js.JsExport
 
 /**
- * @property title title of embed
- * @property type type of embed (always "rich" for webhook embeds)
- * @property description description of embed
- * @property url url of embed
- * @property timestamp timestamp of embed content
- * @property color color code of the embed
- * @property footer footer information
- * @property image image information
- * @property thumbnail thumbnail information
- * @property video video information
- * @property provider provider information
- * @property author author information
- * @property fields fields information
+ * @property title Title of embed.
+ * @property type type of embed (always [EmbedType.RICH] for webhook embeds).
+ * @property description Description of embed.
+ * @property url URL of embed.
+ * @property timestamp Timestamp of embed content.
+ * @property color Color code of the embed.
+ * @property footer Footer information.
+ * @property image Image information.
+ * @property thumbnail Thumbnail information.
+ * @property video Video information.
+ * @property provider Provider information.
+ * @property author Author information.
+ * @property fields Fields information.
  */
-@Serializable class Embed(
+@JsExport @Serializable
+data class Embed(
     val title: String? = null,
-    val type: String? = null,
+    val type: EmbedType? = null,
     val description: String? = null,
     val url: String? = null,
     val timestamp: String? = null,

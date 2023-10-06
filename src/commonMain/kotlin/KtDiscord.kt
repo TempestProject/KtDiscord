@@ -1,16 +1,33 @@
 package cloud.drakon.ktdiscord
 
-import io.ktor.client.statement.HttpResponse
+import io.ktor.client.HttpClient
+import io.ktor.client.plugins.UserAgent
+import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
+import io.ktor.client.plugins.defaultRequest
+import io.ktor.client.request.header
+import io.ktor.serialization.kotlinx.json.json
+import kotlinx.serialization.json.Json
 
-internal const val VERSION = "7.0.0-SNAPSHOT"
+class KtDiscord(
+    applicationId: Snowflake,
+    publicKey: String,
+    botToken: String,
+    ignoreUnknownKeys: Boolean = false,
+) {
+    private val ktorClient = HttpClient {
+        install(UserAgent) {
+            agent = "DiscordBot (https://github.com/TempestProject/KtDiscord, 7.0.0-SNAPSHOT)"
+        }
 
-expect class KtDiscord(applicationId: String, botToken: String) {
-    inner class Interaction
+        defaultRequest {
+            url("https://discord.com/api/v10/")
+            header("Authorization", "Bot $botToken")
+        }
 
-    inner class ApplicationCommands {
-        inner class Guild
+        install(ContentNegotiation) {
+            json(if (ignoreUnknownKeys) Json {
+                this.ignoreUnknownKeys = true
+            } else Json)
+        }
     }
 }
-
-internal fun rateLimitToMilliseconds(response: HttpResponse): Long =
-    (response.headers["X-RateLimit-Reset-After"] !!.toDouble() * 1000).toLong()

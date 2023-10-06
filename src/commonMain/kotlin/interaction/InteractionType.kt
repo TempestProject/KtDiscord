@@ -1,9 +1,17 @@
+@file:OptIn(ExperimentalJsExport::class)
+
 package cloud.drakon.ktdiscord.interaction
 
-object InteractionType {
-    const val PING: Int = 1
-    const val APPLICATION_COMMAND: Int = 2
-    const val MESSAGE_COMPONENT: Int = 3
-    const val APPLICATION_COMMAND_AUTOCOMPLETE: Int = 4
-    const val MODAL_SUBMIT: Int = 5
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+import kotlin.js.ExperimentalJsExport
+import kotlin.js.JsExport
+
+@JsExport @Serializable
+enum class InteractionType {
+    @SerialName("1") PING,
+    @SerialName("2") APPLICATION_COMMAND,
+    @SerialName("3") MESSAGE_COMPONENT,
+    @SerialName("4") APPLICATION_COMMAND_AUTOCOMPLETE,
+    @SerialName("5") MODAL_SUBMIT,
 }
